@@ -1,9 +1,9 @@
 import AuthForm from "@/components/AuthForm";
 
-export default function Signin() {
+export default function Register() {
   return (
     <div>
-      <AuthForm mode="signin" />
+      <AuthForm mode="register" />
     </div>
   );
 }
