@@ -30,11 +30,13 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-feather": "2.0.10",
+    "react-modal": "^3.16.1",
     "typescript": "5.0.4"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
     "@types/cookie": "^0.5.1",
+    "@types/react-modal": "^3.16.0",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.23",
     "prisma": "^4.14.1",

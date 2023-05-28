@@ -3,8 +3,19 @@ import Image from "next/image";
 import logo from "@/assets/images/logo.png";
 import SidebarLink from "./SidebarLink";
 
-const links = [
+export type SidebarLinkData = {
+  label: string;
+  icon: string;
+  link: string;
+};
+
+const links: SidebarLinkData[] = [
   { label: "Home", icon: "Grid", link: "/home" },
+  {
+    label: "Issues",
+    icon: "AlertTriangle",
+    link: "/issues",
+  },
   {
     label: "Calendar",
     icon: "Calendar",

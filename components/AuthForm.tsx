@@ -1,11 +1,12 @@
 "use client";
 import { register, signin } from "@/utilities/api";
-import { useCallback, useState } from "react";
+import { FormEvent, useCallback, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Card from "./Card";
 import Button from "./Button";
 import Input from "./Input";
+import { User } from "@prisma/client";
 
 const registerContent = {
   linkUrl: "/signin",
@@ -23,7 +24,12 @@ const signinContent = {
   buttonText: "Sign In",
 };
 
-const initial = { email: "", password: "", firstName: "", lastName: "" };
+const initial: Partial<User> = {
+  email: "",
+  password: "",
+  firstName: "",
+  lastName: "",
+};
 
 export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
   const [formState, setFormState] = useState({ ...initial });
@@ -31,7 +37,7 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
 
   const router = useRouter();
   const handleSubmit = useCallback(
-    async (e) => {
+    async (e: FormEvent) => {
       e.preventDefault();
 
       try {

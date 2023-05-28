@@ -1,6 +1,11 @@
 import clsx from "clsx";
 
-const GlassPane = ({ children, className }) => {
+type GlassPaneProps = {
+  children: React.ReactNode;
+  className: string;
+};
+
+const GlassPane = ({ children, className }: GlassPaneProps) => {
   return (
     <div
       className={clsx(

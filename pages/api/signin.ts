@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { db } from "@/utilities/db";
-import { serialize } from "cookie";
 import { comparePasswords, createJWT } from "@/utilities/auth";
+import { serialize } from "cookie";
 
 export default async function signin(
   req: NextApiRequest,
@@ -14,24 +14,32 @@ export default async function signin(
       },
     });
 
-    const isUser = await comparePasswords(req.body.password, user?.password);
+    if (!user) {
+      res.status(401);
+      res.json({ error: "Invalid login" });
+      return;
+    }
+
+    const isUser = await comparePasswords(req.body.password, user.password);
 
     if (isUser) {
       const jwt = await createJWT(user);
-
       res.setHeader(
         "Set-Cookie",
-        serialize(process.env.COOKIE_NAME, jwt, {
+        serialize(process.env.COOKIE_NAME as string, jwt, {
           httpOnly: true,
           path: "/",
           maxAge: 60 * 60 * 24 * 7,
         })
       );
       res.status(201);
-      res.end();
+      res.json({});
+    } else {
+      res.status(401);
+      res.json({ error: "Invalid login" });
     }
   } else {
     res.status(402);
-    res.end();
+    res.json({});
   }
 }

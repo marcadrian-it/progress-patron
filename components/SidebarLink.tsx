@@ -1,12 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { Settings, User, Grid, Calendar } from "react-feather";
+import { Settings, User, Grid, Calendar, AlertTriangle } from "react-feather";
 import { usePathname } from "next/navigation";
+import { SidebarLinkData } from "./Sidebar";
 import clsx from "clsx";
 
-const icons = { Settings, User, Grid, Calendar };
-const SidebarLink = ({ link }) => {
+type SidebarLinkProps = {
+  link: SidebarLinkData;
+};
+
+const icons = { Settings, User, Grid, Calendar, AlertTriangle };
+const SidebarLink = ({ link }: SidebarLinkProps) => {
   const pathname = usePathname();
   let isActive = false;
 
@@ -14,7 +19,7 @@ const SidebarLink = ({ link }) => {
     isActive = true;
   }
 
-  const Icon = icons[link.icon];
+  const Icon = icons[link.icon as keyof typeof icons];
   return (
     <Link href={link.link}>
       <Icon

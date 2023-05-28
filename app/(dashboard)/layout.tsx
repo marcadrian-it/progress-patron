@@ -1,7 +1,6 @@
 import "@/styles/global.css";
 import GlassPane from "@/components/GlassPane";
 import Sidebar from "@/components/Sidebar";
-import Greetings from "@/components/Greetings";
 
 export default function DashboardRootLayout({ children }) {
   return (
@@ -12,6 +11,7 @@ export default function DashboardRootLayout({ children }) {
           <Sidebar />
           {children}
         </GlassPane>
+        <div id="modal"></div>
       </body>
     </html>
   );

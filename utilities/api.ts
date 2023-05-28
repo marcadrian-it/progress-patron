@@ -1,4 +1,13 @@
-const fetcher = async ({ url, method, body, json = true }) => {
+import { Project, User } from "@prisma/client";
+
+type FetcherProps = {
+  url: string;
+  method: string;
+  body: Partial<User> | Partial<Project>;
+  json?: boolean;
+};
+
+const fetcher = async ({ url, method, body, json = true }: FetcherProps) => {
   const res = await fetch(url, {
     method,
     body: body && JSON.stringify(body),
@@ -18,7 +27,7 @@ const fetcher = async ({ url, method, body, json = true }) => {
   }
 };
 
-export const register = async (user) => {
+export const register = async (user: Partial<User>) => {
   return fetcher({
     url: "/api/register",
     method: "POST",
@@ -27,11 +36,20 @@ export const register = async (user) => {
   });
 };
 
-export const signin = async (user) => {
+export const signin = async (user: Partial<User>) => {
   return fetcher({
     url: "/api/signin",
     method: "POST",
     body: user,
     json: false,
+  });
+};
+
+export const createNewProject = async (name: string) => {
+  return fetcher({
+    url: "/api/project",
+    method: "POST",
+    body: { name },
+    json: true,
   });
 };
