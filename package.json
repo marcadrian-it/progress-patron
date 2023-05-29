@@ -12,7 +12,7 @@
     "seed": "ts-node -P tsconfig-seed.json -r tsconfig-paths/register --transpileOnly prisma/seed.ts"
   },
   "dependencies": {
-    "@next/font": "13.4.3",
+    "@next/font": "^13.4.3",
     "@prisma/client": "^4.14.1",
     "@types/node": "20.2.3",
     "@types/react": "18.2.6",

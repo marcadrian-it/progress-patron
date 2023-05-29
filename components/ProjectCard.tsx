@@ -11,7 +11,7 @@ type ProjectWithTasks = Prisma.ProjectGetPayload<typeof projectWithTasks>;
 
 const formatDate = (date: Date) =>
   new Date(date).toLocaleDateString("en-gb", {
-    weekday: "long",
+    weekday: "short",
     year: "numeric",
     month: "short",
     day: "numeric",

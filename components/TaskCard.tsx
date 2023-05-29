@@ -36,7 +36,7 @@ const TaskCard = async ({ tasks, title }: TaskCardProps) => {
 
   return (
     <Card>
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center ">
         <div>
           <span className="text-3xl text-gray-600">{title}</span>
         </div>
@@ -50,7 +50,7 @@ const TaskCard = async ({ tasks, title }: TaskCardProps) => {
         {data && data.length ? (
           <div>
             {data.map((task: Task) => (
-              <div className="py-2 ">
+              <div className="py-2 " key={task.id}>
                 <div>
                   <span className="text-gray-800">{task.name}</span>
                 </div>
@@ -63,7 +63,7 @@ const TaskCard = async ({ tasks, title }: TaskCardProps) => {
             ))}
           </div>
         ) : (
-          <div>no tasks</div>
+          <div>You currently have no tasks</div>
         )}
       </div>
     </Card>

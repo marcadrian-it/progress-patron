@@ -6,7 +6,7 @@ import { delay } from "@/utilities/async";
 import { RequestCookies } from "next/dist/server/web/spec-extension/cookies";
 
 const getData = async () => {
-  await delay(2000);
+  await delay(1000);
   const user = await getUserFromCookie(cookies() as RequestCookies);
   return user;
 };
@@ -25,7 +25,7 @@ const Greetings = async () => {
         </h4>
       </div>
       <div>
-        <Button size="large">Today's Schedule</Button>
+        <Button size="large">Today&apos;s Schedule</Button>
       </div>
     </Card>
   );
