@@ -1,14 +1,20 @@
 import { getUserFromCookie } from "@/utilities/auth";
 import { db } from "@/utilities/db";
-import { Task, TASK_STATUS } from "@prisma/client";
+import { Project, Task, TASK_STATUS } from "@prisma/client";
 import { cookies } from "next/headers";
-import Button from "./Button";
+
 import Card from "./Card";
 import { RequestCookies } from "next/dist/server/web/spec-extension/cookies";
+import NewTask from "./NewTask";
 
 type TaskCardProps = {
   title?: string;
   tasks?: Task[];
+  projects?:
+    | (Project & {
+        tasks: Task[];
+      })[]
+    | (Project & { tasks: Task[] });
 };
 
 const getData = async () => {
@@ -31,7 +37,7 @@ const getData = async () => {
   return tasks;
 };
 
-const TaskCard = async ({ tasks, title }: TaskCardProps) => {
+const TaskCard = async ({ projects, tasks, title }: TaskCardProps) => {
   const data = tasks || (await getData());
 
   return (
@@ -41,9 +47,7 @@ const TaskCard = async ({ tasks, title }: TaskCardProps) => {
           <span className="text-3xl text-gray-600">{title}</span>
         </div>
         <div>
-          <Button intent="text" className="text-violet-600">
-            + Create New
-          </Button>
+          <NewTask projects={projects} />
         </div>
       </div>
       <div>

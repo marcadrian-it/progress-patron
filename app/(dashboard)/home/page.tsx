@@ -3,7 +3,7 @@ import GreetingsShimmer from "@/components/GreetingsShimmer";
 import NewProject from "@/components/NewProject";
 import ProjectCard from "@/components/ProjectCard";
 import TaskCard from "@/components/TaskCard";
-import { delay } from "@/utilities/async";
+
 import { getUserFromCookie } from "@/utilities/auth";
 import { db } from "@/utilities/db";
 import { RequestCookies } from "next/dist/server/web/spec-extension/cookies";
@@ -12,7 +12,6 @@ import Link from "next/link";
 import React, { Suspense } from "react";
 
 const getData = async () => {
-  await delay(1000);
   const user = await getUserFromCookie(cookies() as RequestCookies);
 
   const projects = await db.project.findMany({
@@ -31,8 +30,8 @@ export default async function Page() {
   const { projects } = await getData();
 
   return (
-    <div className="h-full overflow-y-auto p-4 w-full">
-      <div className=" h-full items-stretch justify-center min-h-[content]">
+    <div className="h-full overflow-y-auto  w-full">
+      <div className=" h-full items-stretch justify-center min-h-[content] p-6 pt-0">
         <div className="flex-1 grow flex">
           <Suspense fallback={<GreetingsShimmer />}>
             {/* @ts-expect-error Server Component */}
@@ -54,7 +53,7 @@ export default async function Page() {
         <div className="mt-6 flex-2 grow w-full flex">
           <div className="w-full">
             {/* @ts-expect-error Server Component */}
-            <TaskCard />
+            <TaskCard projects={projects} />
           </div>
         </div>
       </div>

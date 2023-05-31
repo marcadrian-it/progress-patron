@@ -20,11 +20,12 @@ export default function DashboardRootLayout({
     <html lang="en" className={inter.variable}>
       <head />
       <body className="h-screen w-screen candy-mesh p-6">
-        <GlassPane className="w-full h-full flex gap-1 items-center p-4">
+        <GlassPane className="w-full h-full flex items-center p-4">
           <Sidebar />
           {children}
         </GlassPane>
         <div id="modal"></div>
+        <div id="modal-task"></div>
       </body>
     </html>
   );

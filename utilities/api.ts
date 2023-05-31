@@ -3,7 +3,7 @@ import { Project, User } from "@prisma/client";
 type FetcherProps = {
   url: string;
   method: string;
-  body: Partial<User> | Partial<Project>;
+  body: Partial<User> | Partial<Project> | { name: string; projectId: number };
   json?: boolean;
 };
 
@@ -50,6 +50,15 @@ export const createNewProject = async (name: string) => {
     url: "/api/project",
     method: "POST",
     body: { name },
+    json: true,
+  });
+};
+
+export const createNewTask = async (name: string, projectId: number) => {
+  return fetcher({
+    url: "/api/task",
+    method: "POST",
+    body: { name, projectId },
     json: true,
   });
 };

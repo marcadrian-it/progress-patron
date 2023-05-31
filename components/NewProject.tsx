@@ -32,9 +32,9 @@ const NewProject = () => {
         className="w-3/4 bg-white rounded-xl p-8"
       >
         <h1 className="text-3xl mb-6">New Project</h1>
-        <form className="flex items-center" onSubmit={handleSubmit}>
+        <form className="flex items-center gap-2" onSubmit={handleSubmit}>
           <Input
-            placeholder="project name"
+            placeholder="Project name"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
