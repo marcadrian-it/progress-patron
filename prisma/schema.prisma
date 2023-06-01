@@ -69,9 +69,9 @@ model Task {
 }
 
 enum ISSUE_STATUS {
-  NOT_ASSIGNED
-  ASSIGNED
-  SOLVED
+  OPEN
+  IN_PROGRESS
+  CLOSED
 }
 
 enum ISSUE_SEVERITY {
@@ -88,7 +88,7 @@ model Issue {
 
   name        String
   description String?
-  status      ISSUE_STATUS   @default(NOT_ASSIGNED)
+  status      ISSUE_STATUS   @default(OPEN)
   severity    ISSUE_SEVERITY @default(Medium)
 
   owner     User    @relation(fields: [ownerId], references: [id])

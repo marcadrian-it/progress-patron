@@ -1,5 +1,5 @@
 import "@/styles/global.css";
-import { Inter } from "@next/font/google";
+import { Inter } from "next/font/google";
 import GlassPane from "@/components/GlassPane";
 import Sidebar from "@/components/Sidebar";
 import { ReactElement } from "react";

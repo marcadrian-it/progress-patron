@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { Prisma } from "@prisma/client";
 import Card from "./Card";
-import clsx from "clsx";
 
 const projectWithTasks = Prisma.validator<Prisma.ProjectArgs>()({
   include: { tasks: true },
@@ -45,9 +44,9 @@ const ProjectCard: FC<{ project: ProjectWithTasks }> = ({ project }) => {
       <div>
         <div className="w-full h-2 bg-violet-200 rounded-full mb-2">
           <div
-            className={clsx(
+            className={
               "h-full text-center text-xs text-white bg-violet-600 rounded-full"
-            )}
+            }
             style={{ width: `${progress}%` }}
           ></div>
         </div>

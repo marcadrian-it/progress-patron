@@ -1,7 +1,7 @@
 import "@/styles/global.css";
 import GlassPane from "@/components/GlassPane";
 import { ReactElement } from "react";
-import { Inter } from "@next/font/google";
+import { Inter } from "next/font/google";
 
 type AuthRootLayoutProps = {
   children: ReactElement;

@@ -1,3 +1,3 @@
-export default function Issues() {
+export default function ProfilePage() {
   return <div>Hey</div>;
 }
