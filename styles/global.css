@@ -40,6 +40,18 @@
     radial-gradient(at 35% 44%, hsla(337, 92%, 61%, 1) 0px, transparent 50%);
 }
 
+.sunset-mesh {
+  background-color: #ff6b6b;
+  background-image: radial-gradient(
+      at 20% 30%,
+      hsla(15, 86%, 65%, 1) 0px,
+      transparent 50%
+    ),
+    radial-gradient(at 40% 70%, hsla(38, 85%, 65%, 1) 0px, transparent 50%),
+    radial-gradient(at 60% 20%, hsla(45, 74%, 65%, 1) 0px, transparent 50%),
+    radial-gradient(at 80% 80%, hsla(22, 95%, 61%, 1) 0px, transparent 50%);
+}
+
 .glass {
   backdrop-filter: blur(16px) saturate(150%);
   background-color: rgba(255, 255, 255, 0.4);

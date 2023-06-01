@@ -19,7 +19,10 @@ export default function DashboardRootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <head />
-      <body className="h-screen w-screen candy-mesh p-6">
+      <body
+        suppressHydrationWarning={true}
+        className="h-screen w-screen candy-mesh p-6"
+      >
         <GlassPane className="w-full h-full flex items-center p-4">
           <Sidebar />
           {children}

@@ -24,6 +24,7 @@ export default async function register(
         httpOnly: true,
         path: "/",
         maxAge: 60 * 60 * 24 * 7,
+        sameSite: "lax",
       })
     );
     res.status(201);

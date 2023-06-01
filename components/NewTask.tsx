@@ -1,6 +1,6 @@
 "use client";
 
-import { Project, Task } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { createNewTask } from "@/utilities/api";
 import { useState } from "react";
 import Modal from "react-modal";
@@ -10,17 +10,9 @@ import { FormEvent } from "react";
 
 Modal.setAppElement("#modal-task");
 
-interface NewTaskProps {
-  projects: (Project & {
-    tasks: Task[];
-  })[];
-}
-
-const NewTask = ({ projects }: NewTaskProps) => {
+const NewTask = () => {
   const [isModalOpen, setIsOpen] = useState(false);
-  const [selectedProjectId, setSelectedProjectId] = useState<number>(
-    projects[0].id
-  );
+  const [selectedProjectId, setSelectedProjectId] = useState<number>(0);
   const [name, setName] = useState("");
   const closeModal = () => setIsOpen(false);
   const openModal = () => setIsOpen(true);

@@ -27,6 +27,11 @@ const links: SidebarLinkData[] = [
     icon: "Settings",
     link: "/settings",
   },
+  {
+    label: "Logout",
+    icon: "LogOut",
+    link: "/logout",
+  },
 ];
 
 const Sidebar = () => {

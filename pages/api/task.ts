@@ -8,13 +8,7 @@ export default async function handler(
 ) {
   /* @ts-ignore */
   const user = await validateJWT(req.cookies[process.env.COOKIE_NAME]);
-  console.log(req.body, "hello body");
-  console.log(
-    user.id,
-    req.body.name,
-    req.body.projectId,
-    "hello userid reqbodyname reqbodyprojectid"
-  );
+
   await db.task.create({
     /* @ts-ignore */
     data: {

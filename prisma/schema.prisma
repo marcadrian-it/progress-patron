@@ -21,6 +21,7 @@ model User {
   password  String
   projects  Project[]
   tasks     Task[]
+  issues    Issue[]
 }
 
 model Project {
@@ -35,6 +36,7 @@ model Project {
   owner       User      @relation(fields: [ownerId], references: [id])
   ownerId     Int
   tasks       Task[]
+  issues      Issue[]
 
   @@unique([name, ownerId])
   @@index([ownerId, id])
@@ -55,7 +57,6 @@ model Task {
   description String?
   status      TASK_STATUS @default(NOT_STARTED)
 
-  
   owner     User    @relation(fields: [ownerId], references: [id])
   ownerId   Int
   projectId Int
@@ -65,4 +66,38 @@ model Task {
   due     DateTime?
 
   @@index([ownerId])
+}
+
+enum ISSUE_STATUS {
+  NOT_ASSIGNED
+  ASSIGNED
+  SOLVED
+}
+
+enum ISSUE_SEVERITY {
+  Critical
+  High
+  Medium
+  Low
+}
+
+model Issue {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name        String
+  description String?
+  status      ISSUE_STATUS   @default(NOT_ASSIGNED)
+  severity    ISSUE_SEVERITY @default(Medium)
+
+  owner     User    @relation(fields: [ownerId], references: [id])
+  ownerId   Int
+  projectId Int
+  project   Project @relation(fields: [projectId], references: [id])
+
+  deleted Boolean @default(false)
+
+  @@unique([name, ownerId])
+  @@index([projectId, id])
 }
