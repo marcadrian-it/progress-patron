@@ -23,13 +23,13 @@ export default async function IssuesPage() {
   const { issues } = await getData();
   return (
     <div className="h-full overflow-y-auto  w-full">
-      <div className=" h-full items-stretch justify-center min-h-[content] p-6 pt-0">
-        {issues.map((issue) => (
-          <div className="w-1/3 p-3" key={issue.id}>
+      {issues.map((issue) => (
+        <div className="w-full flex justify-center p-3" key={issue.id}>
+          <div className="w-3/4">
             <IssueCard issue={issue} />
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 }
