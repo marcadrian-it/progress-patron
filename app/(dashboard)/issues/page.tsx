@@ -1,4 +1,4 @@
-import IssueCard from "@/components/IssueCard";
+import IssuesList from "@/components/IssuesList";
 import { getUserFromCookie } from "@/utilities/auth";
 import { db } from "@/utilities/db";
 import { RequestCookies } from "next/dist/server/web/spec-extension/cookies";
@@ -22,14 +22,8 @@ const getData = async () => {
 export default async function IssuesPage() {
   const { issues } = await getData();
   return (
-    <div className="h-full overflow-y-auto  w-full">
-      {issues.map((issue) => (
-        <div className="w-full flex justify-center p-3" key={issue.id}>
-          <div className="w-3/4">
-            <IssueCard issue={issue} />
-          </div>
-        </div>
-      ))}
+    <div className="h-full overflow-y-auto w-full px-8">
+      <IssuesList issues={issues} />
     </div>
   );
 }

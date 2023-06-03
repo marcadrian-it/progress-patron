@@ -11,7 +11,7 @@ type IssueWithProject = Prisma.IssueGetPayload<typeof issueWithProject>;
 const getStatusColor = (status: string) => {
   switch (status) {
     case "OPEN":
-      return "bg-red-500";
+      return "bg-blue-500";
     case "IN_PROGRESS":
       return "bg-yellow-500";
     case "CLOSED":
@@ -21,9 +21,28 @@ const getStatusColor = (status: string) => {
   }
 };
 
+const getSeverityColor = (severity: string) => {
+  switch (severity) {
+    case "LOW":
+      return "border-green-500";
+    case "MEDIUM":
+      return "border-yellow-500";
+    case "HIGH":
+      return "border-red-500";
+    case "CRITICAL":
+      return "border-purple-500";
+    default:
+      return "border-gray-500";
+  }
+};
+
 const IssueCard: FC<{ issue: IssueWithProject }> = ({ issue }) => {
   return (
-    <Card className="!px-6 !py-8 hover:scale-105 transition-all ease-in-out duration-200">
+    <Card
+      className={
+        "!px-6 !py-8 hover:scale-105 transition-all ease-in-out duration-200"
+      }
+    >
       <div className="mb-2">
         <span className="text-sm text-gray-300">Issue ID: {issue.id}</span>
       </div>
@@ -33,8 +52,11 @@ const IssueCard: FC<{ issue: IssueWithProject }> = ({ issue }) => {
             issue.status
           )}`}
         ></div>
-        <span className="text-xl text-gray-600">{issue.name}</span>
+        <span className={`rounded py-1 px-2 ${getStatusColor(issue.status)}`}>
+          {issue.status.replace("_", " ")}
+        </span>
       </div>
+      <span className="text-xl text-gray-600">{issue.name}</span>
       <div className="mb-4">
         <span className="text-gray-400">{issue.description}</span>
       </div>
