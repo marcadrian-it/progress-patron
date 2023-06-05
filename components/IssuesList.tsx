@@ -31,11 +31,23 @@ const IssuesList: FC<{ issues: issueWithProjectAndUsername[] }> = ({
   issues,
 }) => {
   const router = useRouter();
-  const openIssues = issues.filter((issue) => issue.status === "OPEN");
-  const inProgressIssues = issues.filter(
-    (issue) => issue.status === "IN_PROGRESS"
-  );
-  const closedIssues = issues.filter((issue) => issue.status === "CLOSED");
+
+  const severityMap = {
+    Critical: 3,
+    High: 2,
+    Medium: 1,
+    Low: 0,
+  };
+
+  const openIssues = issues
+    .filter((issue) => issue.status === "OPEN")
+    .sort((a, b) => severityMap[b.severity] - severityMap[a.severity]);
+  const inProgressIssues = issues
+    .filter((issue) => issue.status === "IN_PROGRESS")
+    .sort((a, b) => severityMap[b.severity] - severityMap[a.severity]);
+  const closedIssues = issues
+    .filter((issue) => issue.status === "CLOSED")
+    .sort((a, b) => severityMap[b.severity] - severityMap[a.severity]);
 
   const onDragEnd = async (result: any) => {
     const { destination, source, draggableId } = result;
