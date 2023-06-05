@@ -1,9 +1,13 @@
-import { Project, User } from "@prisma/client";
+import { Issue, Project, User, ISSUE_STATUS } from "@prisma/client";
 
 type FetcherProps = {
   url: string;
   method: string;
-  body: Partial<User> | Partial<Project> | { name: string; projectId: number };
+  body:
+    | Partial<User>
+    | Partial<Project>
+    | Partial<Issue>
+    | { name: string; projectId: number };
   json?: boolean;
 };
 
@@ -59,6 +63,15 @@ export const createNewTask = async (name: string, projectId: number) => {
     url: "/api/task",
     method: "POST",
     body: { name, projectId },
+    json: true,
+  });
+};
+
+export const updateIssueStatus = async (id: string, status: ISSUE_STATUS) => {
+  return fetcher({
+    url: `/api/issue`,
+    method: "PUT",
+    body: { id, status },
     json: true,
   });
 };

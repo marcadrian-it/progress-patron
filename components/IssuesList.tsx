@@ -1,7 +1,16 @@
-import { FC, Suspense } from "react";
+"use client";
+import { FC } from "react";
+import { Droppable, Draggable } from "react-beautiful-dnd";
 import IssueCard from "./IssueCard";
-import IssueCardShimmer from "./IssueCardShimmer";
-import { Prisma } from "@prisma/client";
+import { Prisma, ISSUE_STATUS } from "@prisma/client";
+import { updateIssueStatus } from "@/utilities/api";
+import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
+
+const DragDropContext = dynamic(
+  () => import("react-beautiful-dnd").then((mod) => mod.DragDropContext),
+  { ssr: false }
+);
 
 const issueWithProjectAndUsername = Prisma.validator<Prisma.IssueArgs>()({
   include: {
@@ -21,51 +30,134 @@ type issueWithProjectAndUsername = Prisma.IssueGetPayload<
 const IssuesList: FC<{ issues: issueWithProjectAndUsername[] }> = ({
   issues,
 }) => {
+  const router = useRouter();
   const openIssues = issues.filter((issue) => issue.status === "OPEN");
   const inProgressIssues = issues.filter(
     (issue) => issue.status === "IN_PROGRESS"
   );
   const closedIssues = issues.filter((issue) => issue.status === "CLOSED");
 
+  const onDragEnd = async (result: any) => {
+    const { destination, source, draggableId } = result;
+
+    if (!destination) {
+      return;
+    }
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+
+    let newStatus: ISSUE_STATUS | undefined;
+    if (destination.droppableId === "openIssues") {
+      newStatus = "OPEN";
+    } else if (destination.droppableId === "inProgressIssues") {
+      newStatus = "IN_PROGRESS";
+    } else if (destination.droppableId === "closedIssues") {
+      newStatus = "CLOSED";
+    }
+
+    if (newStatus) {
+      await updateIssueStatus(draggableId, newStatus);
+      router.refresh();
+    }
+  };
+
   return (
-    <div className="grid grid-cols-3 gap-6">
-      <div>
-        <h2 className="sticky top-0 rounded-3xl bg-blue-500 z-10 text-2xl text-center font-bold mb-4 -mx-3">
-          Open
-        </h2>
-        <div className="space-y-4">
-          <Suspense fallback={<IssueCardShimmer />}>
-            {openIssues.map((issue) => (
-              <IssueCard key={issue.id} issue={issue} />
-            ))}
-          </Suspense>
-        </div>
+    <DragDropContext onDragEnd={onDragEnd}>
+      <div className="grid grid-cols-3 gap-6">
+        <Droppable droppableId="openIssues">
+          {(provided) => (
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+              <h2 className="sticky top-0 rounded-3xl bg-blue-500 z-10 text-2xl text-center font-bold mb-4 w-1/4 -mx-3">
+                Open
+              </h2>
+              <div className="space-y-4">
+                {openIssues.map((issue, index) => (
+                  <Draggable
+                    key={issue.id}
+                    draggableId={issue.id}
+                    index={index}
+                  >
+                    {(provided) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <IssueCard key={issue.id} issue={issue} />
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            </div>
+          )}
+        </Droppable>
+        <Droppable droppableId="inProgressIssues">
+          {(provided) => (
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+              <h2 className="sticky top-0 rounded-3xl bg-yellow-500 z-10 text-2xl text-center font-bold mb-4 w-1/4 -mx-3">
+                In Progress
+              </h2>
+              <div className="space-y-4">
+                {inProgressIssues.map((issue, index) => (
+                  <Draggable
+                    key={issue.id}
+                    draggableId={issue.id}
+                    index={index}
+                  >
+                    {(provided) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <IssueCard key={issue.id} issue={issue} />
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            </div>
+          )}
+        </Droppable>
+        <Droppable droppableId="closedIssues">
+          {(provided) => (
+            <div ref={provided.innerRef} {...provided.droppableProps}>
+              <h2 className="sticky top-0 rounded-3xl bg-green-500 z-10 text-2xl text-center font-bold mb-4 w-1/4 -mx-3">
+                Closed
+              </h2>
+              <div className="space-y-4">
+                {closedIssues.map((issue, index) => (
+                  <Draggable
+                    key={issue.id}
+                    draggableId={issue.id}
+                    index={index}
+                  >
+                    {(provided) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                      >
+                        <IssueCard key={issue.id} issue={issue} />
+                      </div>
+                    )}
+                  </Draggable>
+                ))}
+                {provided.placeholder}
+              </div>
+            </div>
+          )}
+        </Droppable>
       </div>
-      <div>
-        <h2 className="sticky top-0 rounded-3xl bg-yellow-500 z-10 text-2xl text-center font-bold mb-4 -mx-3">
-          In Progress
-        </h2>
-        <div className="space-y-4">
-          <Suspense fallback={<IssueCardShimmer />}>
-            {inProgressIssues.map((issue) => (
-              <IssueCard key={issue.id} issue={issue} />
-            ))}
-          </Suspense>
-        </div>
-      </div>
-      <div>
-        <h2 className="sticky top-0 rounded-3xl bg-green-500 z-10 text-2xl text-center font-bold mb-4 -mx-3">
-          Closed
-        </h2>
-        <div className="space-y-4">
-          <Suspense fallback={<IssueCardShimmer />}>
-            {closedIssues.map((issue) => (
-              <IssueCard key={issue.id} issue={issue} />
-            ))}
-          </Suspense>
-        </div>
-      </div>
-    </div>
+    </DragDropContext>
   );
 };
 
