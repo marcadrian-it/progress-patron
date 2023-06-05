@@ -1,12 +1,23 @@
 import { FC } from "react";
 import { Prisma } from "@prisma/client";
 import Card from "./Card";
+import { Users } from "react-feather";
+import Link from "next/link";
 
-const issueWithProject = Prisma.validator<Prisma.IssueArgs>()({
-  include: { project: true },
+const issueWithProjectAndUsername = Prisma.validator<Prisma.IssueArgs>()({
+  include: {
+    project: true,
+    owner: {
+      select: {
+        firstName: true,
+      },
+    },
+  },
 });
 
-type IssueWithProject = Prisma.IssueGetPayload<typeof issueWithProject>;
+type issueWithProjectAndUsername = Prisma.IssueGetPayload<
+  typeof issueWithProjectAndUsername
+>;
 
 const getStatusColor = (status: string) => {
   switch (status) {
@@ -23,20 +34,20 @@ const getStatusColor = (status: string) => {
 
 const getSeverityColor = (severity: string) => {
   switch (severity) {
-    case "LOW":
-      return "border-green-500";
-    case "MEDIUM":
-      return "border-yellow-500";
-    case "HIGH":
-      return "border-red-500";
-    case "CRITICAL":
-      return "border-purple-500";
+    case "Low":
+      return "bg-green-500";
+    case "Medium":
+      return "bg-yellow-500";
+    case "High":
+      return "bg-red-500";
+    case "Critical":
+      return "bg-purple-500";
     default:
-      return "border-gray-500";
+      return "bg-gray-500";
   }
 };
 
-const IssueCard: FC<{ issue: IssueWithProject }> = ({ issue }) => {
+const IssueCard: FC<{ issue: issueWithProjectAndUsername }> = ({ issue }) => {
   return (
     <Card
       className={
@@ -44,7 +55,7 @@ const IssueCard: FC<{ issue: IssueWithProject }> = ({ issue }) => {
       }
     >
       <div className="mb-2">
-        <span className="text-sm text-gray-300">Issue ID: {issue.id}</span>
+        <span className="text-sm text-gray-400">Issue ID: {issue.id}</span>
       </div>
       <div className="flex items-center mb-4">
         <div
@@ -61,13 +72,23 @@ const IssueCard: FC<{ issue: IssueWithProject }> = ({ issue }) => {
         <span className="text-gray-400">{issue.description}</span>
       </div>
       <div className="flex justify-between mb-4">
-        <span className="text-gray-400">Severity: {issue.severity}</span>
-        <span className="text-gray-400">Owner ID: {issue.ownerId}</span>
+        <span
+          className={` rounded py-1 px-2 ${getSeverityColor(issue.severity)}`}
+        >
+          Severity: {issue.severity}
+        </span>
+        <span className="text-gray-400">
+          {" "}
+          <Users size={24} className="inline-block mr-1" />
+          Assigned to: {issue.owner.firstName}
+        </span>
       </div>
       <div>
-        <span className="text-sm text-gray-300">
-          Project ID: {issue.projectId}
-        </span>
+        <Link href={`/project/${issue.projectId}`}>
+          <span className="text-sm text-purple-500 hover:text-blue-700 hover:underline">
+            Project: {issue.project.name}
+          </span>
+        </Link>
       </div>
     </Card>
   );
