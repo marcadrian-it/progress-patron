@@ -33,6 +33,9 @@ const ProjectCard: FC<{ project: ProjectWithTasks }> = ({ project }) => {
           {formatDate(project.createdAt)}
         </span>
       </div>
+      <div>
+        <span className="text-sm text-red-400">{formatDate(project.due)}</span>
+      </div>
       <div className="mb-6">
         <span className="text-3xl text-gray-600">{project.name}</span>
       </div>

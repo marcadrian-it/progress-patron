@@ -31,7 +31,7 @@ model Project {
 
   name        String
   description String?
-  due         DateTime?
+  due         DateTime
   deleted     Boolean   @default(false)
   owner       User      @relation(fields: [ownerId], references: [id])
   ownerId     Int
