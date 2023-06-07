@@ -49,11 +49,11 @@ export const signin = async (user: Partial<User>) => {
   });
 };
 
-export const createNewProject = async (name: string) => {
+export const createNewProject = async (name: string, due: Date) => {
   return fetcher({
     url: "/api/project",
     method: "POST",
-    body: { name },
+    body: { name, due },
     json: true,
   });
 };

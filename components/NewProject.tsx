@@ -13,12 +13,17 @@ Modal.setAppElement("#modal");
 const NewProject = () => {
   const [isModalOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
+  const [due, setDue] = useState<Date | null>(null);
   const closeModal = () => setIsOpen(false);
   const openModal = () => setIsOpen(true);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    await createNewProject(name);
+    if (!name || !due || due === null) {
+      closeModal();
+      return;
+    }
+    await createNewProject(name, due);
     closeModal();
   };
 
@@ -43,7 +48,10 @@ const NewProject = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            <DateInput />
+            <DateInput
+              value={due?.toISOString().split("T")[0] || ""}
+              onChange={(e) => setDue(new Date(e.target.value))}
+            />
             <Button type="submit">Create</Button>
           </div>
           <div className="w-full md:w-1/2">

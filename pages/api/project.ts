@@ -13,6 +13,7 @@ export default async function handler(
     /* @ts-ignore */
     data: {
       name: req.body.name,
+      due: req.body.due,
       ownerId: user.id,
     },
   });
