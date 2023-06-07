@@ -63,7 +63,7 @@ model Task {
   project   Project @relation(fields: [projectId], references: [id])
 
   deleted Boolean   @default(false)
-  due     DateTime?
+  due     DateTime
 
   @@index([ownerId])
 }

@@ -42,7 +42,7 @@ async function main() {
       projects: {
         create: new Array(5).fill(1).map((_, i) => ({
           name: `Project ${i}`,
-          due: new Date(2022, 11, 25),
+          due: new Date(2023, 11, 25),
         })),
       },
     },
@@ -59,6 +59,7 @@ async function main() {
             name: `Task ${i}`,
             ownerId: user.id,
             projectId: project.id,
+            due: new Date(2023, 10, 5),
             description: `Everything that describes Task ${i}`,
             status: getRandomTaskStatus(),
           };
@@ -70,7 +71,7 @@ async function main() {
   const issues = await Promise.all(
     user.projects.map((project) =>
       db.issue.createMany({
-        data: new Array(3).fill(1).map((_, i) => {
+        data: new Array(2).fill(1).map((_, i) => {
           return {
             name: `Issue ${i} for Project ${project.id}`,
             ownerId: user.id,
