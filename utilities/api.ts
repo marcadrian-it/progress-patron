@@ -8,7 +8,7 @@ type FetcherProps = {
     | Partial<Project>
     | Partial<Issue>
     | { name: string; projectId: number };
-  json?: boolean;
+  json: boolean;
 };
 
 const fetcher = async ({ url, method, body, json = true }: FetcherProps) => {

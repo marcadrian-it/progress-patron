@@ -47,7 +47,15 @@ const TaskCard = async ({ tasks, title }: TaskCardProps) => {
     <Card>
       <div className="flex justify-between items-center ">
         <div>
-          <span className="text-3xl text-gray-600">{title}</span>
+          {title ? (
+            <span className="text-3xl text-gray-700 font-bold mb-4">
+              {title}
+            </span>
+          ) : (
+            <h1 className="text-3xl text-gray-700 font-bold mb-4">
+              Tasks with Approaching Deadlines
+            </h1>
+          )}
         </div>
         <div>{/* <NewTask /> */}</div>
       </div>
@@ -57,7 +65,7 @@ const TaskCard = async ({ tasks, title }: TaskCardProps) => {
             {data.map((task: Task) => (
               <div className="py-2 " key={task.id}>
                 <div className="flex items-center gap-2">
-                  <Plus className="text-purple-500" stroke-width={5} />
+                  <Plus className="text-purple-500" strokeWidth={5} />
                   <div>
                     <div>
                       <span className="text-gray-800">{task.name}</span>
