@@ -41,8 +41,8 @@ const getData = async () => {
   return tasks;
 };
 
-const TaskCard = async ({ projects, title }: TaskCardProps) => {
-  const data = await getData();
+const TaskCard = async ({ tasks, projects, title }: TaskCardProps) => {
+  const data = tasks || (await getData());
 
   return (
     <Card>

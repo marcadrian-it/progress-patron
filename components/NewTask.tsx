@@ -62,6 +62,7 @@ const NewTask = ({ projects }: NewTaskProps) => {
             placeholder="Task name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            className="w-1/3"
           />
           <Button type="submit">Create</Button>
         </form>
