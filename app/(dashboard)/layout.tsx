@@ -23,7 +23,10 @@ export default function DashboardRootLayout({
         suppressHydrationWarning={true}
         className="h-screen w-screen candy-mesh p-6"
       >
-        <GlassPane className="w-full h-full flex items-center p-4">
+        <GlassPane
+          className="w-full h-full flex items-center p-4"
+          style={{ maxWidth: "100vw", overflow: "hidden" }}
+        >
           <Sidebar />
           {children}
         </GlassPane>

@@ -4,6 +4,7 @@ import Button from "./Button";
 import Card from "./Card";
 import { delay } from "@/utilities/async";
 import { RequestCookies } from "next/dist/server/web/spec-extension/cookies";
+import Link from "next/link";
 
 const getData = async () => {
   await delay(300);
@@ -25,7 +26,9 @@ const Greetings = async () => {
         </h4>
       </div>
       <div>
-        <Button size="large">Today&apos;s Schedule</Button>
+        <Link href={"/calendar"}>
+          <Button size="large">Today&apos;s Schedule</Button>
+        </Link>
       </div>
     </Card>
   );

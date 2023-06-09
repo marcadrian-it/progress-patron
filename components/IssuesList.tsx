@@ -32,6 +32,7 @@ const IssuesList: FC<{ issues: issueWithProjectAndUsername[] }> = ({
   issues,
 }) => {
   const [activeDroppableId, setActiveDroppableId] = useState(null);
+
   const router = useRouter();
   const severityMap = {
     Critical: 3,
@@ -58,7 +59,6 @@ const IssuesList: FC<{ issues: issueWithProjectAndUsername[] }> = ({
     setActiveDroppableId(null);
     const { destination, source, draggableId } = result;
 
-    // Return early if there is no destination or if the source and destination are the same
     if (
       !destination ||
       (destination.droppableId === source.droppableId &&
@@ -84,7 +84,7 @@ const IssuesList: FC<{ issues: issueWithProjectAndUsername[] }> = ({
 
   return (
     <DragDropContext onDragEnd={onDragEnd} onDragUpdate={onDragUpdate}>
-      <div className="grid grid-cols-3 gap-6">
+      <div className="grid grid-cols-3 gap-6 w-full h-full">
         <Droppable droppableId="openIssues">
           {(provided) => (
             <div

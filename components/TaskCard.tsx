@@ -82,18 +82,20 @@ const TaskCard = async ({ tasks, projects, title }: TaskCardProps) => {
                       </span>
                     </div>
                   </div>
-                  {task.status === TASK_STATUS.NOT_STARTED && (
-                    <Circle className="text-red-400" strokeWidth={3} />
-                  )}
-                  {task.status === TASK_STATUS.STARTED && (
-                    <ArrowRightCircle
-                      className="text-yellow-400"
-                      strokeWidth={3}
-                    />
-                  )}
-                  {task.status === TASK_STATUS.COMPLETED && (
-                    <CheckCircle className="text-green-400" strokeWidth={3} />
-                  )}
+                  <div>
+                    {task.status === TASK_STATUS.NOT_STARTED && (
+                      <Circle className="text-red-400" strokeWidth={3} />
+                    )}
+                    {task.status === TASK_STATUS.STARTED && (
+                      <ArrowRightCircle
+                        className="text-yellow-400"
+                        strokeWidth={3}
+                      />
+                    )}
+                    {task.status === TASK_STATUS.COMPLETED && (
+                      <CheckCircle className="text-green-400" strokeWidth={3} />
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
