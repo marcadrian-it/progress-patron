@@ -1,8 +1,8 @@
 import { getUserFromCookie } from "@/utilities/auth";
 import { db } from "@/utilities/db";
-import { Task, TASK_STATUS } from "@prisma/client";
+import { Project, Task, TASK_STATUS } from "@prisma/client";
 import { cookies } from "next/headers";
-import { Plus } from "react-feather";
+import { Plus, Circle, ArrowRightCircle, CheckCircle } from "react-feather";
 import Card from "./Card";
 import { RequestCookies } from "next/dist/server/web/spec-extension/cookies";
 import NewTask from "./NewTask";
@@ -10,6 +10,7 @@ import NewTask from "./NewTask";
 type TaskCardProps = {
   title?: string;
   tasks?: Task[];
+  projects?: Project[];
 };
 
 const formatDate = (date: Date) =>
@@ -40,8 +41,8 @@ const getData = async () => {
   return tasks;
 };
 
-const TaskCard = async ({ tasks, title }: TaskCardProps) => {
-  const data = tasks || (await getData());
+const TaskCard = async ({ projects, title }: TaskCardProps) => {
+  const data = await getData();
 
   return (
     <Card>
@@ -57,7 +58,7 @@ const TaskCard = async ({ tasks, title }: TaskCardProps) => {
             </h1>
           )}
         </div>
-        <div>{/* <NewTask /> */}</div>
+        <div>{projects && <NewTask projects={projects} />}</div>
       </div>
       <div>
         {data && data.length ? (
@@ -76,11 +77,23 @@ const TaskCard = async ({ tasks, title }: TaskCardProps) => {
                       </span>
                     </div>
                     <div>
-                      <span className="text-gray-400 text-sm">
+                      <span className="text-red-400 text-sm">
                         {formatDate(task.due)}
                       </span>
                     </div>
                   </div>
+                  {task.status === TASK_STATUS.NOT_STARTED && (
+                    <Circle className="text-red-400" strokeWidth={3} />
+                  )}
+                  {task.status === TASK_STATUS.STARTED && (
+                    <ArrowRightCircle
+                      className="text-yellow-400"
+                      strokeWidth={3}
+                    />
+                  )}
+                  {task.status === TASK_STATUS.COMPLETED && (
+                    <CheckCircle className="text-green-400" strokeWidth={3} />
+                  )}
                 </div>
               </div>
             ))}

@@ -1,16 +1,21 @@
 "use client";
 
-import { Prisma } from "@prisma/client";
+import { Project } from "@prisma/client";
 import { createNewTask } from "@/utilities/api";
 import { useState } from "react";
 import Modal from "react-modal";
 import Button from "./Button";
 import Input from "./Input";
 import { FormEvent } from "react";
+import Select from "./Select";
 
 Modal.setAppElement("#modal-task");
 
-const NewTask = () => {
+type NewTaskProps = {
+  projects?: Project[];
+};
+
+const NewTask = ({ projects }: NewTaskProps) => {
   const [isModalOpen, setIsOpen] = useState(false);
   const [selectedProjectId, setSelectedProjectId] = useState<number>(0);
   const [name, setName] = useState("");
@@ -43,15 +48,16 @@ const NewTask = () => {
         <h1 className="text-3xl mb-6">New Task</h1>
 
         <form className="flex items-center gap-2" onSubmit={handleSubmit}>
-          <select
+          <Select
             onChange={(e) => setSelectedProjectId(Number(e.target.value))}
           >
-            {projects.map((project) => (
-              <option key={project.id} value={project.id}>
-                {project.name}
-              </option>
-            ))}
-          </select>
+            {projects &&
+              projects.map((project) => (
+                <option key={project.id} value={project.id}>
+                  {project.name}
+                </option>
+              ))}
+          </Select>
           <Input
             placeholder="Task name"
             value={name}

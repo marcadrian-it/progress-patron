@@ -41,7 +41,7 @@ async function main() {
       password: await hashPassword("password"),
       projects: {
         create: new Array(5).fill(1).map((_, i) => ({
-          name: `Project ${i}`,
+          name: `Project ${i + 1}`,
           due: new Date(2023, 11, 25),
         })),
       },
@@ -56,11 +56,11 @@ async function main() {
       db.task.createMany({
         data: new Array(10).fill(1).map((_, i) => {
           return {
-            name: `Task ${i}`,
+            name: `Task ${i + 1}`,
             ownerId: user.id,
             projectId: project.id,
             due: new Date(2023, 10, 5),
-            description: `Everything that describes Task ${i}`,
+            description: `Everything that describes Task ${i + 1}`,
             status: getRandomTaskStatus(),
           };
         }),
@@ -71,12 +71,12 @@ async function main() {
   const issues = await Promise.all(
     user.projects.map((project) =>
       db.issue.createMany({
-        data: new Array(2).fill(1).map((_, i) => {
+        data: new Array(1).fill(1).map((_, i) => {
           return {
-            name: `Issue ${i} for Project ${project.id}`,
+            name: `Issue ${i + 1} for ${project.name}`,
             ownerId: user.id,
             projectId: project.id,
-            description: `Everything that describes Issue ${i}`,
+            description: `Everything that describes Issue ${i + 1}`,
             status: getRandomIssueStatus(),
             severity: getRandomIssueSeverity(),
           };

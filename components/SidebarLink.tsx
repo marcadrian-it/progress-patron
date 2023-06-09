@@ -1,14 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import {
-  Settings,
-  User,
-  Grid,
-  Calendar,
-  AlertTriangle,
-  LogOut,
-} from "react-feather";
+import { Settings, Grid, Calendar, AlertTriangle, LogOut } from "react-feather";
 import { usePathname } from "next/navigation";
 import { SidebarLinkData } from "./Sidebar";
 import clsx from "clsx";
@@ -17,7 +10,7 @@ type SidebarLinkProps = {
   link: SidebarLinkData;
 };
 
-const icons = { Settings, User, Grid, Calendar, AlertTriangle, LogOut };
+const icons = { Settings, Grid, Calendar, AlertTriangle, LogOut };
 const SidebarLink = ({ link }: SidebarLinkProps) => {
   const pathname = usePathname();
   let isActive = false;

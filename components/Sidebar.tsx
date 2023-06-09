@@ -12,16 +12,15 @@ export type SidebarLinkData = {
 const links: SidebarLinkData[] = [
   { label: "Home", icon: "Grid", link: "/home" },
   {
-    label: "Issues",
-    icon: "AlertTriangle",
-    link: "/issues",
-  },
-  {
     label: "Calendar",
     icon: "Calendar",
     link: "/calendar",
   },
-  { label: "Profile", icon: "User", link: "/profile" },
+  {
+    label: "Issues",
+    icon: "AlertTriangle",
+    link: "/issues",
+  },
   {
     label: "Settings",
     icon: "Settings",

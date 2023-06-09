@@ -28,6 +28,9 @@ const Settings: React.FC<SettingsProps> = ({ user: user }) => {
           disabled
           value={user.lastName}
         />
+        <span className="text-sm text-gray-400">
+          You cannot change your name.
+        </span>
       </label>
       <label className=" mb-2">
         E-MAIL ADDRESS
@@ -41,8 +44,11 @@ const Settings: React.FC<SettingsProps> = ({ user: user }) => {
         NEW PASSWORD
         <Input className="border-gray-400 mt-2" type="password" />
       </label>
-      <div className="flex justify-center mt-4">
+      <div className="flex flex-col justify-center items-center mt-4">
         <Button className="w-3/4">Save</Button>
+        <span className="text-sm text-blue-400 mt-4">
+          Do you want to delete your account?
+        </span>
       </div>
     </div>
   );
