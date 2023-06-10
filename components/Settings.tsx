@@ -16,7 +16,7 @@ const Settings: React.FC<SettingsProps> = ({ user: user }) => {
       <label className=" mb-2">
         FIRST NAME
         <Input
-          className="border-gray-400 mt-2"
+          className="border-gray-400 bg-gray-200 mt-2"
           disabled
           value={user.firstName}
         />
@@ -24,7 +24,7 @@ const Settings: React.FC<SettingsProps> = ({ user: user }) => {
       <label className=" mb-2">
         LAST NAME
         <Input
-          className="border-gray-400 mt-2"
+          className="border-gray-400 bg-gray-200 mt-2"
           disabled
           value={user.lastName}
         />
@@ -34,7 +34,7 @@ const Settings: React.FC<SettingsProps> = ({ user: user }) => {
       </label>
       <label className=" mb-2">
         E-MAIL ADDRESS
-        <Input className="border-gray-400 mt-2" value={user.email} />
+        <Input className="border-gray-400 mt-2" defaultValue={user.email} />
       </label>
       <label className=" mb-2">
         PASSWORD
@@ -46,7 +46,7 @@ const Settings: React.FC<SettingsProps> = ({ user: user }) => {
       </label>
       <div className="flex flex-col justify-center items-center mt-4">
         <Button className="w-3/4">Save</Button>
-        <span className="text-sm text-blue-400 mt-4">
+        <span className="text-sm text-blue-400 mt-4 hover:underline cursor-pointer">
           Do you want to delete your account?
         </span>
       </div>

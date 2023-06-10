@@ -8,9 +8,12 @@ import { RequestCookies } from "next/dist/server/web/spec-extension/cookies";
 import NewTask from "./NewTask";
 
 type TaskCardProps = {
-  title?: string;
-  tasks?: Task[];
   projects?: Project[];
+  project?:
+    | (Project & {
+        tasks: Task[];
+      })
+    | null;
 };
 
 const formatDate = (date: Date) =>
@@ -41,16 +44,16 @@ const getData = async () => {
   return tasks;
 };
 
-const TaskCard = async ({ tasks, projects, title }: TaskCardProps) => {
-  const data = tasks || (await getData());
+const TaskCard = async ({ project, projects }: TaskCardProps) => {
+  const data = project?.tasks || (await getData());
 
   return (
     <Card>
       <div className="flex justify-between items-center ">
         <div>
-          {title ? (
+          {project ? (
             <span className="text-3xl text-gray-700 font-bold mb-4">
-              {title}
+              {project.name}
             </span>
           ) : (
             <h1 className="text-3xl text-gray-700 font-bold mb-4">
@@ -58,7 +61,11 @@ const TaskCard = async ({ tasks, projects, title }: TaskCardProps) => {
             </h1>
           )}
         </div>
-        <div>{projects && <NewTask projects={projects} />}</div>
+        <div>
+          {(projects || project) && (
+            <NewTask projects={projects} project={project} />
+          )}
+        </div>
       </div>
       <div>
         {data && data.length ? (
