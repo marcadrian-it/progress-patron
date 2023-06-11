@@ -58,11 +58,15 @@ export const createNewProject = async (name: string, due: Date) => {
   });
 };
 
-export const createNewTask = async (name: string, projectId: number) => {
+export const createNewTask = async (
+  name: string,
+  projectId: number,
+  due: Date
+) => {
   return fetcher({
     url: "/api/task",
     method: "POST",
-    body: { name, projectId },
+    body: { name, projectId, due },
     json: true,
   });
 };
@@ -72,6 +76,19 @@ export const updateIssueStatus = async (id: string, status: ISSUE_STATUS) => {
     url: `/api/issue`,
     method: "PUT",
     body: { id, status },
+    json: true,
+  });
+};
+
+export const updateUserEmail = async (
+  id: number,
+  email: string,
+  password: string
+) => {
+  return fetcher({
+    url: `/api/user`,
+    method: "PUT",
+    body: { id, email, password },
     json: true,
   });
 };

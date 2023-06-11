@@ -24,7 +24,7 @@ const TextArea = ({ className, maxLength = 100, ...props }: TextAreaProps) => {
         )}
         {...props}
       />
-      <span className="absolute bottom-2 right-2 text-gray-500 text-sm">
+      <span className="absolute bottom-2 right-2 text-gray-500 text-sm p-4 select-none">
         {charsLeft}
       </span>
     </div>

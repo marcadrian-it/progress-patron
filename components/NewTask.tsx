@@ -20,7 +20,6 @@ type NewTaskProps = {
 
 const NewTask = ({ projects, project }: NewTaskProps) => {
   const [isModalOpen, setIsOpen] = useState(false);
-  // Set the initial value of selectedProjectId conditionally
   const [selectedProjectId, setSelectedProjectId] = useState<number>(
     project
       ? project.id
@@ -36,7 +35,7 @@ const NewTask = ({ projects, project }: NewTaskProps) => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!selectedProjectId) return;
-    await createNewTask(name, selectedProjectId);
+    await createNewTask(name, selectedProjectId, due);
     closeModal();
   };
 

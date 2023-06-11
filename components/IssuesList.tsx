@@ -13,24 +13,15 @@ const DragDropContext = dynamic(
   { ssr: false }
 );
 
-const issueWithProjectAndUsername = Prisma.validator<Prisma.IssueArgs>()({
+const issueWithProject = Prisma.validator<Prisma.IssueArgs>()({
   include: {
     project: true,
-    owner: {
-      select: {
-        firstName: true,
-      },
-    },
   },
 });
 
-type issueWithProjectAndUsername = Prisma.IssueGetPayload<
-  typeof issueWithProjectAndUsername
->;
+type issueWithProject = Prisma.IssueGetPayload<typeof issueWithProject>;
 
-const IssuesList: FC<{ issues: issueWithProjectAndUsername[] }> = ({
-  issues,
-}) => {
+const IssuesList: FC<{ issues: issueWithProject[] }> = ({ issues }) => {
   const [activeDroppableId, setActiveDroppableId] = useState(null);
 
   const router = useRouter();

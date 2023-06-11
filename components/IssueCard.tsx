@@ -1,23 +1,15 @@
 import { FC } from "react";
 import { Prisma } from "@prisma/client";
 import Card from "./Card";
-import { Users } from "react-feather";
 import Link from "next/link";
 
-const issueWithProjectAndUsername = Prisma.validator<Prisma.IssueArgs>()({
+const issueWithProject = Prisma.validator<Prisma.IssueArgs>()({
   include: {
     project: true,
-    owner: {
-      select: {
-        firstName: true,
-      },
-    },
   },
 });
 
-type issueWithProjectAndUsername = Prisma.IssueGetPayload<
-  typeof issueWithProjectAndUsername
->;
+type issueWithProject = Prisma.IssueGetPayload<typeof issueWithProject>;
 
 const getStatusColor = (status: string) => {
   switch (status) {
@@ -47,7 +39,7 @@ const getSeverityColor = (severity: string) => {
   }
 };
 
-const IssueCard: FC<{ issue: issueWithProjectAndUsername }> = ({ issue }) => {
+const IssueCard: FC<{ issue: issueWithProject }> = ({ issue }) => {
   return (
     <Card
       className={
@@ -76,11 +68,6 @@ const IssueCard: FC<{ issue: issueWithProjectAndUsername }> = ({ issue }) => {
           className={` rounded py-1 px-2 ${getSeverityColor(issue.severity)}`}
         >
           Severity: {issue.severity}
-        </span>
-        <span className="text-gray-400">
-          {" "}
-          <Users size={24} className="inline-block mr-1" />
-          Assigned to: {issue.owner.firstName}
         </span>
       </div>
       <div>

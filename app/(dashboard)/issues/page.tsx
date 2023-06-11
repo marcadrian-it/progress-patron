@@ -13,11 +13,6 @@ const getData = async () => {
     },
     include: {
       project: true,
-      owner: {
-        select: {
-          firstName: true,
-        },
-      },
     },
   });
 

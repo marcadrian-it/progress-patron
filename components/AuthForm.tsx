@@ -98,11 +98,11 @@ export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
             </div>
           )}
           <div className="mb-8">
-            <div className="text-lg mb-4 ml-2 text-black/50">Email</div>
+            <div className="text-lg mb-4 ml-2 text-black/50">E-mail</div>
             <Input
               required
               type="email"
-              placeholder="Email"
+              placeholder="E-mail"
               value={formState.email}
               className="border-solid border-gray border-2 px-6 py-2 text-lg rounded-3xl w-full"
               onChange={(e) =>
