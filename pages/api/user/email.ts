@@ -33,7 +33,7 @@ export default async function handler(
       return;
     }
 
-    const updatedUser = await db.user.update({
+    await db.user.update({
       where: {
         id: user.id,
       },
@@ -43,7 +43,7 @@ export default async function handler(
     });
 
     res.json({
-      data: { message: "User updated successfully", user: updatedUser },
+      data: { message: "User email updated successfully" },
     });
   } catch (error) {
     console.error(error);

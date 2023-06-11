@@ -4,21 +4,31 @@ import Input from "@/components/Input";
 import Button from "@/components/Button";
 import Modal from "react-modal";
 import { User } from "@prisma/client";
-import { updateUserEmail } from "@/utilities/api";
+import {
+  deleteUser,
+  updateUserEmail,
+  updateUserEmailAndPassword,
+  updateUserPassword,
+} from "@/utilities/api";
+import { useRouter } from "next/navigation";
 
 interface SettingsProps {
   user: User;
 }
 
 const Settings: React.FC<SettingsProps> = ({ user: user }) => {
+  const router = useRouter();
   const [showNewPasswordInput, setShowNewPasswordInput] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const openModal = () => {
+    setPassword("");
     setModalIsOpen(true);
   };
   const closeModal = () => {
+    setPassword("");
     setModalIsOpen(false);
   };
   const togglePasswordInput = () => {
@@ -26,8 +36,24 @@ const Settings: React.FC<SettingsProps> = ({ user: user }) => {
   };
 
   const handleSave = async () => {
-    if (email !== user.email && password) {
+    if (email !== user.email && newPassword && password) {
+      // Update both the user's email and password
+      await updateUserEmailAndPassword(user.id, email, newPassword, password);
+    } else if (email !== user.email && password) {
+      // Update only the user's email
       await updateUserEmail(user.id, email, password);
+    } else if (newPassword && password) {
+      // Update only the user's password
+      await updateUserPassword(user.id, newPassword, password);
+    }
+    setPassword("");
+    setNewPassword("");
+  };
+
+  const handleDelete = async () => {
+    if (password) {
+      await deleteUser(user.id, password);
+      router.replace("/register");
     }
   };
 
@@ -81,7 +107,12 @@ const Settings: React.FC<SettingsProps> = ({ user: user }) => {
         {showNewPasswordInput && (
           <label className=" mb-2">
             NEW PASSWORD
-            <Input className="border-gray-400 mt-2" type="password" />
+            <Input
+              value={newPassword}
+              onChange={(e) => setNewPassword(e.target.value)}
+              className="border-gray-400 mt-2"
+              type="password"
+            />
           </label>
         )}
       </div>
@@ -99,30 +130,37 @@ const Settings: React.FC<SettingsProps> = ({ user: user }) => {
       </div>
       <Modal
         overlayClassName="bg-[rgba(0,0,0,.4)] flex justify-center items-center absolute top-0 left-0 h-screen w-screen"
-        className="w-full md:w-3/4 bg-white rounded-xl p-8"
+        className="w-full md:w-1/5 bg-white rounded-xl p-8"
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
       >
         <h2 className="text-2xl">Delete Account</h2>
-        <p>
+        <p className="mt-2 mb-4">
           Please confirm that you want to delete your account. This action
-          cannot be undone and you will not be able to create a new account with
-          the same username.
+          cannot be undone.
         </p>
         <label>
           Password
-          <Input type="password" />
+          <Input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="border-gray-400 mt-2"
+            type="password"
+          />
         </label>
-        <Button intent="secondary" size="medium" onClick={closeModal}>
-          Cancel
-        </Button>
-        <Button
-          className="bg-red-500 hover:bg-red-600"
-          intent="primary"
-          size="medium"
-        >
-          Delete Account
-        </Button>
+        <div className="flex justify-between mt-4">
+          <Button intent="secondary" size="medium" onClick={closeModal}>
+            Cancel
+          </Button>
+          <Button
+            className="bg-red-500 hover:bg-red-600 "
+            intent="primary"
+            size="medium"
+            onClick={handleDelete}
+          >
+            Delete Account
+          </Button>
+        </div>
       </Modal>
     </div>
   );

@@ -4,7 +4,7 @@ type FetcherProps = {
   url: string;
   method: string;
   body:
-    | Partial<User>
+    | Partial<User & { newPassword: string }>
     | Partial<Project>
     | Partial<Issue>
     | { name: string; projectId: number };
@@ -80,15 +80,51 @@ export const updateIssueStatus = async (id: string, status: ISSUE_STATUS) => {
   });
 };
 
+export const updateUserEmailAndPassword = async (
+  id: number,
+  email: string,
+  newPassword: string,
+  password: string
+) => {
+  return fetcher({
+    url: `/api/user/emailandpassword`,
+    method: "PUT",
+    body: { id, email, newPassword, password },
+    json: true,
+  });
+};
+
 export const updateUserEmail = async (
   id: number,
   email: string,
   password: string
 ) => {
   return fetcher({
-    url: `/api/user`,
+    url: `/api/user/email`,
     method: "PUT",
     body: { id, email, password },
+    json: true,
+  });
+};
+
+export const updateUserPassword = async (
+  id: number,
+  newPassword: string,
+  password: string
+) => {
+  return fetcher({
+    url: `/api/user/password`,
+    method: "PUT",
+    body: { id, newPassword, password },
+    json: true,
+  });
+};
+
+export const deleteUser = async (id: number, password: string) => {
+  return fetcher({
+    url: `/api/user/delete`,
+    method: "DELETE",
+    body: { id, password },
     json: true,
   });
 };
