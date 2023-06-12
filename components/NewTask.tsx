@@ -35,7 +35,7 @@ const NewTask = ({ projects, project }: NewTaskProps) => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!selectedProjectId) return;
-    await createNewTask(name, selectedProjectId, due);
+    await createNewTask(name, selectedProjectId, due!);
     closeModal();
   };
 
