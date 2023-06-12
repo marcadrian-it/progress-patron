@@ -12,6 +12,8 @@ import {
 } from "@/utilities/api";
 import { useRouter } from "next/navigation";
 
+Modal.setAppElement("#modal");
+
 interface SettingsProps {
   user: User;
 }

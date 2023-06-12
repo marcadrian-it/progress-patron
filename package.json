@@ -10,7 +10,7 @@
     "lint": "next lint"
   },
   "prisma": {
-    "schema": "@/prisma/schema.prisma",
+    "schema": "./prisma/schema.prisma",
     "seed": "ts-node -P tsconfig-seed.json -r tsconfig-paths/register --transpileOnly prisma/seed.ts"
   },
   "dependencies": {
