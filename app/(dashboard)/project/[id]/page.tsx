@@ -1,6 +1,6 @@
 import { getUserFromCookie } from "@/utilities/auth";
 import { db } from "@/utilities/db";
-import { RequestCookies } from "next/dist/server/web/spec-extension/cookies";
+
 import { Project } from "@prisma/client";
 import { cookies } from "next/headers";
 import TaskCard from "@/components/TaskCard";
@@ -12,7 +12,7 @@ type ProjectPageParams = {
 };
 
 const getData = async (id: number) => {
-  const user = await getUserFromCookie(cookies() as RequestCookies);
+  const user = await getUserFromCookie(cookies() as any);
 
   const project = await db.project.findFirst({
     where: {

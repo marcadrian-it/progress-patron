@@ -3,12 +3,11 @@ import { cookies } from "next/headers";
 import Button from "./Button";
 import Card from "./Card";
 import { delay } from "@/utilities/async";
-import { RequestCookies } from "next/dist/server/web/spec-extension/cookies";
 import Link from "next/link";
 
 const getData = async () => {
   await delay(300);
-  const user = await getUserFromCookie(cookies() as RequestCookies);
+  const user = await getUserFromCookie(cookies() as any);
   return user;
 };
 

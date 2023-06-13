@@ -6,13 +6,12 @@ import TaskCard from "@/components/TaskCard";
 
 import { getUserFromCookie } from "@/utilities/auth";
 import { db } from "@/utilities/db";
-import { RequestCookies } from "next/dist/server/web/spec-extension/cookies";
 import { cookies } from "next/headers";
 import Link from "next/link";
 import React, { Suspense } from "react";
 
 const getData = async () => {
-  const user = await getUserFromCookie(cookies() as RequestCookies);
+  const user = await getUserFromCookie(cookies() as any);
 
   const projects = await db.project.findMany({
     where: {

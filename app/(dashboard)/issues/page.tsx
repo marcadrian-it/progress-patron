@@ -1,11 +1,10 @@
 import IssuesList from "@/components/IssuesList";
 import { getUserFromCookie } from "@/utilities/auth";
 import { db } from "@/utilities/db";
-import { RequestCookies } from "next/dist/server/web/spec-extension/cookies";
 import { cookies } from "next/headers";
 
 const getData = async () => {
-  const user = await getUserFromCookie(cookies() as RequestCookies);
+  const user = await getUserFromCookie(cookies() as any);
 
   const issues = await db.issue.findMany({
     where: {

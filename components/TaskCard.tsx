@@ -4,7 +4,7 @@ import { Project, Task, TASK_STATUS } from "@prisma/client";
 import { cookies } from "next/headers";
 import { Plus, Circle, ArrowRightCircle, CheckCircle } from "react-feather";
 import Card from "./Card";
-import { RequestCookies } from "next/dist/server/web/spec-extension/cookies";
+
 import NewTask from "./NewTask";
 
 type TaskCardProps = {
@@ -25,7 +25,7 @@ const formatDate = (date: Date) =>
   });
 
 const getData = async () => {
-  const user = await getUserFromCookie(cookies() as RequestCookies);
+  const user = await getUserFromCookie(cookies() as any);
 
   const tasks = await db.task.findMany({
     where: {

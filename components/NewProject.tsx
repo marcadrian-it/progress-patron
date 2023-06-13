@@ -7,10 +7,12 @@ import Input from "./Input";
 import TextArea from "./TextArea";
 import { FormEvent } from "react";
 import DateInput from "./DateInput";
+import { useRouter } from "next/navigation";
 
 Modal.setAppElement("#modal");
 
 const NewProject = () => {
+  const router = useRouter();
   const [isModalOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
   const [due, setDue] = useState<Date | null>(null);
@@ -24,6 +26,9 @@ const NewProject = () => {
       return;
     }
     await createNewProject(name, due);
+    router.refresh();
+    setName("");
+    setDue(null);
     closeModal();
   };
 

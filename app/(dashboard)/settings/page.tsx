@@ -1,11 +1,11 @@
 import Card from "@/components/Card";
 import Settings from "@/components/Settings";
-import { RequestCookies } from "next/dist/server/web/spec-extension/cookies";
+
 import { getUserFromCookie } from "@/utilities/auth";
 import { cookies } from "next/headers";
 
 const getData = async () => {
-  return await getUserFromCookie(cookies() as RequestCookies);
+  return await getUserFromCookie(cookies() as any);
 };
 
 export default async function SettingsPage() {

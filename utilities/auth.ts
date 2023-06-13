@@ -1,10 +1,7 @@
 import { User } from "@prisma/client";
 import bcrypt from "bcrypt";
 import { SignJWT, jwtVerify } from "jose";
-import {
-  RequestCookie,
-  RequestCookies,
-} from "next/dist/server/web/spec-extension/cookies";
+import { RequestCookies } from "next/dist/server/web/spec-extension/cookies";
 import { db } from "./db";
 
 export const hashPassword = (password: string) => bcrypt.hash(password, 10);
@@ -37,7 +34,7 @@ export const validateJWT = async (jwt: string) => {
 };
 
 export const getUserFromCookie = async (cookies: RequestCookies) => {
-  const jwt = cookies.get(process.env.COOKIE_NAME as string) as RequestCookie;
+  const jwt = cookies.get(process.env.COOKIE_NAME as string) as any;
 
   const { id } = await validateJWT(jwt.value as string);
 

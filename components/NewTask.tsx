@@ -10,6 +10,7 @@ import { FormEvent } from "react";
 import Select from "./Select";
 import DateInput from "./DateInput";
 import TextArea from "./TextArea";
+import { useRouter } from "next/navigation";
 
 Modal.setAppElement("#modal-task");
 
@@ -19,6 +20,7 @@ type NewTaskProps = {
 };
 
 const NewTask = ({ projects, project }: NewTaskProps) => {
+  const router = useRouter();
   const [isModalOpen, setIsOpen] = useState(false);
   const [selectedProjectId, setSelectedProjectId] = useState<number>(
     project
@@ -36,6 +38,7 @@ const NewTask = ({ projects, project }: NewTaskProps) => {
     e.preventDefault();
     if (!selectedProjectId) return;
     await createNewTask(name, selectedProjectId, due!);
+    router.refresh();
     closeModal();
   };
 
