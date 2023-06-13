@@ -33,6 +33,24 @@ export default async function handler(
       return;
     }
 
+    await db.task.deleteMany({
+      where: {
+        ownerId: req.body.id,
+      },
+    });
+
+    await db.issue.deleteMany({
+      where: {
+        ownerId: req.body.id,
+      },
+    });
+
+    await db.project.deleteMany({
+      where: {
+        ownerId: req.body.id,
+      },
+    });
+
     await db.user.delete({
       where: {
         id: req.body.id,
