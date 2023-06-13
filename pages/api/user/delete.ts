@@ -35,7 +35,7 @@ export default async function handler(
 
     await db.user.delete({
       where: {
-        id: user.id,
+        id: req.body.id,
       },
     });
 

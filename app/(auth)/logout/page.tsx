@@ -6,7 +6,9 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
 
 const removeCookieAndRedirect = async (router: AppRouterInstance) => {
   // Call the logout API route to remove the cookie
-  await fetch("/api/logout", { method: "POST" });
+  await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/logout`, {
+    method: "POST",
+  });
 
   await delay(300);
   router.replace("/signin");

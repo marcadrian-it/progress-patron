@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "devnstudio": "concurrently \"npx prisma studio\" \"next dev\"",
-    "build": "prisma generate && next build",
+    "build": "npx prisma generate && next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -24,13 +24,13 @@
     "cookie": "0.5.0",
     "css-reset-and-normalize": "2.3.6",
     "eslint": "8.41.0",
-    "eslint-config-next": "13.4.3",
+    "eslint-config-next": "^13.4.5",
     "jose": "4.11.1",
-    "next": "13.4.3",
+    "next": "^13.4.5",
     "pg": "^8.11.0",
-    "react": "18.2.0",
+    "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
-    "react-dom": "18.2.0",
+    "react-dom": "^18.2.0",
     "react-feather": "2.0.10",
     "react-modal": "^3.16.1",
     "typescript": "5.0.4"
