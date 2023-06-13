@@ -1,22 +1,20 @@
 "use client";
-import Card from "@/components/Card";
+
 import { useRouter } from "next/navigation";
-import { delay } from "@/utilities/async";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context";
-
-const removeCookieAndRedirect = async (router: AppRouterInstance) => {
-  // Call the logout API route to remove the cookie
-  await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/logout`, {
-    method: "POST",
-  });
-
-  await delay(300);
-  router.replace("/signin");
-};
+import { useEffect } from "react";
+import Card from "@/components/Card";
 
 export default function Logout() {
   const router = useRouter();
-  removeCookieAndRedirect(router);
+
+  useEffect(() => {
+    const logout = async () => {
+      await fetch("/api/logout", { method: "POST" });
+      router.replace("/signin");
+    };
+
+    logout();
+  }, [router]);
 
   return (
     <Card>
