@@ -97,6 +97,7 @@ const Settings: React.FC<SettingsProps> = ({ user: user }) => {
           onChange={(e) => setPassword(e.target.value)}
           className="border-gray-400 mt-2"
           type="password"
+          autoComplete="off"
         />
       </label>
       <span
@@ -114,6 +115,7 @@ const Settings: React.FC<SettingsProps> = ({ user: user }) => {
               onChange={(e) => setNewPassword(e.target.value)}
               className="border-gray-400 mt-2"
               type="password"
+              autoComplete="off"
             />
           </label>
         )}
@@ -148,6 +150,7 @@ const Settings: React.FC<SettingsProps> = ({ user: user }) => {
             onChange={(e) => setPassword(e.target.value)}
             className="border-gray-400 mt-2"
             type="password"
+            autoComplete="off"
           />
         </label>
         <div className="flex justify-between mt-4">
