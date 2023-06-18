@@ -35,9 +35,14 @@ const links: SidebarLinkData[] = [
 
 const Sidebar = () => {
   return (
-    <Card className="h-full w-40 flex flex-col items-center justify-evenly flex-wrap">
-      <div className="w-full flex justify-center items-center">
-        <Image src={logo} alt="ProgressPatron logo" priority className="w-15" />
+    <Card className="h-full w-40 sm:h-20 sm:w-full flex flex-col sm:flex-row items-center justify-evenly sm:mb-4">
+      <div className="w-full flex justify-center items-center sm:hidden">
+        <Image
+          src={logo}
+          alt="ProgressPatron logo"
+          priority
+          className="w-15 sm:w-10"
+        />
       </div>
 
       {links.map((link) => (

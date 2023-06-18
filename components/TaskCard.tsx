@@ -49,14 +49,14 @@ const TaskCard = async ({ project, projects }: TaskCardProps) => {
 
   return (
     <Card>
-      <div className="flex justify-between items-center ">
+      <div className="flex flex-row sm:flex-col justify-between items-center ">
         <div>
           {project ? (
-            <span className="text-3xl text-gray-700 font-bold mb-4">
+            <span className="text-3xl text-gray-700 font-bold mb-4 sm:text-2xl">
               {project.name}
             </span>
           ) : (
-            <h1 className="text-3xl text-gray-700 font-bold mb-4">
+            <h1 className="text-3xl text-gray-700 font-bold mb-4 sm:text-2xl">
               Tasks with Approaching Deadlines
             </h1>
           )}

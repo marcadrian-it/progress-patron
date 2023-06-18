@@ -26,7 +26,12 @@ const Greetings = async () => {
       </div>
       <div>
         <Link href={"/calendar"}>
-          <Button size="large">Today&apos;s Schedule</Button>
+          <Button size="large" className="block sm:hidden">
+            Today&apos;s Schedule
+          </Button>
+          <Button size="small" className="hidden sm:block">
+            Today&apos;s Schedule
+          </Button>
         </Link>
       </div>
     </Card>
