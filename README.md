@@ -24,4 +24,5 @@ To visit the website, click on the logo.
 - Tailwind
 
 ## Preview
-https://raw.githubusercontent.com/marcadrian-it/progress-patron/main/public/progress-patron-preview.jpg
+![Preview](https://raw.githubusercontent.com/marcadrian-it/progress-patron/main/public/progress-patron-preview.jpg)
+
