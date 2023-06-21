@@ -85,9 +85,9 @@ const IssuesList: FC<{ issues: issueWithProject[] }> = ({ issues }) => {
                 activeDroppableId === "openIssues" ? "bg-blue-100" : ""
               }`}
             >
-              <h2 className="sticky top-0 rounded-3xl bg-blue-500 z-10 text-2xl text-center font-bold mb-4 w-1/4 -mx-3">
-                Open
-              </h2>
+ <h2 className="sticky top-0 bg-blue-500 z-10 text-2xl text-center font-bold mb-4 py-2 px-4 border-2 border-white rounded">
+  Open
+</h2>
               <div className="space-y-4">
                 {openIssues.map((issue, index) => (
                   <Draggable
@@ -120,9 +120,9 @@ const IssuesList: FC<{ issues: issueWithProject[] }> = ({ issues }) => {
                 activeDroppableId === "inProgressIssues" ? "bg-yellow-100" : ""
               }`}
             >
-              <h2 className="sticky top-0 rounded-3xl bg-yellow-500 z-10 text-2xl text-center font-bold mb-4 w-1/4 -mx-3">
-                In Progress
-              </h2>
+           <h2 className="sticky top-0 bg-yellow-500 z-10 text-2xl text-center font-bold mb-4 py-2 px-4 border-2 border-white rounded">
+  In Progress
+</h2>
               <div className="space-y-4">
                 {inProgressIssues.map((issue, index) => (
                   <Draggable
@@ -155,9 +155,10 @@ const IssuesList: FC<{ issues: issueWithProject[] }> = ({ issues }) => {
                 activeDroppableId === "closedIssues" ? "bg-green-100" : ""
               }`}
             >
-              <h2 className="sticky top-0 rounded-3xl bg-green-500 z-10 text-2xl text-center font-bold mb-4 w-1/4 -mx-3">
-                Closed
-              </h2>
+ <h2 className="sticky top-0 bg-green-500 z-10 text-2xl text-center font-bold mb-4 py-2 px-4 border-2 border-white rounded">
+  Closed
+</h2>
+
               <div className="space-y-4">
                 {closedIssues.map((issue, index) => (
                   <Draggable
@@ -182,6 +183,13 @@ const IssuesList: FC<{ issues: issueWithProject[] }> = ({ issues }) => {
           )}
         </Droppable>
       </div>
+      <style jsx>{`
+        @media (max-width: 1240px) {
+          .grid-cols-3 {
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+          }
+        }
+      `}</style>
     </DragDropContext>
   );
 };

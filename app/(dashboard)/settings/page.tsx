@@ -12,9 +12,9 @@ export default async function SettingsPage() {
   const user = await getData();
 
   return (
-    <div className="h-full overflow-y-auto w-full flex justify-center items-center">
-      <div className="w-1/3 h-3/4">
-        <Card className="h-full  flex flex-col pt-8 items-center">
+    <div className="overflow-y-auto h-full w-full flex justify-center items-center">
+      <div className="w-1/3 h-full xl:w-3/4 md:h-full md:w-full flex items-center">
+        <Card className="flex flex-col pt-8 items-center h-full ">
           <Settings user={user!} />
         </Card>
       </div>

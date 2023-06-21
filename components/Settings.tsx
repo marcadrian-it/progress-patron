@@ -60,7 +60,7 @@ const Settings: React.FC<SettingsProps> = ({ user: user }) => {
   };
 
   return (
-    <div className=" w-2/3 mt-4 flex flex-col gap-2 text-xl">
+    <div className=" w-2/3 mt-4 flex flex-col gap-2 text-xl sm:w-full">
       <h2 className="text-center text-3xl font-bold mb-12">Account settings</h2>
 
       <label className=" mb-2">
