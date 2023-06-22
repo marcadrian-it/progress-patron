@@ -134,7 +134,7 @@ const Settings: React.FC<SettingsProps> = ({ user: user }) => {
       </div>
       <Modal
         overlayClassName="bg-[rgba(0,0,0,.4)] flex justify-center items-center absolute top-0 left-0 h-screen w-screen"
-        className="w-full md:w-1/5 bg-white rounded-xl p-8"
+        className="w-1/3 lg:w-3/4 bg-white rounded-xl p-8"
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
       >

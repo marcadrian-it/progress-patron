@@ -2,8 +2,15 @@
 
 import React, { useState } from "react";
 import Card from "@/components/Card";
+import { Task } from "@prisma/client";
+import { MoreHorizontal } from "react-feather";
+import Link from "next/link";
 
-const CalendarCard: React.FC = () => {
+interface CalendarCardProps {
+  tasks: Task[];
+}
+
+const CalendarCard: React.FC<CalendarCardProps> = ({ tasks }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -72,14 +79,14 @@ const CalendarCard: React.FC = () => {
   const renderCalendarGrid = () => {
     const daysInMonth = getDaysInMonth(currentDate);
     const firstDayOfWeek = getFirstDayOfMonth(currentDate);
-
+  
     const emptyCells = Array(
       firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1
     ).fill(null);
     const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
-
+  
     const todayIndex = (new Date().getDay() + 6) % 7;
-
+  
     return (
       <div className="h-full grid grid-cols-7 gap-4">
         {daysOfWeek.map((day, index) => (
@@ -97,25 +104,51 @@ const CalendarCard: React.FC = () => {
           </span>
         ))}
         {emptyCells.map((_, index) => (
-          <div key={`empty-${index}`} className="invisible" />
-        ))}
-        {days.map((day) => (
           <div
-            key={day}
-            className={`text-center border rounded-lg ${
-              day === new Date().getDate() &&
-              currentDate.getMonth() === new Date().getMonth() &&
-              currentDate.getFullYear() === new Date().getFullYear()
-                ? "bg-purple-500 text-white"
-                : ""
-            }`}
-          >
-            {day}
-          </div>
+            key={`empty-${index}`}
+            className="invisible h-30"
+          />
         ))}
+        {days.map((day) => {
+          const tasksForDay = tasks.filter(
+            (task) =>
+              task.due.getDate() === day &&
+              task.due.getMonth() === currentDate.getMonth() &&
+              task.due.getFullYear() === currentDate.getFullYear()
+          );
+          return (
+            <div
+              key={day}
+              className={`text-center border rounded-lg h-30 max-h-40 ${
+                day === new Date().getDate() &&
+                currentDate.getMonth() === new Date().getMonth() &&
+                currentDate.getFullYear() === new Date().getFullYear()
+                  ? "bg-purple-500 text-white"
+                  : ""
+              }`}
+            >
+              {day}
+              <div className="flex flex-col items-center gap-1 w-full text-xs ">
+                {tasksForDay.slice(0, 5).map((task) => (
+                  <Link className="w-full bg-gray-800 text-white rounded-md" key={task.id} href={`/project/${task.projectId}`}>
+                  <span >
+                    {task.name}
+                  </span>
+                  </Link>
+                ))}
+                {tasksForDay.length > 5 && (
+                  <MoreHorizontal className="text-purple-500 cursor-pointer" strokeWidth={3} />
+                )}
+              </div>
+            </div>
+          );
+        })}
       </div>
     );
   };
+  
+  
+  
 
   return (
     <Card className="h-full flex flex-col pt-8 items-center">
