@@ -4,6 +4,7 @@ import { Circle, ArrowRightCircle, CheckCircle } from "react-feather";
 import Button from "./Button";
 import { updateTaskStatus } from "@/utilities/api";
 import { TASK_STATUS } from "@prisma/client";
+import { useRouter } from "next/navigation";
 
 type StatusButtonsProps = {
   status: TASK_STATUS;
@@ -14,6 +15,7 @@ const StatusButtons: React.FC<StatusButtonsProps> = ({ status, taskId }) => {
   const [showButtons, setShowButtons] = useState(false);
   const [statusClicked, setStatusClicked] = useState<TASK_STATUS | null>(null);
   const ref = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const handleClick = (clickedStatus: TASK_STATUS) => {
     setShowButtons(true);
@@ -23,6 +25,7 @@ const StatusButtons: React.FC<StatusButtonsProps> = ({ status, taskId }) => {
   const handleStatusChange = async (newStatus: TASK_STATUS) => {
     try {
       await updateTaskStatus(taskId, newStatus);
+      router.refresh();
       setShowButtons(false);
       setStatusClicked(null);
     } catch (error) {
