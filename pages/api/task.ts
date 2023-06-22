@@ -13,7 +13,7 @@ export default async function handler(
   if (req.method === "POST") {
     await createNewTask(req.body.name, req.body.projectId, req.body.due, user);
     res.json({ data: { message: "ok" } });
-  } else if (req.method === "PUT") {
+  } else if (req.method === "PATCH") {
     await updateTaskStatus(req.body.id, req.body.status, user);
     res.json({ data: { message: "ok" } });
   } else {

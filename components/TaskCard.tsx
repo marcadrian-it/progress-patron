@@ -2,11 +2,12 @@ import { getUserFromCookie } from "@/utilities/auth";
 import { db } from "@/utilities/db";
 import { Project, Task, TASK_STATUS } from "@prisma/client";
 import { cookies } from "next/headers";
-import { Plus, Circle, ArrowRightCircle, CheckCircle } from "react-feather";
+import { Plus } from "react-feather";
 import Card from "./Card";
-import Button from "./Button";
+
 
 import NewTask from "./NewTask";
+import StatusButtons from "./StatusButtons";
 
 type TaskCardProps = {
   projects?: Project[];
@@ -94,25 +95,23 @@ const TaskCard = async ({ project, projects }: TaskCardProps) => {
                       </span>
                     </div>
                   </div>
+                  
                 </div>
                 <div className="flex-shrink-0 pr-6 md:pr-0">
                   {task.status === TASK_STATUS.NOT_STARTED && (
-                          <Button intent="primary" size="medium">
-                              <Circle className="text-red-400" strokeWidth={3} />
-                    </Button>
+                    <div>
+                      <StatusButtons status={task.status} taskId={task.id} />
+                    </div>
                   )}
                   {task.status === TASK_STATUS.STARTED && (
-                          <Button intent="primary" size="medium">
-                    <ArrowRightCircle
-                      className="text-yellow-400"
-                      strokeWidth={3}
-                    />
-                    </Button>
+                    <div>
+                      <StatusButtons status={task.status} taskId={task.id} />
+                    </div>
                   )}
                   {task.status === TASK_STATUS.COMPLETED && (
-                    <Button intent="primary" size="medium">
-                    <CheckCircle className="text-green-400" strokeWidth={3} />
-                    </Button>
+                    <div>
+                      <StatusButtons status={task.status} taskId={task.id} />
+                    </div>
                   )}
                 </div>
               </div>
@@ -125,6 +124,5 @@ const TaskCard = async ({ project, projects }: TaskCardProps) => {
     </Card>
   );
 };
-
 
 export default TaskCard;

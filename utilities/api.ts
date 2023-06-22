@@ -75,7 +75,7 @@ export const createNewTask = async (
 export const updateTaskStatus = async (id: number, status: TASK_STATUS) => {
   return fetcher({
     url: `/api/task`,
-    method: "PUT",
+    method: "PATCH",
     body: { id, status },
     json: true,
   });
