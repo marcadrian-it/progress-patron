@@ -4,6 +4,7 @@ import { Project, Task, TASK_STATUS } from "@prisma/client";
 import { cookies } from "next/headers";
 import { Plus, Circle, ArrowRightCircle, CheckCircle } from "react-feather";
 import Card from "./Card";
+import Button from "./Button";
 
 import NewTask from "./NewTask";
 
@@ -44,12 +45,14 @@ const getData = async () => {
   return tasks;
 };
 
+
+
 const TaskCard = async ({ project, projects }: TaskCardProps) => {
   const data = project?.tasks || (await getData());
 
   return (
     <Card>
-      <div className="flex flex-row sm:flex-col justify-between items-center ">
+      <div className="flex flex-row sm:flex-col justify-between items-center">
         <div>
           {project ? (
             <span className="text-3xl text-gray-700 font-bold mb-4 sm:text-2xl">
@@ -69,12 +72,14 @@ const TaskCard = async ({ project, projects }: TaskCardProps) => {
       </div>
       <div>
         {data && data.length ? (
-          <div>
+          <div className="space-y-4">
             {data.map((task: Task) => (
-              <div className="py-2 " key={task.id}>
-                <div className="flex items-center gap-2">
-                  <Plus className="text-purple-500" strokeWidth={5} />
-                  <div>
+              <div className="flex items-center gap-4" key={task.id}>
+                <div className="flex items-center w-full">
+                  <div className="flex-shrink-0">
+                    <Plus className="text-purple-500" strokeWidth={5} />
+                  </div>
+                  <div className="flex-grow">
                     <div>
                       <span className="text-gray-800">{task.name}</span>
                     </div>
@@ -89,20 +94,26 @@ const TaskCard = async ({ project, projects }: TaskCardProps) => {
                       </span>
                     </div>
                   </div>
-                  <div>
-                    {task.status === TASK_STATUS.NOT_STARTED && (
-                      <Circle className="text-red-400" strokeWidth={3} />
-                    )}
-                    {task.status === TASK_STATUS.STARTED && (
-                      <ArrowRightCircle
-                        className="text-yellow-400"
-                        strokeWidth={3}
-                      />
-                    )}
-                    {task.status === TASK_STATUS.COMPLETED && (
-                      <CheckCircle className="text-green-400" strokeWidth={3} />
-                    )}
-                  </div>
+                </div>
+                <div className="flex-shrink-0 pr-6 md:pr-0">
+                  {task.status === TASK_STATUS.NOT_STARTED && (
+                          <Button intent="primary" size="medium">
+                              <Circle className="text-red-400" strokeWidth={3} />
+                    </Button>
+                  )}
+                  {task.status === TASK_STATUS.STARTED && (
+                          <Button intent="primary" size="medium">
+                    <ArrowRightCircle
+                      className="text-yellow-400"
+                      strokeWidth={3}
+                    />
+                    </Button>
+                  )}
+                  {task.status === TASK_STATUS.COMPLETED && (
+                    <Button intent="primary" size="medium">
+                    <CheckCircle className="text-green-400" strokeWidth={3} />
+                    </Button>
+                  )}
                 </div>
               </div>
             ))}
@@ -114,5 +125,6 @@ const TaskCard = async ({ project, projects }: TaskCardProps) => {
     </Card>
   );
 };
+
 
 export default TaskCard;

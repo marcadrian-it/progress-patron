@@ -1,4 +1,4 @@
-import { Issue, Project, User, ISSUE_STATUS } from "@prisma/client";
+import { Issue, Project, User, Task, ISSUE_STATUS, TASK_STATUS } from "@prisma/client";
 
 type FetcherProps = {
   url: string;
@@ -7,6 +7,7 @@ type FetcherProps = {
     | Partial<User & { newPassword: string }>
     | Partial<Project>
     | Partial<Issue>
+    | Partial<Task>
     | { name: string; projectId: number };
   json: boolean;
 };
@@ -71,8 +72,17 @@ export const createNewTask = async (
   });
 };
 
-export const updateIssueStatus = async (id: string, status: ISSUE_STATUS) => {
+export const updateTaskStatus = async (id: number, status: TASK_STATUS) => {
   return fetcher({
+    url: `/api/task`,
+    method: "PUT",
+    body: { id, status },
+    json: true,
+  });
+};
+
+export const updateIssueStatus = async (id: string, status: ISSUE_STATUS) => {
+  return fetcher({  
     url: `/api/issue`,
     method: "PUT",
     body: { id, status },

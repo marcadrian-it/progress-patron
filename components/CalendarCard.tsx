@@ -130,7 +130,7 @@ const CalendarCard: React.FC<CalendarCardProps> = ({ tasks }) => {
               {day}
               <div className="flex flex-col items-center gap-1 w-full text-xs ">
                 {tasksForDay.slice(0, 5).map((task) => (
-                  <Link className="w-full bg-gray-800 text-white rounded-md" key={task.id} href={`/project/${task.projectId}`}>
+                  <Link className="w-full bg-gray-800 text-white hover:text-purple-400 rounded-md" key={task.id} href={`/project/${task.projectId}`}>
                   <span >
                     {task.name}
                   </span>

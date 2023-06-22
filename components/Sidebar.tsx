@@ -35,7 +35,7 @@ const links: SidebarLinkData[] = [
 
 const Sidebar = () => {
   return (
-    <Card className="h-full w-40 sm:h-20 sm:w-full flex flex-col sm:flex-row items-center justify-evenly sm:justify-between sm:mb-4">
+    <Card className="h-full w-40 sm:h-20 sm:w-full flex flex-col sm:flex-row items-center justify-evenly sm:justify-between sm:mt-4">
       <div className="w-full flex justify-center items-center sm:hidden">
         <Image
           src={logo}
