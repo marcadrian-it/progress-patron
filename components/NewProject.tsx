@@ -9,6 +9,8 @@ import { FormEvent } from "react";
 import DateInput from "./DateInput";
 import { useRouter } from "next/navigation";
 
+
+
 Modal.setAppElement("#modal");
 
 const NewProject = () => {
@@ -18,6 +20,7 @@ const NewProject = () => {
   const [due, setDue] = useState<Date | null>(null);
   const closeModal = () => setIsOpen(false);
   const openModal = () => setIsOpen(true);
+
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();

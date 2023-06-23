@@ -3,13 +3,15 @@ import { Issue, Project, User, Task, ISSUE_STATUS, TASK_STATUS } from "@prisma/c
 type FetcherProps = {
   url: string;
   method: string;
-  body:
+  body?:
     | Partial<User & { newPassword: string }>
     | Partial<Project>
     | Partial<Issue>
     | Partial<Task>
     | { name: string; projectId: number };
-  json: boolean;
+  json?: boolean;
+  id?: number;
+  password?: string;
 };
 
 const fetcher = async ({ url, method, body, json = true }: FetcherProps) => {
@@ -132,9 +134,7 @@ export const updateUserPassword = async (
 
 export const deleteUser = async (id: number, password: string) => {
   return fetcher({
-    url: `/api/user/delete`,
+    url: `/api/user/delete?id=${id}&password=${password}`,
     method: "DELETE",
-    body: { id, password },
-    json: true,
   });
 };

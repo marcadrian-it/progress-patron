@@ -12,10 +12,9 @@ export default async function handler(
       return;
     }
 
-    /* @ts-ignore */
     const user = await db.user.findUnique({
       where: {
-        id: req.body.id,
+        id: Number(req.query.id),
       },
     });
 
@@ -25,7 +24,7 @@ export default async function handler(
     }
 
     const isPasswordValid = await comparePasswords(
-      req.body.password,
+      req.query.password as string,
       user.password
     );
     if (!isPasswordValid) {
@@ -33,27 +32,9 @@ export default async function handler(
       return;
     }
 
-    await db.task.deleteMany({
-      where: {
-        ownerId: req.body.id,
-      },
-    });
-
-    await db.issue.deleteMany({
-      where: {
-        ownerId: req.body.id,
-      },
-    });
-
-    await db.project.deleteMany({
-      where: {
-        ownerId: req.body.id,
-      },
-    });
-
     await db.user.delete({
       where: {
-        id: req.body.id,
+        id: user.id,
       },
     });
 
