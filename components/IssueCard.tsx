@@ -2,6 +2,7 @@ import { FC } from "react";
 import { Prisma } from "@prisma/client";
 import Card from "./Card";
 import Link from "next/link";
+import { DeleteButton } from "./DeleteButton";
 
 const issueWithProject = Prisma.validator<Prisma.IssueArgs>()({
   include: {
@@ -48,6 +49,7 @@ const IssueCard: FC<{ issue: issueWithProject }> = ({ issue }) => {
     >
       <div className="mb-2">
         <span className="text-sm text-gray-400">Issue ID: {issue.id}</span>
+        <DeleteButton />
       </div>
       <div className="flex items-center mb-4">
         <div

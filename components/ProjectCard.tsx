@@ -1,6 +1,8 @@
 import { FC } from "react";
 import { Prisma } from "@prisma/client";
 import Card from "./Card";
+import { DeleteButton } from "./DeleteButton";
+
 
 const projectWithTasks = Prisma.validator<Prisma.ProjectArgs>()({
   include: { tasks: true },
@@ -37,6 +39,9 @@ const ProjectCard: FC<{ project: ProjectWithTasks }> = ({ project }) => {
         <span className="text-sm text-red-400">
           Due: {formatDate(project.due)}
         </span>
+        <div>
+        <DeleteButton />
+        </div>
       </div>
       <div className="mb-6">
         <span className="text-3xl text-gray-600">{project.name}</span>

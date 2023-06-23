@@ -36,8 +36,8 @@ const NewProject = () => {
   };
 
   return (
-    <div className="px-6 py-8 hover:scale-105 transition-all ease-in-out duration-200 flex justify-center items-center">
-      <Button onClick={() => openModal()}>+ New Project</Button>
+    <div className="px-6 py-8 flex justify-center items-center">
+      <Button className="hover:scale-105 transition-all ease-in-out duration-200" onClick={() => openModal()}>+ New Project</Button>
 
       <Modal
         isOpen={isModalOpen}

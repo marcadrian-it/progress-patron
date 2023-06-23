@@ -77,7 +77,7 @@ const TaskCard = async ({ project, projects }: TaskCardProps) => {
             {data.map((task: Task) => (
               <div className="flex items-center gap-4" key={task.id}>
                 <div className="flex items-center w-full">
-                  <div className="flex-shrink-0">
+                  <div className="flex-shrink-0 mr-2">
                     <Plus className="text-purple-500" strokeWidth={5} />
                   </div>
                   <div className="flex-grow">
