@@ -4,6 +4,7 @@ import { SignJWT, jwtVerify } from "jose";
 import { RequestCookies } from "next/dist/server/web/spec-extension/cookies";
 import { db } from "./db";
 
+
 export const hashPassword = (password: string) => bcrypt.hash(password, 10);
 
 export const comparePasswords = (
@@ -12,7 +13,6 @@ export const comparePasswords = (
 ) => bcrypt.compare(plainTextPassword, hashedPassword);
 
 export const createJWT = (user: Partial<User>) => {
-  // return jwt.sign({ id: user.id }, 'cookies')
   const iat = Math.floor(Date.now() / 1000);
   const exp = iat + 60 * 60 * 24 * 7;
 
@@ -30,7 +30,7 @@ export const validateJWT = async (jwt: string) => {
     new TextEncoder().encode(process.env.JWT_SECRET)
   );
 
-  return payload.payload as any;
+  return payload.payload as Partial<User>;
 };
 
 export const getUserFromCookie = async (cookies: RequestCookies) => {
