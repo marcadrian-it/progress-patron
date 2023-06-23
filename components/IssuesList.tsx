@@ -85,7 +85,7 @@ const IssuesList: FC<{ issues: issueWithProject[] }> = ({ issues }) => {
                 activeDroppableId === "openIssues" ? "bg-blue-100" : ""
               }`}
             >
- <h2 className="sticky top-0 bg-blue-500 z-10 text-2xl text-center font-bold mb-4 py-2 px-4 border-2 border-white rounded">
+ <h2 className={`sticky top-0 text-2xl text-center text-black font-bold mb-4 py-2 px-4 border-2 border-white rounded ${activeDroppableId === "openIssues" ? "bg-gradient-to-br from-blue-500 to-blue-600" : "bg-gradient-to-br from-blue-400 to-blue-500"}`}>
   Open
 </h2>
               <div className="space-y-4">
@@ -120,7 +120,7 @@ const IssuesList: FC<{ issues: issueWithProject[] }> = ({ issues }) => {
                 activeDroppableId === "inProgressIssues" ? "bg-yellow-100" : ""
               }`}
             >
-           <h2 className="sticky top-0 bg-yellow-500 z-10 text-2xl text-center font-bold mb-4 py-2 px-4 border-2 border-white rounded">
+           <h2 className={`sticky top-0 text-2xl text-center text-black font-bold mb-4 py-2 px-4 border-2 border-white rounded ${activeDroppableId === "inProgressIssues" ? "bg-gradient-to-br from-yellow-500 to-yellow-600" : "bg-gradient-to-br from-yellow-400 to-yellow-500"}`}>
   In Progress
 </h2>
               <div className="space-y-4">
@@ -155,7 +155,7 @@ const IssuesList: FC<{ issues: issueWithProject[] }> = ({ issues }) => {
                 activeDroppableId === "closedIssues" ? "bg-green-100" : ""
               }`}
             >
- <h2 className="sticky top-0 bg-green-500 z-10 text-2xl text-center font-bold mb-4 py-2 px-4 border-2 border-white rounded">
+<h2 className={`sticky top-0 text-2xl text-center text-black font-bold mb-4 py-2 px-4 border-2 border-white rounded ${activeDroppableId === "closedIssues" ? "bg-gradient-to-br from-green-500 to-green-600" : "bg-gradient-to-br from-green-400 to-green-500"}`}>
   Closed
 </h2>
 
@@ -183,7 +183,7 @@ const IssuesList: FC<{ issues: issueWithProject[] }> = ({ issues }) => {
           )}
         </Droppable>
       </div>
-      <style jsx>{`
+      <style>{`
         @media (max-width: 1240px) {
           .grid-cols-3 {
             grid-template-columns: repeat(1, minmax(0, 1fr));
