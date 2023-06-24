@@ -16,14 +16,20 @@ const getData = async () => {
   const projects = await db.project.findMany({
     where: {
       ownerId: user?.id,
+      deleted: false,
     },
     include: {
-      tasks: true,
+      tasks: {
+        where: {
+          deleted: false,
+        },
+      },
     },
   });
 
   return { projects };
 };
+
 
 export default async function Page() {
   const { projects } = await getData();

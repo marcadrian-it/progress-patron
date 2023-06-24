@@ -18,9 +18,14 @@ const getData = async (id: number) => {
     where: {
       id,
       ownerId: user?.id,
+      
     },
     include: {
-      tasks: true,
+      tasks: {
+        where: {
+          deleted: false,
+        },
+      }
     },
   });
 

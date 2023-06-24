@@ -77,7 +77,7 @@ export const createNewTask = async (
 export const updateTaskStatus = async (id: number, status: TASK_STATUS) => {
   return fetcher({
     url: `/api/task`,
-    method: "PATCH",
+    method: "PUT",
     body: { id, status },
     json: true,
   });
@@ -136,5 +136,32 @@ export const deleteUser = async (id: number, password: string) => {
   return fetcher({
     url: `/api/user/delete?id=${id}&password=${password}`,
     method: "DELETE",
+  });
+};
+
+export const deleteProject = async (id: number) => {
+  return fetcher({
+    url: `/api/project`,
+    method: "PATCH",
+    body: { id },
+    json: true,
+  });
+};
+
+export const deleteTask = async (id: number) => {
+  return fetcher({
+    url: `/api/task`,
+    method: "PATCH",
+    body: { id },
+    json: true,
+  });
+};
+
+export const deleteIssue = async (id: string) => {
+  return fetcher({
+    url: `/api/issue`,
+    method: "PATCH",
+    body: { id },
+    json: true,
   });
 };
