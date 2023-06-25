@@ -1,4 +1,12 @@
-import { Issue, Project, User, Task, ISSUE_STATUS, TASK_STATUS } from "@prisma/client";
+import {
+  Issue,
+  Project,
+  User,
+  Task,
+  ISSUE_STATUS,
+  TASK_STATUS,
+  ISSUE_SEVERITY,
+} from "@prisma/client";
 
 type FetcherProps = {
   url: string;
@@ -8,10 +16,8 @@ type FetcherProps = {
     | Partial<Project>
     | Partial<Issue>
     | Partial<Task>
-    | { name: string; projectId: number };
+    | { name: string; projectId: string; severity: ISSUE_SEVERITY };
   json?: boolean;
-  id?: number;
-  password?: string;
 };
 
 const fetcher = async ({ url, method, body, json = true }: FetcherProps) => {
@@ -74,6 +80,20 @@ export const createNewTask = async (
   });
 };
 
+export const createNewIssue = async (
+  name: string,
+  projectId: number,
+  severity: ISSUE_SEVERITY,
+  description?: string
+) => {
+  return fetcher({
+    url: "/api/issue",
+    method: "POST",
+    body: { name, projectId, severity, description },
+    json: true,
+  });
+};
+
 export const updateTaskStatus = async (id: number, status: TASK_STATUS) => {
   return fetcher({
     url: `/api/task`,
@@ -84,7 +104,7 @@ export const updateTaskStatus = async (id: number, status: TASK_STATUS) => {
 };
 
 export const updateIssueStatus = async (id: string, status: ISSUE_STATUS) => {
-  return fetcher({  
+  return fetcher({
     url: `/api/issue`,
     method: "PUT",
     body: { id, status },

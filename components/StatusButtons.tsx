@@ -1,5 +1,5 @@
-"use client"
-import React, { useState, useRef, useEffect, Suspense  } from "react";
+"use client";
+import React, { useState, useRef, useEffect, Suspense } from "react";
 import { Circle, ArrowRightCircle, CheckCircle } from "react-feather";
 import Button from "./Button";
 import { updateTaskStatus } from "@/utilities/api";
@@ -29,12 +29,12 @@ const StatusButtons: React.FC<StatusButtonsProps> = ({ status, taskId }) => {
       setIsRefreshing(true);
       setShowButtons(false);
       await updateTaskStatus(taskId, newStatus);
-      router.refresh();
+      await router.refresh();
       setStatusClicked(null);
     } catch (error) {
       console.error(error);
     } finally {
-      setIsRefreshing(false); 
+      setIsRefreshing(false);
     }
   };
 
@@ -51,7 +51,7 @@ const StatusButtons: React.FC<StatusButtonsProps> = ({ status, taskId }) => {
     };
   }, [ref]);
 
-return (
+  return (
     <div ref={ref}>
       {!showButtons && (
         <Button

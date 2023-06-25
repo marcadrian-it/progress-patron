@@ -5,6 +5,7 @@ import Card from "@/components/Card";
 import { Task } from "@prisma/client";
 import { MoreHorizontal } from "react-feather";
 import Link from "next/link";
+import { getDaysInMonth, getFirstDayOfMonth } from "@/utilities/dateUtils";
 
 interface CalendarCardProps {
   tasks: Task[];
@@ -14,18 +15,6 @@ const CalendarCard: React.FC<CalendarCardProps> = ({ tasks }) => {
   const [currentDate, setCurrentDate] = useState(new Date());
 
   const daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-
-  const getDaysInMonth = (date: Date) => {
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    return new Date(year, month + 1, 0).getDate();
-  };
-
-  const getFirstDayOfMonth = (date: Date) => {
-    const year = date.getFullYear();
-    const month = date.getMonth();
-    return new Date(year, month, 1).getDay();
-  };
 
   const prevMonth = () => {
     setCurrentDate((prevDate) => {
@@ -79,14 +68,14 @@ const CalendarCard: React.FC<CalendarCardProps> = ({ tasks }) => {
   const renderCalendarGrid = () => {
     const daysInMonth = getDaysInMonth(currentDate);
     const firstDayOfWeek = getFirstDayOfMonth(currentDate);
-  
+
     const emptyCells = Array(
       firstDayOfWeek === 0 ? 6 : firstDayOfWeek - 1
     ).fill(null);
     const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
-  
+
     const todayIndex = (new Date().getDay() + 6) % 7;
-  
+
     return (
       <div className="h-full grid grid-cols-7 gap-4">
         {daysOfWeek.map((day, index) => (
@@ -104,10 +93,7 @@ const CalendarCard: React.FC<CalendarCardProps> = ({ tasks }) => {
           </span>
         ))}
         {emptyCells.map((_, index) => (
-          <div
-            key={`empty-${index}`}
-            className="invisible h-30"
-          />
+          <div key={`empty-${index}`} className="invisible h-30" />
         ))}
         {days.map((day) => {
           const tasksForDay = tasks.filter(
@@ -130,14 +116,19 @@ const CalendarCard: React.FC<CalendarCardProps> = ({ tasks }) => {
               {day}
               <div className="flex flex-col items-center gap-1 w-full text-xs ">
                 {tasksForDay.slice(0, 5).map((task) => (
-                  <Link className="w-full bg-gray-800 text-white hover:text-purple-400 rounded-md" key={task.id} href={`/project/${task.projectId}`}>
-                  <span >
-                    {task.name}
-                  </span>
+                  <Link
+                    className="w-full bg-gray-800 text-white hover:text-purple-400 rounded-md"
+                    key={task.id}
+                    href={`/project/${task.projectId}`}
+                  >
+                    <span>{task.name}</span>
                   </Link>
                 ))}
                 {tasksForDay.length > 5 && (
-                  <MoreHorizontal className="text-purple-500 cursor-pointer" strokeWidth={3} />
+                  <MoreHorizontal
+                    className="text-purple-500 cursor-pointer"
+                    strokeWidth={3}
+                  />
                 )}
               </div>
             </div>
@@ -146,9 +137,6 @@ const CalendarCard: React.FC<CalendarCardProps> = ({ tasks }) => {
       </div>
     );
   };
-  
-  
-  
 
   return (
     <Card className="h-full flex flex-col pt-8 items-center">

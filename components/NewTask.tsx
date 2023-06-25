@@ -23,11 +23,7 @@ const NewTask = ({ projects, project }: NewTaskProps) => {
   const router = useRouter();
   const [isModalOpen, setIsOpen] = useState(false);
   const [selectedProjectId, setSelectedProjectId] = useState<number>(
-    project
-      ? project.id
-      : projects && projects.length === 1
-      ? projects[0].id
-      : 0
+    project ? project.id : projects && projects.length ? projects[0].id : 0
   );
   const [name, setName] = useState("");
   const [due, setDue] = useState<Date | null>(null);
