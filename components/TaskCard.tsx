@@ -2,14 +2,12 @@ import { getUserFromCookie } from "@/utilities/auth";
 import { db } from "@/utilities/db";
 import { Project, Task, TASK_STATUS } from "@prisma/client";
 import { cookies } from "next/headers";
-import { Plus} from "react-feather";
+import { Plus } from "react-feather";
 import Card from "./Card";
-
 
 import NewTask from "./NewTask";
 import StatusButtons from "./StatusButtons";
 import DeleteTaskButton from "./DeleteTaskButton";
-
 
 type TaskCardProps = {
   projects?: Project[];
@@ -38,6 +36,9 @@ const getData = async () => {
       NOT: {
         status: TASK_STATUS.COMPLETED,
       },
+      project: {
+        deleted: false,
+      },
     },
     take: 5,
     orderBy: {
@@ -47,8 +48,6 @@ const getData = async () => {
 
   return tasks;
 };
-
-
 
 const TaskCard = async ({ project, projects }: TaskCardProps) => {
   const data = project?.tasks || (await getData());
@@ -85,7 +84,7 @@ const TaskCard = async ({ project, projects }: TaskCardProps) => {
                   <div className="flex-grow">
                     <div className="flex flex-row gap-6">
                       <span className="text-gray-800">{task.name}</span>
-                      <DeleteTaskButton taskId={task.id}/>
+                      <DeleteTaskButton taskId={task.id} />
                     </div>
                     <div>
                       <span className="text-gray-400 text-sm">
@@ -96,9 +95,8 @@ const TaskCard = async ({ project, projects }: TaskCardProps) => {
                       <span className="text-red-400 text-sm">
                         {formatDate(task.due)}
                       </span>
-                    </div>                    
+                    </div>
                   </div>
-              
                 </div>
                 <div className="flex-shrink-0 pr-6 md:pr-0">
                   {task.status === TASK_STATUS.NOT_STARTED && (

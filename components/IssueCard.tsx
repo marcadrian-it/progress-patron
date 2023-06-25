@@ -40,16 +40,19 @@ const getSeverityColor = (severity: string) => {
   }
 };
 
-const IssueCard: FC<{ issue: issueWithProject }> = ({ issue }) => {
+const IssueCard: FC<{ issue: issueWithProject; isDragging: boolean }> = ({
+  issue,
+  isDragging,
+}) => {
   return (
     <Card
-      className={
-        "!px-6 !py-8 hover:scale-105 transition-all ease-in-out duration-200"
-      }
+      className={`!px-6 !py-8 hover:scale-105 transition-all ease-in-out duration-200 ${
+        isDragging ? "pointer-events-none" : ""
+      }`}
     >
       <div className="mb-2">
         <span className="text-sm text-gray-400">Issue ID: {issue.id}</span>
-        <DeleteButton />
+        <DeleteButton variant="issue" id={issue.id} />
       </div>
       <div className="flex items-center mb-4">
         <div

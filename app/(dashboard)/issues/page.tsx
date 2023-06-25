@@ -9,6 +9,10 @@ const getData = async () => {
   const issues = await db.issue.findMany({
     where: {
       ownerId: user?.id,
+      deleted: false,
+      project: {
+        deleted: false,
+      },
     },
     include: {
       project: true,

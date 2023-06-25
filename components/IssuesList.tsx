@@ -85,9 +85,15 @@ const IssuesList: FC<{ issues: issueWithProject[] }> = ({ issues }) => {
                 activeDroppableId === "openIssues" ? "bg-blue-100" : ""
               }`}
             >
- <h2 className={`sticky top-0 text-2xl text-center text-black font-bold mb-4 py-2 px-4 border-2 border-white rounded ${activeDroppableId === "openIssues" ? "bg-gradient-to-br from-blue-500 to-blue-600" : "bg-gradient-to-br from-blue-400 to-blue-500"}`}>
-  Open
-</h2>
+              <h2
+                className={`sticky top-0 text-2xl text-center text-black font-bold mb-4 py-2 px-4 border-2 border-white rounded ${
+                  activeDroppableId === "openIssues"
+                    ? "bg-gradient-to-br from-blue-500 to-blue-600"
+                    : "bg-gradient-to-br from-blue-400 to-blue-500"
+                }`}
+              >
+                Open
+              </h2>
               <div className="space-y-4">
                 {openIssues.map((issue, index) => (
                   <Draggable
@@ -95,13 +101,17 @@ const IssuesList: FC<{ issues: issueWithProject[] }> = ({ issues }) => {
                     draggableId={issue.id}
                     index={index}
                   >
-                    {(provided) => (
+                    {(provided, snapshot) => (
                       <div
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                       >
-                        <IssueCard key={issue.id} issue={issue} />
+                        <IssueCard
+                          key={issue.id}
+                          issue={issue}
+                          isDragging={snapshot.isDragging}
+                        />
                       </div>
                     )}
                   </Draggable>
@@ -120,9 +130,15 @@ const IssuesList: FC<{ issues: issueWithProject[] }> = ({ issues }) => {
                 activeDroppableId === "inProgressIssues" ? "bg-yellow-100" : ""
               }`}
             >
-           <h2 className={`sticky top-0 text-2xl text-center text-black font-bold mb-4 py-2 px-4 border-2 border-white rounded ${activeDroppableId === "inProgressIssues" ? "bg-gradient-to-br from-yellow-500 to-yellow-600" : "bg-gradient-to-br from-yellow-400 to-yellow-500"}`}>
-  In Progress
-</h2>
+              <h2
+                className={`sticky top-0 text-2xl text-center text-black font-bold mb-4 py-2 px-4 border-2 border-white rounded ${
+                  activeDroppableId === "inProgressIssues"
+                    ? "bg-gradient-to-br from-yellow-500 to-yellow-600"
+                    : "bg-gradient-to-br from-yellow-400 to-yellow-500"
+                }`}
+              >
+                In Progress
+              </h2>
               <div className="space-y-4">
                 {inProgressIssues.map((issue, index) => (
                   <Draggable
@@ -130,13 +146,16 @@ const IssuesList: FC<{ issues: issueWithProject[] }> = ({ issues }) => {
                     draggableId={issue.id}
                     index={index}
                   >
-                    {(provided) => (
+                    {(provided, snapshot) => (
                       <div
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                       >
-                        <IssueCard key={issue.id} issue={issue} />
+                        <IssueCard
+                          issue={issue}
+                          isDragging={snapshot.isDragging}
+                        />
                       </div>
                     )}
                   </Draggable>
@@ -155,9 +174,15 @@ const IssuesList: FC<{ issues: issueWithProject[] }> = ({ issues }) => {
                 activeDroppableId === "closedIssues" ? "bg-green-100" : ""
               }`}
             >
-<h2 className={`sticky top-0 text-2xl text-center text-black font-bold mb-4 py-2 px-4 border-2 border-white rounded ${activeDroppableId === "closedIssues" ? "bg-gradient-to-br from-green-500 to-green-600" : "bg-gradient-to-br from-green-400 to-green-500"}`}>
-  Closed
-</h2>
+              <h2
+                className={`sticky top-0 text-2xl text-center text-black font-bold mb-4 py-2 px-4 border-2 border-white rounded ${
+                  activeDroppableId === "closedIssues"
+                    ? "bg-gradient-to-br from-green-500 to-green-600"
+                    : "bg-gradient-to-br from-green-400 to-green-500"
+                }`}
+              >
+                Closed
+              </h2>
 
               <div className="space-y-4">
                 {closedIssues.map((issue, index) => (
@@ -166,13 +191,16 @@ const IssuesList: FC<{ issues: issueWithProject[] }> = ({ issues }) => {
                     draggableId={issue.id}
                     index={index}
                   >
-                    {(provided) => (
+                    {(provided, snapshot) => (
                       <div
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                       >
-                        <IssueCard key={issue.id} issue={issue} />
+                        <IssueCard
+                          issue={issue}
+                          isDragging={snapshot.isDragging}
+                        />
                       </div>
                     )}
                   </Draggable>

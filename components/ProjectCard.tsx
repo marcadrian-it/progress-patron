@@ -3,7 +3,6 @@ import { Prisma } from "@prisma/client";
 import Card from "./Card";
 import { DeleteButton } from "./DeleteButton";
 
-
 const projectWithTasks = Prisma.validator<Prisma.ProjectArgs>()({
   include: { tasks: true },
 });
@@ -40,7 +39,7 @@ const ProjectCard: FC<{ project: ProjectWithTasks }> = ({ project }) => {
           Due: {formatDate(project.due)}
         </span>
         <div>
-        <DeleteButton />
+          <DeleteButton variant="project" id={project.id} />
         </div>
       </div>
       <div className="mb-6">

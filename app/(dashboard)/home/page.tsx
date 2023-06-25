@@ -30,7 +30,6 @@ const getData = async () => {
   return { projects };
 };
 
-
 export default async function Page() {
   const { projects } = await getData();
 
@@ -46,7 +45,7 @@ export default async function Page() {
         <div className="flex flex-2 grow items-center flex-wrap mt-3 -m-3 ">
           {projects.map((project) => (
             <div className="w-1/3 lg:w-full p-3" key={project.id}>
-              <Link href={`/project/${project.id}`}>
+              <Link href={`/project/${project.id}`} passHref>
                 <ProjectCard project={project} />
               </Link>
             </div>
