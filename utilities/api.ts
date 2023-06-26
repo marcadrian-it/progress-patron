@@ -20,6 +20,12 @@ type FetcherProps = {
   json?: boolean;
 };
 
+interface ApiError extends Error {
+  response: {
+    status: number;
+  };
+}
+
 const fetcher = async ({ url, method, body, json = true }: FetcherProps) => {
   const res = await fetch(url, {
     method,
@@ -31,7 +37,11 @@ const fetcher = async ({ url, method, body, json = true }: FetcherProps) => {
   });
 
   if (!res.ok) {
-    throw new Error("API Error");
+    const error = new Error("API Error") as ApiError;
+    error.response = {
+      status: res.status,
+    };
+    throw error;
   }
 
   if (json) {
@@ -131,12 +141,16 @@ export const updateUserEmail = async (
   email: string,
   password: string
 ) => {
-  return fetcher({
-    url: `/api/user/email`,
-    method: "PUT",
-    body: { id, email, password },
-    json: true,
-  });
+  try {
+    return await fetcher({
+      url: `/api/user/email`,
+      method: "PUT",
+      body: { id, email, password },
+      json: true,
+    });
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const updateUserPassword = async (
@@ -153,10 +167,14 @@ export const updateUserPassword = async (
 };
 
 export const deleteUser = async (id: number, password: string) => {
-  return fetcher({
-    url: `/api/user/delete?id=${id}&password=${password}`,
-    method: "DELETE",
-  });
+  try {
+    return await fetcher({
+      url: `/api/user/delete?id=${id}&password=${password}`,
+      method: "DELETE",
+    });
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const deleteProject = async (id: number) => {
