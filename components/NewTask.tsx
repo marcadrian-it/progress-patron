@@ -52,7 +52,7 @@ const NewTask = ({ projects, project }: NewTaskProps) => {
         isOpen={isModalOpen}
         onRequestClose={closeModal}
         overlayClassName="bg-[rgba(0,0,0,.4)] flex justify-center items-center absolute top-0 left-0 h-screen w-screen"
-        className="w-1/3 md:w-3/4 bg-white rounded-xl p-8"
+        className="w-1/3 xl:w-3/4 bg-white rounded-xl p-8"
       >
         <h1 className="text-3xl mb-6">New Task</h1>
 
@@ -60,35 +60,44 @@ const NewTask = ({ projects, project }: NewTaskProps) => {
           className="flex flex-col items-center gap-4 p-4"
           onSubmit={handleSubmit}
         >
-          <div className="flex flex-col md:flex-row gap-2 w-full md:w-1/2">
-            {!project && (
-              <Select
-                onChange={(e) => setSelectedProjectId(Number(e.target.value))}
-              >
-                {projects &&
-                  projects.map((project) => (
-                    <option key={project.id} value={project.id}>
-                      {project.name}
-                    </option>
-                  ))}
-              </Select>
-            )}
+          <div className="flex flex-col gap-2 w-full items-start">
+            <div className="flex flex-row gap-2 w-3/4 lg:w-2/3 lg:flex-col">
+              {!project && (
+                <Select
+                  className="w-full"
+                  onChange={(e) => setSelectedProjectId(Number(e.target.value))}
+                >
+                  {projects &&
+                    projects.map((project) => (
+                      <option key={project.id} value={project.id}>
+                        {project.name}
+                      </option>
+                    ))}
+                </Select>
+              )}
+              <DateInput
+                className="w-full"
+                value={due?.toISOString().split("T")[0] || ""}
+                onChange={(e) => setDue(new Date(e.target.value))}
+              />
+            </div>
             <Input
+              className="w-3/4 lg:w-full"
               placeholder="Task name"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            <DateInput
-              value={due?.toISOString().split("T")[0] || ""}
-              onChange={(e) => setDue(new Date(e.target.value))}
-            />
-            <Button type="submit">Create</Button>
           </div>
-          <div className="w-full md:w-1/2">
+          <div className="w-full">
             <TextArea
               placeholder="Task description (optional)"
               maxLength={100}
             />
+          </div>
+          <div className="w-full flex items-center justify-center">
+            <Button className="w-1/3 sm:w-3/4 text-center" type="submit">
+              Create
+            </Button>
           </div>
         </form>
       </Modal>

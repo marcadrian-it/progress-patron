@@ -9,8 +9,6 @@ import { FormEvent } from "react";
 import DateInput from "./DateInput";
 import { useRouter } from "next/navigation";
 
-
-
 Modal.setAppElement("#modal");
 
 const NewProject = () => {
@@ -20,7 +18,6 @@ const NewProject = () => {
   const [due, setDue] = useState<Date | null>(null);
   const closeModal = () => setIsOpen(false);
   const openModal = () => setIsOpen(true);
-
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -37,36 +34,47 @@ const NewProject = () => {
 
   return (
     <div className="px-6 py-8 flex justify-center items-center">
-      <Button className="hover:scale-105 transition-all ease-in-out duration-200" onClick={() => openModal()}>+ New Project</Button>
+      <Button
+        className="hover:scale-105 transition-all ease-in-out duration-200"
+        onClick={() => openModal()}
+      >
+        + New Project
+      </Button>
 
       <Modal
         isOpen={isModalOpen}
         onRequestClose={closeModal}
         overlayClassName="bg-[rgba(0,0,0,.4)] flex justify-center items-center absolute top-0 left-0 h-screen w-screen"
-        className="w-1/3 md:w-3/4 bg-white rounded-xl p-8"
+        className="w-1/3 xl:w-3/4 bg-white rounded-xl p-8"
       >
         <h1 className="text-3xl mb-6">New Project</h1>
         <form
-          className="flex flex-col items-center gap-4 p-4"
+          className="flex flex-col items-start gap-4 p-4"
           onSubmit={handleSubmit}
         >
-          <div className="flex flex-col md:flex-row gap-2 w-full md:w-1/2">
+          <div className="flex flex-row sm:flex-col gap-2 w-full">
             <Input
+              className="w-3/4 xl:w-2/3"
               placeholder="Project name"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
             <DateInput
+              className="w-1/4 sm:w-2/3"
               value={due?.toISOString().split("T")[0] || ""}
               onChange={(e) => setDue(new Date(e.target.value))}
             />
-            <Button type="submit">Create</Button>
           </div>
-          <div className="w-full md:w-1/2">
+          <div className="w-full">
             <TextArea
               placeholder="Project description (optional)"
               maxLength={180}
             />
+          </div>
+          <div className="w-full flex items-center justify-center">
+            <Button className="mt-4 w-1/3 sm:w-3/4 text-center" type="submit">
+              Create
+            </Button>
           </div>
         </form>
       </Modal>
