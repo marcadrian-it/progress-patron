@@ -8,7 +8,8 @@ import Button from "./Button";
 import Input from "./Input";
 import { FormEvent } from "react";
 import Select from "./Select";
-import DateInput from "./DateInput";
+
+import { DatePicker } from "./DatePicker";
 import TextArea from "./TextArea";
 import { useRouter } from "next/navigation";
 
@@ -75,11 +76,7 @@ const NewTask = ({ projects, project }: NewTaskProps) => {
                     ))}
                 </Select>
               )}
-              <DateInput
-                className="w-full"
-                value={due?.toISOString().split("T")[0] || ""}
-                onChange={(e) => setDue(new Date(e.target.value))}
-              />
+              <DatePicker className="text-lg" value={due} setDue={setDue} />
             </div>
             <Input
               className="w-3/4 lg:w-full"

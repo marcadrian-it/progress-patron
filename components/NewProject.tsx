@@ -6,7 +6,8 @@ import Button from "./Button";
 import Input from "./Input";
 import TextArea from "./TextArea";
 import { FormEvent } from "react";
-import DateInput from "./DateInput";
+
+import { DatePicker } from "./DatePicker";
 import { useRouter } from "next/navigation";
 
 Modal.setAppElement("#modal");
@@ -59,11 +60,7 @@ const NewProject = () => {
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            <DateInput
-              className="w-1/4 sm:w-2/3"
-              value={due?.toISOString().split("T")[0] || ""}
-              onChange={(e) => setDue(new Date(e.target.value))}
-            />
+            <DatePicker className="text-lg" value={due} setDue={setDue} />
           </div>
           <div className="w-full">
             <TextArea
