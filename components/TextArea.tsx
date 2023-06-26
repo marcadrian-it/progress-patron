@@ -19,7 +19,7 @@ const TextArea = ({ className, maxLength = 100, ...props }: TextAreaProps) => {
         maxLength={maxLength}
         onChange={handleChange}
         className={clsx(
-          "border-solid border-gray border-2 px-6 py-2 text-lg rounded-3xl w-full",
+          "border-solid border-gray border-2 px-6 py-2 text-lg rounded-3xl w-full focus:outline-none focus:ring-2 focus:ring-black",
           className
         )}
         {...props}
