@@ -128,12 +128,16 @@ export const updateUserEmailAndPassword = async (
   newPassword: string,
   password: string
 ) => {
-  return fetcher({
-    url: `/api/user/emailandpassword`,
-    method: "PUT",
-    body: { id, email, newPassword, password },
-    json: true,
-  });
+  try {
+    return fetcher({
+      url: `/api/user/emailandpassword`,
+      method: "PUT",
+      body: { id, email, newPassword, password },
+      json: true,
+    });
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const updateUserEmail = async (
@@ -158,12 +162,16 @@ export const updateUserPassword = async (
   newPassword: string,
   password: string
 ) => {
-  return fetcher({
-    url: `/api/user/password`,
-    method: "PUT",
-    body: { id, newPassword, password },
-    json: true,
-  });
+  try {
+    return fetcher({
+      url: `/api/user/password`,
+      method: "PUT",
+      body: { id, newPassword, password },
+      json: true,
+    });
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const deleteUser = async (id: number, password: string) => {

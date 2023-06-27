@@ -34,7 +34,6 @@ const Settings: React.FC<SettingsProps> = ({ user: user }) => {
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [error, setError] = useState("");
   const openModal = () => {
     setPassword("");
     setModalIsOpen(true);
@@ -47,72 +46,75 @@ const Settings: React.FC<SettingsProps> = ({ user: user }) => {
     setShowNewPasswordInput(!showNewPasswordInput);
   };
 
+  const showToast = (isError: boolean, description: string) => {
+    const variant = isError ? "destructive" : "destructive_message";
+
+    toast({
+      variant,
+      title: isError ? "Error" : "Success",
+      description,
+      duration: 8000,
+    });
+  };
+
+  const handleError = (error: ApiError, errorMessage: string) => {
+    if (error.response?.status === 401) {
+      showToast(true, "Invalid password.");
+      setEmail(user.email);
+    } else if (error.response?.status === 409) {
+      showToast(true, errorMessage);
+      setEmail(user.email);
+      router.refresh();
+    }
+  };
+
   const handleSave = async () => {
     const emailRegex =
       /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-
     if (!password) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Current password is required.",
-      });
+      showToast(true, "Current password is required.");
       return;
     }
-
     if (!email) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Email is required.",
-      });
-      setEmail(user.email);
-      router.refresh();
+      showToast(true, "Email is required.");
       return;
     }
-
     if (!emailRegex.test(email)) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Email is not valid.",
-      });
+      showToast(true, "Email is not valid.");
       return;
     }
-
-    if (email === user.email || !newPassword) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "No new password or current Email was given.",
-      });
+    if (email === user.email && !newPassword) {
+      showToast(true, "No new password was provided.");
       return;
     }
-
     if (email !== user.email && newPassword) {
       // Update both the user's email and password
-      await updateUserEmailAndPassword(user.id, email, newPassword, password);
-      setEmail(email);
-      router.refresh();
+      try {
+        await updateUserEmailAndPassword(user.id, email, newPassword, password);
+        showToast(false, "Email and password were updated.");
+        setEmail(email);
+      } catch (error) {
+        handleError(error as ApiError, "Email is already in use.");
+      }
     } else if (email !== user.email) {
       // Update only the user's email
+
       try {
         await updateUserEmail(user.id, email, password);
-      } catch (error) {
-        if ((error as ApiError).response?.status === 401) {
-          toast({
-            variant: "destructive",
-            title: "Error",
-            description: "Invalid password.",
-          });
-        }
+        showToast(false, "Email was updated.");
         setEmail(email);
         router.refresh();
+      } catch (error) {
+        handleError(error as ApiError, "Email is already in use.");
       }
     } else if (newPassword) {
       // Update only the user's password
-      await updateUserPassword(user.id, newPassword, password);
-      router.refresh();
+      try {
+        await updateUserPassword(user.id, newPassword, password);
+        showToast(false, "Password was updated.");
+      } catch (error) {
+        handleError(error as ApiError, "");
+      }
     }
 
     setPassword("");
@@ -122,24 +124,13 @@ const Settings: React.FC<SettingsProps> = ({ user: user }) => {
   const handleDelete = async () => {
     if (!password) {
       await closeModal();
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Current password is required.",
-      });
+      showToast(true, "Current password is required.");
     } else {
       try {
         await deleteUser(user.id, password);
         router.replace("/register");
       } catch (error) {
-        if ((error as ApiError).response?.status === 401) {
-          await closeModal();
-          toast({
-            variant: "destructive",
-            title: "Error",
-            description: "Invalid password.",
-          });
-        }
+        handleError(error as ApiError, "");
       }
     }
   };
@@ -176,7 +167,7 @@ const Settings: React.FC<SettingsProps> = ({ user: user }) => {
               E-MAIL ADDRESS
               <Input
                 className="sm:text-sm  border-gray-400 mt-2"
-                defaultValue={email}
+                value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </label>
