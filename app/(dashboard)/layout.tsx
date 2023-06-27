@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import GlassPane from "@/components/GlassPane";
 import Sidebar from "@/components/Sidebar";
 import { ReactElement } from "react";
+import { Toaster } from "@/components/ui/toaster";
 
 type DashboardRootLayoutProps = {
   children: ReactElement;
@@ -33,6 +34,7 @@ export default function DashboardRootLayout({
         <div id="modal"></div>
         <div id="modal-task"></div>
         <div id="modal-issue"></div>
+        <Toaster />
       </body>
     </html>
   );

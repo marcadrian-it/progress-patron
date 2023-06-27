@@ -33,6 +33,17 @@ export default async function handler(
       return;
     }
 
+    const existingEmail = await db.user.findUnique({
+      where: {
+        email: req.body.email,
+      },
+    });
+
+    if (existingEmail) {
+      res.status(409).json({ error: "Email already exists" });
+      return;
+    }
+
     await db.user.update({
       where: {
         id: user.id,
