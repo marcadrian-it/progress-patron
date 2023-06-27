@@ -6,27 +6,60 @@ import Button from "./Button";
 import Input from "./Input";
 import TextArea from "./TextArea";
 import { FormEvent } from "react";
-
+import { useToast } from "@/components/ui/use-toast";
 import { DatePicker } from "./DatePicker";
 import { useRouter } from "next/navigation";
 
 Modal.setAppElement("#modal");
 
+interface ApiError extends Error {
+  response: {
+    status: number;
+  };
+}
+
 const NewProject = () => {
+  const { toast } = useToast();
   const router = useRouter();
   const [isModalOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
   const [due, setDue] = useState<Date | null>(null);
+  const [description, setDescription] = useState("");
   const closeModal = () => setIsOpen(false);
   const openModal = () => setIsOpen(true);
+
+  const showToast = (isError: boolean, description: string) => {
+    const variant = isError ? "destructive" : "destructive_message";
+
+    toast({
+      variant,
+      title: isError ? "Error" : "Success",
+      description,
+      duration: 8000,
+    });
+  };
+
+  const handleError = (error: ApiError, errorMessage: string) => {
+    if (error.response?.status === 400) {
+      showToast(true, errorMessage);
+    }
+  };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!name || !due || due === null) {
-      closeModal();
+      showToast(true, "Please select a due date and a name of your project.");
       return;
     }
-    await createNewProject(name, due);
+    try {
+      await createNewProject(name, due, description);
+    } catch (error) {
+      handleError(
+        error as ApiError,
+        "A project with this name already exists or it was soft-deleted by you before."
+      );
+      return;
+    }
     router.refresh();
     setName("");
     setDue(null);
@@ -66,6 +99,8 @@ const NewProject = () => {
             <TextArea
               placeholder="Project description (optional)"
               maxLength={180}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </div>
           <div className="w-full flex items-center justify-center">
