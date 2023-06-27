@@ -12,8 +12,15 @@ import Select from "./Select";
 import { DatePicker } from "./DatePicker";
 import TextArea from "./TextArea";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/components/ui/use-toast";
 
 Modal.setAppElement("#modal-task");
+
+interface ApiError extends Error {
+  response: {
+    status: number;
+  };
+}
 
 type NewTaskProps = {
   projects?: Project[];
@@ -21,6 +28,7 @@ type NewTaskProps = {
 };
 
 const NewTask = ({ projects, project }: NewTaskProps) => {
+  const { toast } = useToast();
   const router = useRouter();
   const [isModalOpen, setIsOpen] = useState(false);
   const [selectedProjectId, setSelectedProjectId] = useState<number>(
@@ -28,13 +36,32 @@ const NewTask = ({ projects, project }: NewTaskProps) => {
   );
   const [name, setName] = useState("");
   const [due, setDue] = useState<Date | null>(null);
+  const [description, setDescription] = useState("");
   const closeModal = () => setIsOpen(false);
   const openModal = () => setIsOpen(true);
 
+  const showToast = (isError: boolean, description: string) => {
+    const variant = isError ? "destructive" : "destructive_message";
+
+    toast({
+      variant,
+      title: isError ? "Error" : "Success",
+      description,
+      duration: 8000,
+    });
+  };
+
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!selectedProjectId) return;
-    await createNewTask(name, selectedProjectId, due!);
+    if (!selectedProjectId) {
+      showToast(true, "Please select a project.");
+      return;
+    }
+    if (!name || !due || due === null) {
+      showToast(true, "Please select a due date and a name of your task.");
+      return;
+    }
+    await createNewTask(name, selectedProjectId, due!, description);
     router.refresh();
     closeModal();
   };
@@ -89,6 +116,8 @@ const NewTask = ({ projects, project }: NewTaskProps) => {
             <TextArea
               placeholder="Task description (optional)"
               maxLength={100}
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </div>
           <div className="w-full flex items-center justify-center">

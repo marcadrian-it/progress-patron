@@ -68,26 +68,39 @@ export const signin = async (user: Partial<User>) => {
   });
 };
 
-export const createNewProject = async (name: string, due: Date) => {
-  return fetcher({
-    url: "/api/project",
-    method: "POST",
-    body: { name, due },
-    json: true,
-  });
+export const createNewProject = async (
+  name: string,
+  due: Date,
+  description?: string
+) => {
+  try {
+    return fetcher({
+      url: "/api/project",
+      method: "POST",
+      body: { name, due, description },
+      json: true,
+    });
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const createNewTask = async (
   name: string,
   projectId: number,
-  due: Date
+  due: Date,
+  description?: string
 ) => {
-  return fetcher({
-    url: "/api/task",
-    method: "POST",
-    body: { name, projectId, due },
-    json: true,
-  });
+  try {
+    return fetcher({
+      url: "/api/task",
+      method: "POST",
+      body: { name, projectId, due, description },
+      json: true,
+    });
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const createNewIssue = async (
