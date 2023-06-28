@@ -19,6 +19,10 @@ const StatusButtons: React.FC<StatusButtonsProps> = ({ status, taskId }) => {
   const ref = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
+  useEffect(() => {
+    setIsRefreshing(false);
+  }, [status]);
+
   const handleClick = (clickedStatus: TASK_STATUS) => {
     setShowButtons(true);
     setStatusClicked(clickedStatus);
@@ -33,8 +37,6 @@ const StatusButtons: React.FC<StatusButtonsProps> = ({ status, taskId }) => {
       setStatusClicked(null);
     } catch (error) {
       console.error(error);
-    } finally {
-      setIsRefreshing(false);
     }
   };
 

@@ -63,6 +63,9 @@ const NewTask = ({ projects, project }: NewTaskProps) => {
     }
     await createNewTask(name, selectedProjectId, due!, description);
     router.refresh();
+    setName("");
+    setDue(null);
+    setDescription("");
     closeModal();
   };
 

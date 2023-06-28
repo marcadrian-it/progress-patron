@@ -63,6 +63,7 @@ const NewProject = () => {
     router.refresh();
     setName("");
     setDue(null);
+    setDescription("");
     closeModal();
   };
 

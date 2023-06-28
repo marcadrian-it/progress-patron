@@ -1,5 +1,5 @@
 "use client";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import IssueCard from "./IssueCard";
 import { Prisma, ISSUE_STATUS } from "@prisma/client";
@@ -22,6 +22,7 @@ const issueWithProject = Prisma.validator<Prisma.IssueArgs>()({
 type issueWithProject = Prisma.IssueGetPayload<typeof issueWithProject>;
 
 const IssuesList: FC<{ issues: issueWithProject[] }> = ({ issues }) => {
+  const [isDragging, setIsDragging] = useState(false);
   const [activeDroppableId, setActiveDroppableId] = useState(null);
 
   const router = useRouter();
@@ -42,19 +43,25 @@ const IssuesList: FC<{ issues: issueWithProject[] }> = ({ issues }) => {
     .filter((issue) => issue.status === "CLOSED")
     .sort((a, b) => severityMap[b.severity] - severityMap[a.severity]);
 
+  useEffect(() => {
+    if (isDragging) {
+      document.body.classList.add("dragging");
+    } else {
+      document.body.classList.remove("dragging");
+    }
+  }, [isDragging]);
+
   const onDragUpdate = (update: any) => {
     setActiveDroppableId(update.destination?.droppableId);
   };
 
   const onDragEnd = async (result: any) => {
+    setIsDragging(true);
     setActiveDroppableId(null);
     const { destination, source, draggableId } = result;
 
-    if (
-      !destination ||
-      (destination.droppableId === source.droppableId &&
-        destination.index === source.index)
-    ) {
+    if (!destination || destination.droppableId === source.droppableId) {
+      setIsDragging(false);
       return;
     }
 
@@ -71,6 +78,8 @@ const IssuesList: FC<{ issues: issueWithProject[] }> = ({ issues }) => {
       await updateIssueStatus(draggableId, newStatus);
       router.refresh();
     }
+
+    setIsDragging(false);
   };
 
   return (
@@ -110,7 +119,6 @@ const IssuesList: FC<{ issues: issueWithProject[] }> = ({ issues }) => {
                           {...provided.dragHandleProps}
                         >
                           <IssueCard
-                            key={issue.id}
                             issue={issue}
                             isDragging={snapshot.isDragging}
                           />

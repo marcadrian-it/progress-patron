@@ -36,6 +36,9 @@ const NewIssue = ({ projects }: NewIssueProps) => {
     if (!selectedProjectId) return;
     await createNewIssue(name, selectedProjectId, severity, description);
     router.refresh();
+    setName("");
+    setDescription("");
+    setSeverity(ISSUE_SEVERITY.Medium);
     closeModal();
   };
 

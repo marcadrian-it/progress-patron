@@ -11,13 +11,18 @@ export default async function handler(
   const user = await validateJWT(req.cookies[process.env.COOKIE_NAME]);
 
   if (req.method === "PUT") {
-    const { id, status } = req.body;
+    const { id, status, severity } = req.body;
     if (typeof id !== "string") {
       res.status(400).json({ message: "Invalid issue ID" });
       return;
     }
-    await updateIssueStatus(id, status);
-    res.json({ message: "Issue status updated" });
+    if (status) {
+      await updateIssueStatus(id, status);
+      res.json({ message: "Issue status updated" });
+    } else if (severity) {
+      await updateIssueSeverity(id, severity);
+      res.json({ message: "Issue severity updated" });
+    }
   } else if (req.method === "POST") {
     await createNewIssue(
       req.body.name,
@@ -50,6 +55,13 @@ const updateIssueStatus = async (id: string, status: ISSUE_STATUS) => {
   await db.issue.update({
     where: { id: id },
     data: { status },
+  });
+};
+
+const updateIssueSeverity = async (id: string, severity: ISSUE_SEVERITY) => {
+  await db.issue.update({
+    where: { id: id },
+    data: { severity },
   });
 };
 

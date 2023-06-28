@@ -61,7 +61,7 @@ const TaskCard = async ({ project, projects }: TaskCardProps) => {
               {project.name}
             </span>
           ) : (
-            <h1 className="text-3xl text-gray-700 font-bold mb-4 sm:text-2xl">
+            <h1 className="text-3xl text-gray-700 font-bold mb-0 sm:text-2xl">
               Tasks with Approaching Deadlines
             </h1>
           )}
@@ -72,7 +72,7 @@ const TaskCard = async ({ project, projects }: TaskCardProps) => {
           )}
         </div>
       </div>
-      <div className="mt-4">
+      <div>
         {data && data.length ? (
           <div className="space-y-4">
             {data.map((task: Task) => (
