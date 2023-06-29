@@ -3,13 +3,22 @@ import { ComponentPropsWithoutRef, useState } from "react";
 
 interface TextAreaProps extends ComponentPropsWithoutRef<"textarea"> {
   maxLength?: number;
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-const TextArea = ({ className, maxLength = 100, ...props }: TextAreaProps) => {
+const TextArea = ({
+  className,
+  maxLength = 100,
+  onChange,
+  ...props
+}: TextAreaProps) => {
   const [charsLeft, setCharsLeft] = useState(maxLength);
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setCharsLeft(maxLength - event.target.value.length);
+    if (onChange) {
+      onChange(event);
+    }
   };
 
   return (

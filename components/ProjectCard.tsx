@@ -42,7 +42,10 @@ const ProjectCard: FC<{ project: ProjectWithTasks }> = ({ project }) => {
           <DeleteButton variant="project" id={project.id} />
         </div>
       </div>
-      <div className="mb-6">
+      <div
+        style={{ textOverflow: "ellipsis" }}
+        className="mb-6 w-full overflow-hidden whitespace-nowrap"
+      >
         <span className="text-3xl text-gray-600">{project.name}</span>
       </div>
       <div className="mb-2">

@@ -37,7 +37,12 @@ const NewTask = ({ projects, project }: NewTaskProps) => {
   const [name, setName] = useState("");
   const [due, setDue] = useState<Date | null>(null);
   const [description, setDescription] = useState("");
-  const closeModal = () => setIsOpen(false);
+  const closeModal = () => {
+    setIsOpen(false);
+    setName("");
+    setDue(null);
+    setDescription("");
+  };
   const openModal = () => setIsOpen(true);
 
   const showToast = (isError: boolean, description: string) => {
@@ -63,9 +68,6 @@ const NewTask = ({ projects, project }: NewTaskProps) => {
     }
     await createNewTask(name, selectedProjectId, due!, description);
     router.refresh();
-    setName("");
-    setDue(null);
-    setDescription("");
     closeModal();
   };
 
@@ -112,13 +114,14 @@ const NewTask = ({ projects, project }: NewTaskProps) => {
               className="w-3/4 lg:w-full"
               placeholder="Task name"
               value={name}
+              maxLength={40}
               onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className="w-full">
             <TextArea
               placeholder="Task description (optional)"
-              maxLength={100}
+              maxLength={60}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />

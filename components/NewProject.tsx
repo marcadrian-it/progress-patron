@@ -25,7 +25,12 @@ const NewProject = () => {
   const [name, setName] = useState("");
   const [due, setDue] = useState<Date | null>(null);
   const [description, setDescription] = useState("");
-  const closeModal = () => setIsOpen(false);
+  const closeModal = () => {
+    setIsOpen(false);
+    setName("");
+    setDescription("");
+    setDue(null);
+  };
   const openModal = () => setIsOpen(true);
 
   const showToast = (isError: boolean, description: string) => {
@@ -61,9 +66,6 @@ const NewProject = () => {
       return;
     }
     router.refresh();
-    setName("");
-    setDue(null);
-    setDescription("");
     closeModal();
   };
 
@@ -92,6 +94,7 @@ const NewProject = () => {
               className="w-3/4 xl:w-2/3"
               placeholder="Project name"
               value={name}
+              maxLength={50}
               onChange={(e) => setName(e.target.value)}
             />
             <DatePicker className="text-lg" value={due} setDue={setDue} />

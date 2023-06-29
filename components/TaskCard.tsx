@@ -57,7 +57,11 @@ const TaskCard = async ({ project, projects }: TaskCardProps) => {
       <div className="flex flex-row sm:flex-col justify-between items-center">
         <div>
           {project ? (
-            <span className="text-3xl text-gray-700 font-bold mb-4 sm:text-2xl">
+            <span
+              className="text-3xl text-gray-700 font-bold mb-4 sm:text-2xl
+            w-full overflow-hidden whitespace-nowrap"
+              style={{ textOverflow: "ellipsis" }}
+            >
               {project.name}
             </span>
           ) : (
@@ -66,7 +70,7 @@ const TaskCard = async ({ project, projects }: TaskCardProps) => {
             </h1>
           )}
         </div>
-        <div>
+        <div className="mt-2 mb-2">
           {(projects || project) && (
             <NewTask projects={projects} project={project} />
           )}
@@ -76,15 +80,17 @@ const TaskCard = async ({ project, projects }: TaskCardProps) => {
         {data && data.length ? (
           <div className="space-y-4">
             {data.map((task: Task) => (
-              <div className="flex items-center gap-4" key={task.id}>
+              <div
+                className="flex items-center gap-4 lg:flex-wrap overflow-hidden justify-center"
+                key={task.id}
+              >
                 <div className="flex items-center w-full">
                   <div className="flex-shrink-0 mr-2">
-                    <Plus className="text-purple-500" strokeWidth={5} />
+                    <DeleteTaskButton taskId={task.id} />
                   </div>
                   <div className="flex-grow">
-                    <div className="flex flex-row gap-6">
+                    <div className={`flex flex-row gap-6`}>
                       <span className="text-gray-800">{task.name}</span>
-                      <DeleteTaskButton taskId={task.id} />
                     </div>
                     <div>
                       <span className="text-gray-400 text-sm">
@@ -98,7 +104,7 @@ const TaskCard = async ({ project, projects }: TaskCardProps) => {
                     </div>
                   </div>
                 </div>
-                <div className="flex-shrink-0 pr-6 md:pr-0">
+                <div className="flex-shrink-0 pr-6 md:pr-0 mb-2">
                   {task.status === TASK_STATUS.NOT_STARTED && (
                     <div>
                       <StatusButtons status={task.status} taskId={task.id} />
