@@ -28,7 +28,12 @@ const NewIssue = ({ projects }: NewIssueProps) => {
   const [severity, setSeverity] = useState<ISSUE_SEVERITY>(
     ISSUE_SEVERITY.Medium
   );
-  const closeModal = () => setIsOpen(false);
+  const closeModal = () => {
+    setIsOpen(false);
+    setName("");
+    setDescription("");
+    setSeverity(ISSUE_SEVERITY.Medium);
+  };
   const openModal = () => setIsOpen(true);
 
   const handleSubmit = async (e: FormEvent) => {
@@ -85,6 +90,7 @@ const NewIssue = ({ projects }: NewIssueProps) => {
               className="w-3/4 sm:w-full"
               placeholder="Issue name"
               value={name}
+              maxLength={50}
               onChange={(e) => setName(e.target.value)}
             />
           </div>
@@ -93,6 +99,7 @@ const NewIssue = ({ projects }: NewIssueProps) => {
               className="w-full"
               placeholder="Issue description (optional)"
               value={description}
+              maxLength={100}
               onChange={(e) => setDescription(e.target.value)}
             />
           </div>

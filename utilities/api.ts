@@ -135,6 +135,18 @@ export const updateIssueStatus = async (id: string, status: ISSUE_STATUS) => {
   });
 };
 
+export const updateIssueSeverity = async (
+  id: string,
+  severity: ISSUE_SEVERITY
+) => {
+  return fetcher({
+    url: `/api/issue`,
+    method: "PUT",
+    body: { id, severity },
+    json: true,
+  });
+};
+
 export const updateUserEmailAndPassword = async (
   id: number,
   email: string,
