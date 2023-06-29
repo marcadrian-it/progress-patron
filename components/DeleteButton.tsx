@@ -28,6 +28,7 @@ export const DeleteButton: React.FC<DeleteButtonProps> = ({
         await deleteIssue(id as string);
         router.refresh();
       } else if (variant === "project") {
+        setIsDeleting(true);
         await deleteProject(id as number);
         router.refresh();
       }

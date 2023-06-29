@@ -85,7 +85,7 @@ const TaskCard = async ({ project, projects }: TaskCardProps) => {
                 key={task.id}
               >
                 <div className="flex items-center w-full">
-                  <div className="flex-shrink-0 mr-2">
+                  <div className="flex-shrink-0 mr-4">
                     <DeleteTaskButton taskId={task.id} />
                   </div>
                   <div className="flex-grow">

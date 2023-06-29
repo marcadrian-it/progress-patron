@@ -114,14 +114,14 @@ const NewTask = ({ projects, project }: NewTaskProps) => {
               className="w-3/4 lg:w-full"
               placeholder="Task name"
               value={name}
-              maxLength={40}
+              maxLength={50}
               onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className="w-full">
             <TextArea
               placeholder="Task description (optional)"
-              maxLength={60}
+              maxLength={80}
               value={description}
               onChange={(e) => setDescription(e.target.value)}
             />

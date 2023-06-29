@@ -1,3 +1,4 @@
+"use client";
 import { FC, useEffect, useState } from "react";
 import { Prisma } from "@prisma/client";
 import Card from "./Card";
@@ -45,8 +46,13 @@ const IssueCard: FC<{
         }`}
       >
         {isDeleting ? (
-          <div className="flex justify-center items-center">
-            <Spinner />
+          <div
+            className="flex justify-center items-center"
+            style={{
+              minHeight: "220px",
+            }}
+          >
+            <Spinner className="border-purple-500 w-[52px] h-[52px]" />
           </div>
         ) : (
           <>
