@@ -4,14 +4,13 @@ import NewProject from "@/components/NewProject";
 import ProjectCard from "@/components/ProjectCard";
 import TaskCard from "@/components/TaskCard";
 
-import { getUserFromCookie } from "@/utilities/auth";
+import { getUserByClerkID } from "@/utilities/auth";
 import { db } from "@/utilities/db";
-import { cookies } from "next/headers";
 import Link from "next/link";
 import React, { Suspense } from "react";
 
 const getData = async () => {
-  const user = await getUserFromCookie(cookies() as any);
+  const user = await getUserByClerkID();
 
   const projects = await db.project.findMany({
     where: {

@@ -14,7 +14,9 @@ import { useRouter } from "next/navigation";
 import Card from "./Card";
 import { useToast } from "@/components/ui/use-toast";
 
-Modal.setAppElement("#modal");
+if (typeof window !== "undefined") {
+  Modal.setAppElement("body");
+}
 
 interface SettingsProps {
   user: User;

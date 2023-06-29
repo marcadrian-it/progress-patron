@@ -18,24 +18,18 @@ export default function DashboardRootLayout({
   children,
 }: DashboardRootLayoutProps) {
   return (
-    <html lang="en" className={inter.variable}>
-      <head />
-      <body
-        suppressHydrationWarning={true}
-        className="h-screen w-screen candy-mesh p-6 sm:p-4"
+    <div
+      suppressHydrationWarning={true}
+      className="h-screen w-screen candy-mesh p-6 sm:p-4"
+    >
+      <GlassPane
+        className="w-full h-full flex sm:flex-col-reverse items-center p-4 sm:p-2"
+        style={{ maxWidth: "100vw", overflow: "hidden" }}
       >
-        <GlassPane
-          className="w-full h-full flex sm:flex-col-reverse items-center p-4 sm:p-2"
-          style={{ maxWidth: "100vw", overflow: "hidden" }}
-        >
-          <Sidebar />
-          {children}
-        </GlassPane>
-        <div id="modal"></div>
-        <div id="modal-task"></div>
-        <div id="modal-issue"></div>
-        <Toaster />
-      </body>
-    </html>
+        <Sidebar />
+        {children}
+      </GlassPane>
+      <Toaster />
+    </div>
   );
 }

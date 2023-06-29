@@ -14,16 +14,12 @@ const inter = Inter({
 
 export default function AuthRootLayout({ children }: AuthRootLayoutProps) {
   return (
-    <html lang="en" className={inter.variable}>
-      <head />
-      <body
-        suppressHydrationWarning={true}
-        className="h-screen w-screen rainbow-mesh p-6"
-      >
+    <div>
+      <div className="h-screen w-screen rainbow-mesh p-6">
         <GlassPane className="w-full h-full flex items-center justify-center">
           {children}
         </GlassPane>
-      </body>
-    </html>
+      </div>
+    </div>
   );
 }

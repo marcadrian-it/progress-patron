@@ -1,10 +1,8 @@
 import Settings from "@/components/Settings";
-
-import { getUserFromCookie } from "@/utilities/auth";
-import { cookies } from "next/headers";
+import { getUserByClerkID } from "@/utilities/auth";
 
 const getData = async () => {
-  return await getUserFromCookie(cookies() as any);
+  return await getUserByClerkID();
 };
 
 export default async function SettingsPage() {

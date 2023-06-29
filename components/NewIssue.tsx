@@ -11,7 +11,9 @@ import Select from "./Select";
 import TextArea from "./TextArea";
 import { useRouter } from "next/navigation";
 
-Modal.setAppElement("#modal-issue");
+if (typeof window !== "undefined") {
+  Modal.setAppElement("body");
+}
 
 type NewIssueProps = {
   projects?: Project[];

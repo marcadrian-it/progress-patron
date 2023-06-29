@@ -14,7 +14,9 @@ import TextArea from "./TextArea";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 
-Modal.setAppElement("#modal-task");
+if (typeof window !== "undefined") {
+  Modal.setAppElement("body");
+}
 
 interface ApiError extends Error {
   response: {

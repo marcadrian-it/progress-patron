@@ -1,13 +1,11 @@
-import { getUserFromCookie } from "@/utilities/auth";
 import { db } from "@/utilities/db";
 import { Project, Task, TASK_STATUS } from "@prisma/client";
-import { cookies } from "next/headers";
-import { Plus } from "react-feather";
 import Card from "./Card";
 
 import NewTask from "./NewTask";
 import StatusButtons from "./StatusButtons";
 import DeleteTaskButton from "./DeleteTaskButton";
+import { getUserByClerkID } from "@/utilities/auth";
 
 type TaskCardProps = {
   projects?: Project[];
@@ -27,7 +25,7 @@ const formatDate = (date: Date) =>
   });
 
 const getData = async () => {
-  const user = await getUserFromCookie(cookies() as any);
+  const user = await getUserByClerkID();
 
   const tasks = await db.task.findMany({
     where: {

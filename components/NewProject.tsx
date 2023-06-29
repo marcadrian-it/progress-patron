@@ -10,7 +10,9 @@ import { useToast } from "@/components/ui/use-toast";
 import { DatePicker } from "./DatePicker";
 import { useRouter } from "next/navigation";
 
-Modal.setAppElement("#modal");
+if (typeof window !== "undefined") {
+  Modal.setAppElement("body");
+}
 
 interface ApiError extends Error {
   response: {

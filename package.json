@@ -14,6 +14,7 @@
     "seed": "ts-node -P tsconfig-seed.json -r tsconfig-paths/register --transpileOnly prisma/seed.ts"
   },
   "dependencies": {
+    "@clerk/nextjs": "^4.21.12",
     "@prisma/client": "^4.15.0",
     "@radix-ui/react-popover": "^1.0.6",
     "@radix-ui/react-slot": "^1.0.2",

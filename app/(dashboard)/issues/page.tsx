@@ -1,11 +1,11 @@
 import AddIssuesBar from "@/components/AddIssuesBar";
 import IssuesList from "@/components/IssuesList";
-import { getUserFromCookie } from "@/utilities/auth";
+import { getUserByClerkID } from "@/utilities/auth";
+
 import { db } from "@/utilities/db";
-import { cookies } from "next/headers";
 
 const getData = async () => {
-  const user = await getUserFromCookie(cookies() as any);
+  const user = await getUserByClerkID();
 
   const issues = await db.issue.findMany({
     where: {
