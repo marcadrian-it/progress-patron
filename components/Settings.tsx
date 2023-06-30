@@ -225,28 +225,30 @@ const Settings: React.FC<SettingsProps> = ({ user: user }) => {
               Please confirm that you want to delete your account. This action
               cannot be undone.
             </p>
-            <label>
-              Password
-              <Input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="border-gray-400 mt-2"
-                type="password"
-                autoComplete="off"
-              />
-            </label>
-            <div className="flex justify-between mt-4">
-              <Button intent="secondary" size="medium" onClick={closeModal}>
-                Cancel
-              </Button>
-              <Button
-                className="bg-red-500 hover:bg-red-600 "
-                intent="primary"
-                size="medium"
-                onClick={handleDelete}
-              >
-                Delete Account
-              </Button>
+            <div className="p-4 sm:p-1 flex flex-col align-middle justify-start items-start">
+              <label className="w-4/5">
+                Password
+                <Input
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="border-gray-400 mt-2 flex flex-row"
+                  type="password"
+                  autoComplete="off"
+                />
+              </label>
+              <div className="flex justify-between mt-4">
+                <Button intent="secondary" size="medium" onClick={closeModal}>
+                  Cancel
+                </Button>
+                <Button
+                  className="bg-red-500 hover:bg-red-600 ml-2"
+                  intent="primary"
+                  size="small"
+                  onClick={handleDelete}
+                >
+                  Delete Account
+                </Button>
+              </div>
             </div>
           </Modal>
         </div>
