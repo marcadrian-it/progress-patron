@@ -90,6 +90,7 @@ const SeverityButtons: React.FC<SeverityButtonsProps> = ({
           } rounded py-1 px-2 ${getSeverityColor(severity)}`}
           onClick={() => handleClick(severity)}
           disabled={isRefreshing}
+          size="small"
         >
           {isRefreshing ? (
             <div className="flex justify-center items-center">

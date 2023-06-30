@@ -2,6 +2,7 @@ import Card from "./Card";
 import Image from "next/image";
 import logo from "@/assets/images/logo.png";
 import SidebarLink from "./SidebarLink";
+import ClerkLogout from "./ClerkLogout";
 
 export type SidebarLinkData = {
   label: string;
@@ -26,11 +27,6 @@ const links: SidebarLinkData[] = [
     icon: "Settings",
     link: "/settings",
   },
-  {
-    label: "Logout",
-    icon: "LogOut",
-    link: "/logout",
-  },
 ];
 
 const Sidebar = () => {
@@ -48,6 +44,7 @@ const Sidebar = () => {
       {links.map((link) => (
         <SidebarLink link={link} key={link.link} />
       ))}
+      <ClerkLogout />
     </Card>
   );
 };

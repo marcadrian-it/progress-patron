@@ -1,5 +1,6 @@
 import Settings from "@/components/Settings";
 import { getUserByClerkID } from "@/utilities/auth";
+import { useUser } from "@clerk/clerk-react";
 
 const getData = async () => {
   return await getUserByClerkID();

@@ -50,24 +50,6 @@ const fetcher = async ({ url, method, body, json = true }: FetcherProps) => {
   }
 };
 
-export const register = async (user: Partial<User>) => {
-  return fetcher({
-    url: "/api/register",
-    method: "POST",
-    body: user,
-    json: false,
-  });
-};
-
-export const signin = async (user: Partial<User>) => {
-  return fetcher({
-    url: "/api/signin",
-    method: "POST",
-    body: user,
-    json: false,
-  });
-};
-
 export const createNewProject = async (
   name: string,
   due: Date,
@@ -145,58 +127,6 @@ export const updateIssueSeverity = async (
     body: { id, severity },
     json: true,
   });
-};
-
-export const updateUserEmailAndPassword = async (
-  id: number,
-  email: string,
-  newPassword: string,
-  password: string
-) => {
-  try {
-    return fetcher({
-      url: `/api/user/emailandpassword`,
-      method: "PUT",
-      body: { id, email, newPassword, password },
-      json: true,
-    });
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const updateUserEmail = async (
-  id: number,
-  email: string,
-  password: string
-) => {
-  try {
-    return await fetcher({
-      url: `/api/user/email`,
-      method: "PUT",
-      body: { id, email, password },
-      json: true,
-    });
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const updateUserPassword = async (
-  id: number,
-  newPassword: string,
-  password: string
-) => {
-  try {
-    return fetcher({
-      url: `/api/user/password`,
-      method: "PUT",
-      body: { id, newPassword, password },
-      json: true,
-    });
-  } catch (error) {
-    throw error;
-  }
 };
 
 export const deleteUser = async (id: number, password: string) => {

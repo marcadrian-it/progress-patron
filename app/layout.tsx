@@ -16,7 +16,6 @@ export default function MainRootLayout({ children }: MainRootLayoutProps) {
   return (
     <ClerkProvider>
       <html lang="en" className={inter.variable}>
-        <head />
         <body className={inter.className}>{children}</body>
       </html>
     </ClerkProvider>
