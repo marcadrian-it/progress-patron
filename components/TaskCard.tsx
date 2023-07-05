@@ -82,15 +82,17 @@ const TaskCard = async ({ project, projects }: TaskCardProps) => {
                   </div>
                   <div className="flex-grow">
                     <div className={`flex flex-row gap-6`}>
-                      <span className="text-gray-800">{task.name}</span>
+                      <span className="text-gray-800 font-bold">
+                        {task.name}
+                      </span>
                     </div>
                     <div>
-                      <span className="text-gray-400 text-sm">
+                      <span className="text-gray-400 text-sm font-semibold">
                         {task.description}
                       </span>
                     </div>
                     <div>
-                      <span className="text-red-400 text-sm">
+                      <span className="text-red-400 text-sm font-semibold">
                         {formatDate(task.due, true)}
                       </span>
                     </div>

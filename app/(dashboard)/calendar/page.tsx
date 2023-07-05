@@ -25,7 +25,7 @@ export default async function CalendarPage() {
   };
   const tasks = await getData();
   return (
-    <div className="h-full w-full px-6">
+    <div className="h-full w-full px-6 sm:px-2">
       <CalendarCard tasks={tasks}></CalendarCard>
     </div>
   );

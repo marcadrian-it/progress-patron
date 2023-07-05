@@ -77,11 +77,11 @@ const CalendarCard: React.FC<CalendarCardProps> = ({ tasks }) => {
     const todayIndex = (new Date().getDay() + 6) % 7;
 
     return (
-      <div className="h-full grid grid-cols-7 gap-4">
+      <div className="h-full grid grid-cols-7 gap-4 md:gap-2">
         {daysOfWeek.map((day, index) => (
           <span
             key={day}
-            className={`flex items-center justify-center text-center font-bold w-full h-10 ${
+            className={`flex items-center justify-center text-center font-bold w-full h-10 md:text-sm sm:rounded ${
               index === todayIndex &&
               currentDate.getMonth() === new Date().getMonth() &&
               currentDate.getFullYear() === new Date().getFullYear()
@@ -105,7 +105,7 @@ const CalendarCard: React.FC<CalendarCardProps> = ({ tasks }) => {
           return (
             <div
               key={day}
-              className={`text-center border rounded-lg h-30 max-h-40 ${
+              className={`flex flex-col text-center border border-gray-400 rounded-lg h-30 max-h-40 hover:bg-purple-300 hover:text-black ${
                 day === new Date().getDate() &&
                 currentDate.getMonth() === new Date().getMonth() &&
                 currentDate.getFullYear() === new Date().getFullYear()
@@ -114,10 +114,10 @@ const CalendarCard: React.FC<CalendarCardProps> = ({ tasks }) => {
               }`}
             >
               {day}
-              <div className="flex flex-col items-center gap-1 w-full text-xs ">
+              <div className="flex flex-col align-middle items-center gap-1 w-full text-xs ">
                 {tasksForDay.slice(0, 5).map((task) => (
                   <Link
-                    className="w-full bg-gray-800 text-white hover:text-purple-400 rounded-md"
+                    className="block md:hidden w-full bg-gray-800 text-white hover:text-purple-400 rounded-md"
                     key={task.id}
                     href={`/project/${task.projectId}`}
                   >
@@ -126,9 +126,14 @@ const CalendarCard: React.FC<CalendarCardProps> = ({ tasks }) => {
                 ))}
                 {tasksForDay.length > 5 && (
                   <MoreHorizontal
-                    className="text-purple-500 cursor-pointer"
+                    className="block md:hidden text-purple-500 cursor-pointer"
                     strokeWidth={3}
                   />
+                )}
+                {tasksForDay.length > 1 && (
+                  <span className="items-center hidden mt-2 md:block w-6 h-6  bg-blue-400 rounded-full text-white hover:text-purple-400 hover:cursor-pointer">
+                    {tasksForDay.length}
+                  </span>
                 )}
               </div>
             </div>
@@ -139,7 +144,7 @@ const CalendarCard: React.FC<CalendarCardProps> = ({ tasks }) => {
   };
 
   return (
-    <Card className="h-full flex flex-col pt-8 items-center">
+    <Card className="h-full flex flex-col items-center md:px-3">
       {renderCalendarHeader()}
       <div className="w-full flex-grow text-xl">{renderCalendarGrid()}</div>
     </Card>

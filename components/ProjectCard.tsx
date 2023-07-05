@@ -38,12 +38,12 @@ const ProjectCard: FC<{ project: ProjectWithTasks }> = ({ project }) => {
       ) : (
         <>
           <div>
-            <span className="text-sm text-gray-400">
+            <span className="text-sm text-gray-400 font-semibold">
               Started: {formatDate(project.createdAt)}
             </span>
           </div>
           <div>
-            <span className="text-sm text-red-400">
+            <span className="text-sm text-red-400 font-semibold">
               Due: {formatDate(project.due, true)}
             </span>
             <div>
@@ -58,10 +58,12 @@ const ProjectCard: FC<{ project: ProjectWithTasks }> = ({ project }) => {
             style={{ textOverflow: "ellipsis" }}
             className="mb-6 w-full overflow-hidden whitespace-nowrap"
           >
-            <span className="text-3xl text-gray-600">{project.name}</span>
+            <span className="text-3xl text-gray-600 font-bold">
+              {project.name}
+            </span>
           </div>
           <div className="mb-2">
-            <span className="text-gray-400">
+            <span className="text-gray-400 font-semibold">
               {completedCount}/{project.tasks.length} completed
             </span>
           </div>

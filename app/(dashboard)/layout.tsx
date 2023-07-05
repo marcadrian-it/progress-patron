@@ -22,7 +22,7 @@ export default function DashboardRootLayout({
       <head />
       <body
         suppressHydrationWarning={true}
-        className="h-screen w-screen candy-mesh p-6 sm:p-4"
+        className="h-screen w-screen candy-mesh p-6 sm:p-2"
       >
         <GlassPane
           className="w-full h-full flex sm:flex-col-reverse items-center p-4 sm:p-2"

@@ -169,6 +169,7 @@ const Settings: React.FC<SettingsProps> = ({ user: user }) => {
                 className="sm:text-sm  border-gray-400 mt-2"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                autoComplete="off"
               />
             </label>
             <label className="mb-2 sm:text-sm sm:max-w-[200px]">
