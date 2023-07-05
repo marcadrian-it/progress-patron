@@ -4,20 +4,12 @@ import { Prisma } from "@prisma/client";
 import Card from "./Card";
 import { DeleteButton } from "./DeleteButton";
 import Spinner from "./Spinner";
+import { formatDate } from "@/utilities/dateUtils";
 
 const projectWithTasks = Prisma.validator<Prisma.ProjectArgs>()({
   include: { tasks: true },
 });
-
 type ProjectWithTasks = Prisma.ProjectGetPayload<typeof projectWithTasks>;
-
-const formatDate = (date: Date) =>
-  new Date(date).toLocaleDateString("en-gb", {
-    weekday: "short",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
 
 const ProjectCard: FC<{ project: ProjectWithTasks }> = ({ project }) => {
   const [isDeleting, setIsDeleting] = useState(false);
@@ -52,7 +44,7 @@ const ProjectCard: FC<{ project: ProjectWithTasks }> = ({ project }) => {
           </div>
           <div>
             <span className="text-sm text-red-400">
-              Due: {formatDate(project.due)}
+              Due: {formatDate(project.due, true)}
             </span>
             <div>
               <DeleteButton

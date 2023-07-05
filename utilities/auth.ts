@@ -4,7 +4,6 @@ import { SignJWT, jwtVerify } from "jose";
 import { RequestCookies } from "next/dist/server/web/spec-extension/cookies";
 import { db } from "./db";
 
-
 export const hashPassword = (password: string) => bcrypt.hash(password, 10);
 
 export const comparePasswords = (

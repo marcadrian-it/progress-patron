@@ -30,6 +30,16 @@ const getRandomIssueSeverity = () => {
   return statuses[Math.floor(Math.random() * statuses.length)];
 };
 
+const getRandomDueDate = () => {
+  const currentDate = new Date();
+  const maxDate = new Date();
+  maxDate.setFullYear(currentDate.getFullYear() + 1);
+  const randomTimestamp =
+    Math.floor(Math.random() * (maxDate.getTime() - currentDate.getTime())) +
+    currentDate.getTime();
+  return new Date(randomTimestamp);
+};
+
 async function main() {
   const user = await db.user.upsert({
     where: { email: "user@email.com" },
@@ -42,7 +52,7 @@ async function main() {
       projects: {
         create: new Array(5).fill(1).map((_, i) => ({
           name: `Project ${i + 1}`,
-          due: new Date(2023, 11, 25),
+          due: getRandomDueDate(),
         })),
       },
     },
@@ -54,12 +64,12 @@ async function main() {
   const tasks = await Promise.all(
     user.projects.map((project) =>
       db.task.createMany({
-        data: new Array(10).fill(1).map((_, i) => {
+        data: new Array(6).fill(1).map((_, i) => {
           return {
             name: `Task ${i + 1}`,
             ownerId: user.id,
             projectId: project.id,
-            due: new Date(2023, 10, 5),
+            due: getRandomDueDate(),
             description: `Everything that describes Task ${i + 1}`,
             status: getRandomTaskStatus(),
           };

@@ -2,7 +2,7 @@ import { getUserFromCookie } from "@/utilities/auth";
 import { db } from "@/utilities/db";
 import { Project, Task, TASK_STATUS } from "@prisma/client";
 import { cookies } from "next/headers";
-import { Plus } from "react-feather";
+import { formatDate } from "@/utilities/dateUtils";
 import Card from "./Card";
 
 import NewTask from "./NewTask";
@@ -17,14 +17,6 @@ type TaskCardProps = {
       })
     | null;
 };
-
-const formatDate = (date: Date) =>
-  new Date(date).toLocaleDateString("en-gb", {
-    weekday: "short",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
 
 const getData = async () => {
   const user = await getUserFromCookie(cookies() as any);
@@ -99,7 +91,7 @@ const TaskCard = async ({ project, projects }: TaskCardProps) => {
                     </div>
                     <div>
                       <span className="text-red-400 text-sm">
-                        {formatDate(task.due)}
+                        {formatDate(task.due, true)}
                       </span>
                     </div>
                   </div>
