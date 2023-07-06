@@ -17,13 +17,14 @@ To visit the website, click on the logo.
 
 # Stack
 
-- Typescript
-- Next.js
-- Prisma
-- PostgreSQL
-- Vercel (serverless edge runtime)
-- Tailwind
-
+- [TypeScript](https://www.typescriptlang.org/)
+- [NextJS](https://nextjs.org/)
+- [Prisma](https://www.prisma.io/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Vercel (serverless edge runtime)](https://vercel.com/)
+- [Tailwind](https://tailwindcss.com/)
+- [Bcrypt](https://github.com/kelektiv/node.bcrypt.js) / [Clerk.dev](https://clerk.com/)
+  
 ## Instructions
 ``npm install`` - installs all the packages
 
