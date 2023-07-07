@@ -90,6 +90,7 @@ const SeverityButtons: React.FC<SeverityButtonsProps> = ({
           } rounded py-1 px-2 ${getSeverityColor(severity)}`}
           onClick={() => handleClick(severity)}
           disabled={isRefreshing}
+          label="change issue severity"
         >
           {isRefreshing ? (
             <div className="flex justify-center items-center">
@@ -115,6 +116,7 @@ const SeverityButtons: React.FC<SeverityButtonsProps> = ({
               intent="primary"
               size="small"
               onClick={() => handleSeverityChange("Low")}
+              label="change issue severity to low"
             >
               <span> Low </span>
             </Button>
@@ -125,6 +127,7 @@ const SeverityButtons: React.FC<SeverityButtonsProps> = ({
               intent="primary"
               size="small"
               onClick={() => handleSeverityChange("Medium")}
+              label="change issue severity to medium"
             >
               <span> Medium </span>
             </Button>
@@ -135,6 +138,7 @@ const SeverityButtons: React.FC<SeverityButtonsProps> = ({
               intent="primary"
               size="small"
               onClick={() => handleSeverityChange("High")}
+              label="change issue severity to high"
             >
               <span> High </span>
             </Button>
@@ -144,6 +148,7 @@ const SeverityButtons: React.FC<SeverityButtonsProps> = ({
               className="rounded py-1 px-2 bg-purple-500 hover:bg-purple-700 text-black hover:text-white"
               intent="primary"
               size="small"
+              label="change issue severity to critical"
               onClick={() => handleSeverityChange("Critical")}
             >
               <span> Critical </span>

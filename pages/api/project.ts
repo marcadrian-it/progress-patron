@@ -63,6 +63,14 @@ const createNewProject = async (
 };
 
 const deleteProject = async (id: number) => {
+  await db.task.updateMany({
+    where: {
+      projectId: id,
+    },
+    data: {
+      deleted: true,
+    },
+  });
   await db.project.update({
     where: { id: id },
     data: { deleted: true },

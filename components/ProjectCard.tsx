@@ -30,7 +30,7 @@ const ProjectCard: FC<{ project: ProjectWithTasks }> = ({ project }) => {
         <div
           className="flex justify-center items-center"
           style={{
-            minHeight: "160px",
+            minHeight: "180px",
           }}
         >
           <Spinner className="border-purple-500 w-[42px] h-[42px]" />

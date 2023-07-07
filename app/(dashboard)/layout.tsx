@@ -5,6 +5,13 @@ import Sidebar from "@/components/Sidebar";
 import { ReactElement } from "react";
 import { Toaster } from "@/components/ui/toaster";
 
+export const metadata = {
+  title: "Progress patron",
+  description: "A modern tool for managing projects, tasks, and issues",
+  authors: [{ name: "Adrian", url: "https://marcadrian.me" }],
+  creator: "marcadrian",
+};
+
 type DashboardRootLayoutProps = {
   children: ReactElement;
 };
@@ -19,7 +26,6 @@ export default function DashboardRootLayout({
 }: DashboardRootLayoutProps) {
   return (
     <html lang="en" className={inter.variable}>
-      <head />
       <body
         suppressHydrationWarning={true}
         className="h-screen w-screen candy-mesh p-6 sm:p-2"

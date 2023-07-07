@@ -43,7 +43,11 @@ export const DeleteButton: React.FC<DeleteButtonProps> = ({
   );
 
   return (
-    <button className={buttonClassName} onClick={handleClick}>
+    <button
+      className={buttonClassName}
+      onClick={handleClick}
+      aria-label={`delete ${variant}`}
+    >
       <XSquare size={21} />
     </button>
   );

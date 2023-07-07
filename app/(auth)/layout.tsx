@@ -3,6 +3,13 @@ import GlassPane from "@/components/GlassPane";
 import { ReactElement } from "react";
 import { Inter } from "next/font/google";
 
+export const metadata = {
+  title: "Progress patron | Auth",
+  description: "A modern tool for managing projects, tasks, and issues",
+  authors: [{ name: "Adrian", url: "https://marcadrian.me" }],
+  creator: "marcadrian",
+};
+
 type AuthRootLayoutProps = {
   children: ReactElement;
 };
@@ -15,7 +22,6 @@ const inter = Inter({
 export default function AuthRootLayout({ children }: AuthRootLayoutProps) {
   return (
     <html lang="en" className={inter.variable}>
-      <head />
       <body
         suppressHydrationWarning={true}
         className="h-screen w-screen rainbow-mesh p-6"

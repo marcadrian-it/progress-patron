@@ -20,9 +20,9 @@ const Greetings = async () => {
         <h1 className="text-3xl text-gray-700 font-bold mb-4">
           Hello, {user?.firstName}!
         </h1>
-        <h4 className="text-xl text-gray-400">
+        <h2 className="text-xl text-gray-400">
           Check your daily tasks and schedule
-        </h4>
+        </h2>
       </div>
       <div>
         <Link href={"/calendar"}>
