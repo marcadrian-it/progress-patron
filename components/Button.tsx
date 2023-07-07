@@ -47,17 +47,24 @@ const buttonClasses = cva(
 
 export interface ButtonProps
   extends React.ComponentPropsWithoutRef<"button">,
-    VariantProps<typeof buttonClasses> {}
+    VariantProps<typeof buttonClasses> {
+  label?: string;
+}
 
 const Button: FC<ButtonProps> = ({
   children,
   className,
   intent,
   size,
+  label,
   ...props
 }) => {
   return (
-    <button className={buttonClasses({ intent, size, className })} {...props}>
+    <button
+      aria-label={label}
+      className={buttonClasses({ intent, size, className })}
+      {...props}
+    >
       {children}
     </button>
   );

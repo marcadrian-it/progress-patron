@@ -21,7 +21,7 @@ const SidebarLink = ({ link }: SidebarLinkProps) => {
 
   const Icon = icons[link.icon as keyof typeof icons];
   return (
-    <Link href={link.link}>
+    <Link href={link.link} aria-label={link.label}>
       <div className="w-10 sm:w-8">
         <Icon
           size="100%"

@@ -61,6 +61,7 @@ const StatusButtons: React.FC<StatusButtonsProps> = ({ status, taskId }) => {
           size="medium"
           onClick={() => handleClick(status)}
           disabled={isRefreshing}
+          label="change task status"
         >
           {isRefreshing ? (
             <Suspense fallback={<div>...</div>}>
@@ -88,6 +89,7 @@ const StatusButtons: React.FC<StatusButtonsProps> = ({ status, taskId }) => {
               intent="primary"
               size="small"
               onClick={() => handleStatusChange("NOT_STARTED")}
+              label="change task status to not started"
             >
               <Circle className="text-red-400" strokeWidth={3} />
             </Button>
@@ -97,6 +99,7 @@ const StatusButtons: React.FC<StatusButtonsProps> = ({ status, taskId }) => {
               intent="primary"
               size="small"
               onClick={() => handleStatusChange("STARTED")}
+              label="change task status to started"
             >
               <ArrowRightCircle className="text-yellow-400" strokeWidth={3} />
             </Button>
@@ -106,6 +109,7 @@ const StatusButtons: React.FC<StatusButtonsProps> = ({ status, taskId }) => {
               intent="primary"
               size="small"
               onClick={() => handleStatusChange("COMPLETED")}
+              label="change task status to completed"
             >
               <CheckCircle className="text-green-400" strokeWidth={3} />
             </Button>

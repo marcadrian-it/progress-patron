@@ -11,10 +11,10 @@ export default async function CalendarPage() {
     const tasks = await db.task.findMany({
       where: {
         ownerId: user?.id,
+        deleted: false,
         NOT: {
           status: TASK_STATUS.COMPLETED,
         },
-        deleted: false,
       },
       orderBy: {
         due: "asc",

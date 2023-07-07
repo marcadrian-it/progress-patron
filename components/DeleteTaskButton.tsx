@@ -38,6 +38,7 @@ const DeleteTaskButton: React.FC<DeleteTaskButtonProps> = ({
       disabled={isRefreshing}
       onMouseEnter={() => setIsPlusHovered(true)}
       onMouseLeave={() => setIsPlusHovered(false)}
+      aria-label="delete task"
     >
       {isRefreshing ? (
         <Spinner />
