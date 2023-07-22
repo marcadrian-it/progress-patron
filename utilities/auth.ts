@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import { SignJWT, jwtVerify } from "jose";
 import { RequestCookies } from "next/dist/server/web/spec-extension/cookies";
 import { db } from "./db";
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
 export const hashPassword = (password: string) => bcrypt.hash(password, 10);
 
@@ -23,17 +24,17 @@ export const createJWT = (user: Partial<User>) => {
     .sign(new TextEncoder().encode(process.env.JWT_SECRET));
 };
 
-export const validateJWT = async (jwt: string) => {
+export const validateJWT = async (jwt: string): Promise<User> => {
   const { payload } = await jwtVerify(
     jwt,
     new TextEncoder().encode(process.env.JWT_SECRET)
   );
 
-  return payload.payload as Partial<User>;
+  return payload.payload as User;
 };
 
 export const getUserFromCookie = async (cookies: RequestCookies) => {
-  const jwt = cookies.get(process.env.COOKIE_NAME as string) as any;
+  const jwt = cookies.get(process.env.COOKIE_NAME as string) as RequestCookie;
 
   const { id } = await validateJWT(jwt.value as string);
 

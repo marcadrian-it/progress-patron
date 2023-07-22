@@ -1,6 +1,6 @@
 "use client";
 import { FC, useEffect } from "react";
-import { Droppable, Draggable } from "react-beautiful-dnd";
+import { Droppable, Draggable, DropResult } from "react-beautiful-dnd";
 import IssueCard from "./IssueCard";
 import { Prisma, ISSUE_STATUS } from "@prisma/client";
 import { updateIssueStatus } from "@/utilities/api";
@@ -39,7 +39,7 @@ const IssuesList: FC<{ issues: issueWithProject[] }> = ({ issues }) => {
     setActiveDroppableId(update.destination?.droppableId);
   };
 
-  const onDragEnd = async (result: any) => {
+  const onDragEnd = async (result: DropResult) => {
     setIsLoading(true);
     setActiveDroppableId(null);
     const { destination, source, draggableId } = result;
