@@ -1,7 +1,7 @@
 import { validateJWT } from "@/utilities/auth";
 import { db } from "@/utilities/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { TASK_STATUS } from "@prisma/client";
+import { TASK_STATUS, User } from "@prisma/client";
 
 export default async function handler(
   req: NextApiRequest,
@@ -41,7 +41,7 @@ const createNewTask = async (
   projectId: number,
   due: Date,
   description: string,
-  user: any
+  user: User
 ) => {
   await db.task.create({
     data: {

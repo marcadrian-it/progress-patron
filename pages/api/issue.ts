@@ -1,7 +1,7 @@
 import { validateJWT } from "@/utilities/auth";
 import { NextApiRequest, NextApiResponse } from "next";
 import { db } from "@/utilities/db";
-import { ISSUE_SEVERITY, ISSUE_STATUS } from "@prisma/client";
+import { ISSUE_SEVERITY, ISSUE_STATUS, User } from "@prisma/client";
 
 export default async function handler(
   req: NextApiRequest,
@@ -70,7 +70,7 @@ const createNewIssue = async (
   description: string,
   severity: ISSUE_SEVERITY,
   projectId: number,
-  user: any
+  user: User
 ) => {
   await db.issue.create({
     data: {
