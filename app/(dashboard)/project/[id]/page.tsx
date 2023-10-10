@@ -39,7 +39,7 @@ export default async function ProjectPage({ params }: ProjectPageParams) {
   const project = (await getData(Number(params.id))) as Project;
 
   return (
-    <div className="h-full overflow-y-auto p-6 w-full">
+    <div className="h-full overflow-y-auto px-6 sm:px-4 w-full mt-2">
       {/* @ts-expect-error Server Component */}
       <TaskCard project={project} />
     </div>

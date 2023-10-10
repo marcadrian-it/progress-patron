@@ -33,7 +33,7 @@ const getData = async () => {
 export default async function IssuesPage() {
   const { issues, projects } = await getData();
   return (
-    <div className="h-full overflow-y-auto w-full px-8 sm:px-4">
+    <div className="h-full overflow-y-auto w-full px-6 sm:px-4 mt-2">
       {projects?.length ? <AddIssuesBar projects={projects} /> : null}
       <IssuesList issues={issues} />
     </div>

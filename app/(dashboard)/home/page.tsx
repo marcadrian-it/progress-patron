@@ -34,8 +34,8 @@ export default async function Page() {
   const { projects } = await getData();
 
   return (
-    <div className="h-full overflow-y-auto  w-full">
-      <div className=" h-full items-stretch justify-center min-h-[content] p-6 pt-0">
+    <div className="h-full overflow-y-auto  w-full mt-2">
+      <div className=" h-full items-stretch justify-center min-h-[content] px-6 sm:px-4 pt-0">
         <div className="flex-1 grow flex">
           <Suspense fallback={<GreetingsShimmer />}>
             {/* @ts-expect-error Server Component */}
