@@ -24,9 +24,11 @@ To visit the website, click on the logo.
 - [Vercel (serverless edge runtime)](https://vercel.com/)
 - [Tailwind](https://tailwindcss.com/)
 - [Bcrypt](https://github.com/kelektiv/node.bcrypt.js) / [Clerk.dev](https://clerk.com/)
-  
+- [ESLint](https://eslint.org/)
+
 ## Instructions
-``npm install`` - installs all the packages
+
+`npm install` - installs all the packages
 
 `npm run dev` - runs the webapp on localhost
 
