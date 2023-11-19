@@ -14,12 +14,10 @@ test("auth works correctly", async ({ page }) => {
   const passwordField = page.getByPlaceholder("Password");
   await emailField.fill("demo@demo.com");
   await passwordField.fill("password");
-  await Promise.all([
-    page.click('[data-testid="signin-button"]'),
-    page.waitForLoadState("networkidle"),
-  ]);
-
-  const urlPath = new URL(page.url()).pathname;
-
-  expect(urlPath).toBe("/home");
+  await page.getByTestId("signin-button").click();
+  await page.waitForTimeout(10000);
+  await expect(page).toHaveURL("./home");
+  await page.getByLabel("Logout").click();
+  await page.waitForTimeout(3000);
+  await expect(page).toHaveURL("./signin");
 });
