@@ -7,7 +7,8 @@
     "devnstudio": "concurrently \"npx prisma studio\" \"next dev\"",
     "build": "npx prisma generate && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "vitest"
   },
   "prisma": {
     "schema": "./prisma/schema.prisma",
@@ -44,17 +45,22 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.1.2",
     "@types/bcrypt": "^5.0.0",
     "@types/cookie": "^0.5.1",
     "@types/react-beautiful-dnd": "^13.1.4",
     "@types/react-modal": "^3.16.0",
+    "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.4.14",
     "concurrently": "^8.1.0",
+    "jsdom": "^22.1.0",
     "postcss": "^8.4.31",
     "prettier": "^2.8.8",
     "prisma": "^4.15.0",
     "tailwindcss": "^3.2.4",
     "ts-node": "10.9.1",
-    "tsconfig-paths": "4.1.1"
+    "tsconfig-paths": "4.1.1",
+    "vitest": "^0.34.6"
   }
 }
