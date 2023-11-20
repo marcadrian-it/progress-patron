@@ -14,8 +14,10 @@ test("auth works correctly", async ({ page }) => {
   const passwordField = page.getByPlaceholder("Password");
   await emailField.fill("demo@demo.com");
   await passwordField.fill("password");
-  await page.getByTestId("signin-button").click();
-  await page.waitForURL("./home");
+  await Promise.all([
+    page.getByTestId("signin-button").click(),
+    new Promise((resolve) => setTimeout(resolve, 1000)),
+  ]);
 
-  expect(page).toHaveURL("./home");
+  await expect(page).toHaveURL("./home");
 });
