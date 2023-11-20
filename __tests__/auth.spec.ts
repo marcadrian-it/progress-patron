@@ -17,7 +17,6 @@ test("auth works correctly", async ({ page }) => {
   await Promise.all([
     page.getByTestId("signin-button").click(),
     new Promise((resolve) => setTimeout(resolve, 1000)),
+    expect(page).toHaveURL("./home"),
   ]);
-
-  await expect(page).toHaveURL("./home");
 });
