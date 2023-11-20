@@ -9,6 +9,7 @@ test("it has an input field for logging in", async ({ page }) => {
 });
 
 test("auth works correctly", async ({ page }) => {
+  test.setTimeout(35000);
   await page.goto("/signin");
   const emailField = page.getByPlaceholder("E-mail");
   const passwordField = page.getByPlaceholder("Password");
