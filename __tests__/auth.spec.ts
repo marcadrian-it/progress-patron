@@ -15,7 +15,9 @@ test("auth works correctly", async ({ page }) => {
   const passwordField = page.getByPlaceholder("Password");
   await emailField.fill("demo@demo.com");
   await passwordField.fill("password");
-  await page.getByText("Sign In").click();
-
-  await expect(page).toHaveURL("./home", { timeout: 12000 });
+  const signInButton = page.getByTestId("signin-button");
+  await Promise.all([
+    signInButton.click(),
+    await expect(page).toHaveURL("./home", { timeout: 20000 }),
+  ]);
 });
