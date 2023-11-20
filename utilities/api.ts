@@ -60,12 +60,16 @@ export const register = async (user: Partial<User>) => {
 };
 
 export const signin = async (user: Partial<User>) => {
-  return fetcher({
+  const response = await fetcher({
     url: "/api/signin",
     method: "POST",
     body: user,
     json: false,
   });
+
+  console.log(response);
+
+  return response;
 };
 
 export const createNewProject = async (
