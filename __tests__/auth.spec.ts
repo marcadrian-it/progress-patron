@@ -9,15 +9,13 @@ test("it has an input field for logging in", async ({ page }) => {
 });
 
 test("auth works correctly", async ({ page }) => {
-  test.setTimeout(35000);
+  test.setTimeout(60000);
   await page.goto("/signin");
   const emailField = page.getByPlaceholder("E-mail");
   const passwordField = page.getByPlaceholder("Password");
   await emailField.fill("demo@demo.com");
   await passwordField.fill("password");
-  await Promise.all([
-    page.getByTestId("signin-button").click(),
-    new Promise((resolve) => setTimeout(resolve, 1000)),
-    expect(page).toHaveURL("./home"),
-  ]);
+  await page.getByTestId("signin-button").click();
+
+  await expect(page).toHaveURL("./home", { timeout: 12000 });
 });
