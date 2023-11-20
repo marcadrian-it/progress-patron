@@ -7,3 +7,15 @@ test("it has an input field for logging in", async ({ page }) => {
   expect(emailField).toBeTruthy();
   expect(passwordField).toBeTruthy();
 });
+
+test("auth works correctly", async ({ page }) => {
+  await page.goto("/signin");
+  const emailField = page.getByPlaceholder("E-mail");
+  const passwordField = page.getByPlaceholder("Password");
+  await emailField.fill("demo@demo.com");
+  await passwordField.fill("password");
+  await page.getByTestId("signin-button").click();
+  await page.waitForURL("./home");
+
+  await expect(page).toHaveURL("./home");
+});

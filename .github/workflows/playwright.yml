@@ -8,12 +8,6 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
-    env:
-      CI: true
-      NODE_ENV: test
-      JWT_TOKEN: "cats are cool"
-      COOKIE_NAME: "__qid__"
-      DATABASE_URL: "${{ secrets.DATABASE_URL }}"
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
@@ -30,4 +24,10 @@ jobs:
         run: yarn build
 
       - name: Run Playwright tests
-        run: DATABASE_URL=${{ env.DATABASE_URL }} JWT_SECRET=${{ env.JWT_SECRET }} COOKIE_NAME=${{ env.COOKIE_NAME }} npx playwright test
+        run: npx playwright test
+        env:
+          CI: true
+          NODE_ENV: test
+          JWT_TOKEN: "cats are cool"
+          COOKIE_NAME: "__qid__"
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
