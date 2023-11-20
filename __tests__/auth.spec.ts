@@ -17,5 +17,5 @@ test("auth works correctly", async ({ page }) => {
   await page.getByTestId("signin-button").click();
   await page.waitForURL("./home");
 
-  await expect(page).toHaveURL("./home");
+  expect(page).toHaveURL("./home");
 });

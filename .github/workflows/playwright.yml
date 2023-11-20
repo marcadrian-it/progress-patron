@@ -30,16 +30,13 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Start server
-        run: yarn start > server.log 2>&1 &
+        run: yarn start &
         env:
           CI: true
           NODE_ENV: test
           JWT_TOKEN: "cats are cool"
           COOKIE_NAME: "__qid__"
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-
-      - name: Print server log
-        run: cat server.log
 
       - name: Run Playwright tests
         run: npx playwright test
