@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test("it has an input field for logging in", async ({ page }) => {
-  await page.goto("/signin");
+  await page.goto("/signin", { waitUntil: "networkidle" });
   const emailField = page.getByPlaceholder("E-mail");
   const passwordField = page.getByPlaceholder("Password");
   expect(emailField).toBeTruthy();
@@ -10,7 +10,7 @@ test("it has an input field for logging in", async ({ page }) => {
 
 test("auth works correctly", async ({ page }) => {
   test.setTimeout(60000);
-  await page.goto("/signin");
+  await page.goto("/signin", { waitUntil: "networkidle" });
   const emailField = page.getByPlaceholder("E-mail");
   const passwordField = page.getByPlaceholder("Password");
   await emailField.fill("demo@demo.com");
