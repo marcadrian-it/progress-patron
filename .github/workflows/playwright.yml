@@ -29,6 +29,9 @@ jobs:
           COOKIE_NAME: "__qid__"
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
+      - name: Print server log
+        run: cat server.log
+
       - name: Run Playwright tests
         run: npx playwright test
         env:
