@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "devnstudio": "concurrently \"npx prisma studio\" \"next dev\"",
-    "build": "npx prisma generate && next build",
-    "start": "next start",
-    "lint": "next lint",
+    "dev": "yarn next dev",
+    "devnstudio": "concurrently \"npx prisma studio\" \"yarn next dev\"",
+    "build": "npx prisma generate && yarn next build",
+    "start": "yarn next start",
+    "lint": "yarn next lint",
     "test": "vitest"
   },
   "prisma": {
