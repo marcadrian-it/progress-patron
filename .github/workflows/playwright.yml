@@ -37,7 +37,7 @@ jobs:
       - name: Start server and run tests
         run: |
           yarn start &
-          while !</dev/tcp/localhost/3000>; do sleep 1; done
+          sleep 20
           npx playwright install
           npx playwright test
         env:
