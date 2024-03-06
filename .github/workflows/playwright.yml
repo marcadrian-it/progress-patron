@@ -37,8 +37,7 @@ jobs:
         run: |
           yarn start &
           sleep 15
-          npx playwright install
-          npx playwright test
+          yarn playwright test
         env:
           CI: true
           NODE_ENV: test
