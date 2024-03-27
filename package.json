@@ -8,6 +8,8 @@
     "build": "npx prisma generate && next build",
     "start": "next start",
     "test": "vitest",
+    "test-playwright": "npx playwright test",
+    "ci:test": "start-server-and-test start http://localhost:3000 test-playwright",
     "lint": "eslint --ignore-path ./.gitignore --fix \"./**/*.{js,ts}\"",
     "lint:check": "eslint --ignore-path ./.gitignore --quiet \"./**/*.{js,ts}\""
   },
@@ -61,10 +63,10 @@
     "postcss": "^8.4.31",
     "prettier": "^2.8.8",
     "prisma": "^5.6.0",
+    "start-server-and-test": "^2.0.3",
     "tailwindcss": "^3.2.4",
     "ts-node": "10.9.1",
     "tsconfig-paths": "4.1.1",
-    "vitest": "^0.34.6",
-    "wait-on": "^7.2.0"
+    "vitest": "^0.34.6"
   }
 }

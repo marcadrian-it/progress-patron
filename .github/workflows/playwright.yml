@@ -25,10 +25,7 @@ jobs:
           COOKIE_NAME: "__qid__"
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
       - name: Start server and run tests
-        run: |
-          npm start &
-          npm wait-on http://localhost:3000
-          npx playwright test
+        run: npm run ci:test
         env:
           NODE_ENV: test
           JWT_TOKEN: "cats are cool"
