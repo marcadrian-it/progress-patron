@@ -21,6 +21,7 @@ jobs:
         run: npm run build
         env:
           NODE_ENV: test
+          CI: true
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           COOKIE_NAME: ${{ secrets.COOKIE_NAME }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
@@ -28,6 +29,7 @@ jobs:
         run: npm run ci:test
         env:
           NODE_ENV: test
+          CI: true
           JWT_SECRET: ${{ secrets.JWT_SECRET }}
           COOKIE_NAME: ${{ secrets.COOKIE_NAME }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
