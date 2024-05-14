@@ -34,6 +34,11 @@ jobs:
           COOKIE_NAME: "__qid__"
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
+      - name: Reset Prisma Migrations - reseed
+        run: npx prisma migrate reset
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
       - name: Start server
         run: yarn start &
         env:
