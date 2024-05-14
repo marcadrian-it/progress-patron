@@ -1,4 +1,6 @@
 import { defineConfig, devices } from "@playwright/test";
+import dns from "node:dns";
+dns.setDefaultResultOrder("ipv4first");
 
 /**
  * Read environment variables from file.
