@@ -35,7 +35,7 @@ jobs:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Reset Prisma Migrations - reseed
-        run: npx prisma migrate reset
+        run: npx prisma migrate reset --force
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
