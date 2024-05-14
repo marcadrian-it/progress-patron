@@ -4,7 +4,7 @@ A modern web application for managing tasks and projects
 
 To visit the website, click on the logo.
 
-<a href="http://marcadrian.cfd">
+<a href="http://progresspatron.eu">
   <p align="center">
     <img height=80 src="https://raw.githubusercontent.com/marcadrian-it/progress-patron/main/assets/images/logo.png"/>
   </p>
