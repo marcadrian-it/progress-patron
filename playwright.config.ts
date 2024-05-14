@@ -16,14 +16,14 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
-    video: "on" /* Enable video recording for all tests */,
+    video: "retain-on-failure" /* Enable video recording for all tests */,
     screenshot:
       "only-on-failure" /* Capture screenshots only for failed tests */,
   },
   testDir: "./__tests__",
   /* Run tests in files in parallel */
   fullyParallel: true,
-/* Fail the build on CI if you accidentally left test.only in the source code. */
+  /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
   retries: process.env.CI ? 1 : 0,
