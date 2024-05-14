@@ -42,7 +42,8 @@
     "react-modal": "^3.16.1",
     "tailwind-merge": "^1.13.2",
     "tailwindcss-animate": "^1.0.6",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "wait-on": "^7.2.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.0",
