@@ -21,15 +21,15 @@ jobs:
         run: npm run build
         env:
           NODE_ENV: test
-          JWT_TOKEN: "cats are cool"
-          COOKIE_NAME: "__qid__"
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          COOKIE_NAME: ${{ secrets.COOKIE_NAME }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
       - name: Start server and run tests
         run: npm run ci:test
         env:
           NODE_ENV: test
-          JWT_TOKEN: "cats are cool"
-          COOKIE_NAME: "__qid__"
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          COOKIE_NAME: ${{ secrets.COOKIE_NAME }}
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
