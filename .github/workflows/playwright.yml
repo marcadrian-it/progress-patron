@@ -6,24 +6,17 @@ on:
     branches: [main, master]
 jobs:
   test:
-    runs-on: ubuntu-20.04
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 20.9
-
-      - name: Update Ubuntu Packages
-        run: |
-          sudo apt update
-          sudo apt upgrade -y
-
-      - name: Install Dependencies
+          node-version: 18
+      - name: Install dependencies
         run: npm install -g yarn && yarn install --frozen-lockfile
-
       - name: Install Playwright Browsers
         run: yarn playwright install --with-deps
-
       - name: Build server
         run: yarn build
         env:
@@ -32,7 +25,6 @@ jobs:
           JWT_TOKEN: "cats are cool"
           COOKIE_NAME: "__qid__"
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
-
       - name: Start server and run tests
         run: |
           yarn start &
@@ -44,3 +36,9 @@ jobs:
           JWT_TOKEN: "cats are cool"
           COOKIE_NAME: "__qid__"
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
