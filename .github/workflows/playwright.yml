@@ -34,17 +34,12 @@ jobs:
           COOKIE_NAME: "__qid__"
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
-      - name: Start server
-        run: yarn start
-        env:
-          CI: true
-          NODE_ENV: test
-          JWT_TOKEN: "cats are cool"
-          COOKIE_NAME: "__qid__"
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-
-      - name: Run Playwright tests
-        run: npx playwright install  && npx playwright test
+      - name: Start server and run tests
+        run: |
+          yarn start &
+          while !</dev/tcp/localhost/3000>; do sleep 1; done
+          npx playwright install
+          npx playwright test
         env:
           CI: true
           NODE_ENV: test
