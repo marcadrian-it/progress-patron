@@ -7,8 +7,7 @@
     "devnstudio": "concurrently \"npx prisma studio\" \"next dev\"",
     "build": "npx prisma generate && next build",
     "start": "next start",
-    "test": "vitest",
-    "ci:test": "start-server-and-test start http://localhost:3000 'npx playwright test'",
+    "test": "npx playwright test",
     "lint": "eslint --ignore-path ./.gitignore --fix \"./**/*.{js,ts}\"",
     "lint:check": "eslint --ignore-path ./.gitignore --quiet \"./**/*.{js,ts}\""
   },
