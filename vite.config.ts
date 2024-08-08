@@ -6,7 +6,10 @@ import { resolve } from "path";
 export default defineConfig({
   plugins: [react()],
   test: {
-    include: ["**/__tests__/**/*.[jt]s?(x)", "**/?(*.)+(spec|test).[jt]s?(x)"],
+    include: [
+      "**/__tests__/vitest/**/*.[jt]s?(x)",
+      "**/?(*.)+(spec|test).[jt]s?(x)",
+    ],
     globals: true,
     environment: "jsdom",
     mockReset: true,
