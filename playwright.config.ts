@@ -22,7 +22,8 @@ export default defineConfig({
     screenshot:
       "only-on-failure" /* Capture screenshots only for failed tests */,
   },
-  testDir: "./playwright/__tests__",
+  testDir: "./__tests__/playwright",
+
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
