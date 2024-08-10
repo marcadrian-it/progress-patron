@@ -1,4 +1,4 @@
-// Inspired by react-hot-toast library
+/* eslint-disable no-unused-vars */
 import * as React from "react";
 
 import type { ToastActionElement, ToastProps } from "components/ui/toast";

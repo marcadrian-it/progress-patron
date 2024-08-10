@@ -1,3 +1,4 @@
+/* eslint-disable no-redeclare */
 import { ISSUE_STATUS, Prisma } from "@prisma/client";
 
 const issueWithProject = Prisma.validator<Prisma.IssueArgs>()({

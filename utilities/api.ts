@@ -73,16 +73,12 @@ export const createNewProject = async (
   due: Date,
   description?: string
 ) => {
-  try {
-    return fetcher({
-      url: "/api/project",
-      method: "POST",
-      body: { name, due, description },
-      json: true,
-    });
-  } catch (error) {
-    throw error;
-  }
+  return fetcher({
+    url: "/api/project",
+    method: "POST",
+    body: { name, due, description },
+    json: true,
+  });
 };
 
 export const createNewTask = async (
@@ -91,16 +87,12 @@ export const createNewTask = async (
   due: Date,
   description?: string
 ) => {
-  try {
-    return fetcher({
-      url: "/api/task",
-      method: "POST",
-      body: { name, projectId, due, description },
-      json: true,
-    });
-  } catch (error) {
-    throw error;
-  }
+  return fetcher({
+    url: "/api/task",
+    method: "POST",
+    body: { name, projectId, due, description },
+    json: true,
+  });
 };
 
 export const createNewIssue = async (
@@ -153,16 +145,12 @@ export const updateUserEmailAndPassword = async (
   newPassword: string,
   password: string
 ) => {
-  try {
-    return fetcher({
-      url: `/api/user/emailandpassword`,
-      method: "PUT",
-      body: { id, email, newPassword, password },
-      json: true,
-    });
-  } catch (error) {
-    throw error;
-  }
+  return fetcher({
+    url: `/api/user/emailandpassword`,
+    method: "PUT",
+    body: { id, email, newPassword, password },
+    json: true,
+  });
 };
 
 export const updateUserEmail = async (
@@ -170,16 +158,12 @@ export const updateUserEmail = async (
   email: string,
   password: string
 ) => {
-  try {
-    return await fetcher({
-      url: `/api/user/email`,
-      method: "PUT",
-      body: { id, email, password },
-      json: true,
-    });
-  } catch (error) {
-    throw error;
-  }
+  return await fetcher({
+    url: `/api/user/email`,
+    method: "PUT",
+    body: { id, email, password },
+    json: true,
+  });
 };
 
 export const updateUserPassword = async (
@@ -187,27 +171,19 @@ export const updateUserPassword = async (
   newPassword: string,
   password: string
 ) => {
-  try {
-    return fetcher({
-      url: `/api/user/password`,
-      method: "PUT",
-      body: { id, newPassword, password },
-      json: true,
-    });
-  } catch (error) {
-    throw error;
-  }
+  return fetcher({
+    url: `/api/user/password`,
+    method: "PUT",
+    body: { id, newPassword, password },
+    json: true,
+  });
 };
 
 export const deleteUser = async (id: number, password: string) => {
-  try {
-    return await fetcher({
-      url: `/api/user/delete?id=${id}&password=${password}`,
-      method: "DELETE",
-    });
-  } catch (error) {
-    throw error;
-  }
+  return await fetcher({
+    url: `/api/user/delete?id=${id}&password=${password}`,
+    method: "DELETE",
+  });
 };
 
 export const deleteProject = async (id: number) => {
