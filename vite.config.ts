@@ -11,7 +11,7 @@ export default defineConfig({
       "**/?(*.)+(spec|test).[jt]s?(x)",
     ],
     globals: true,
-    environment: "jsdom",
+    environment: "happy-dom",
     mockReset: true,
     setupFiles: ["setupTests"],
   },
