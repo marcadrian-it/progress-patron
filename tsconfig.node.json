@@ -5,8 +5,14 @@
     "moduleResolution": "bundler",
     "allowSyntheticDefaultImports": true,
     "paths": {
-      "@/*": ["./*"]
-    }
+        "@/components/*": ["./components/*"],
+        "@/hooks/*": ["./hooks/*"],
+        "@/utilities/*": ["./utilities/*"],
+        "@/styles/*": ["./styles/*"],
+        "@/prisma/*": ["./prisma/*"],
+        "@/assets/*": ["./assets/*"]
+}
+
   },
   "include": ["vite.config.ts"]
 }
