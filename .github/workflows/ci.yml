@@ -67,4 +67,4 @@ jobs:
               run: npm run lint:check .
 
             - name: Run Prettier
-              run: npx prettier --check .
+              run: npm run prettier:check .
