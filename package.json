@@ -7,9 +7,12 @@
     "devnstudio": "concurrently \"npx prisma studio\" \"next dev\"",
     "build": "npx prisma generate && next build",
     "start": "next start",
-    "test": "npx playwright test",
-    "lint": "eslint --ignore-path ./.gitignore --fix \"./**/*.{js,ts}\"",
-    "lint:check": "eslint --ignore-path ./.gitignore --quiet \"./**/*.{js,ts}\""
+    "test": "vitest",
+    "test:playwright": "npx playwright test",
+    "lint": "eslint --ignore-path ./.gitignore --fix \"./**/*.{js,ts,jsx,tsx}\"",
+    "lint:check": "eslint --ignore-path ./.gitignore --quiet \"./**/*.{js,ts,jsx,tsx}\"",
+    "format": "prettier --write \"./**/*.{js,ts,jsx,tsx}\"",
+    "prettier:check": "prettier --check \"./**/*.{js,ts,jsx,tsx}\""
   },
   "prisma": {
     "schema": "./prisma/schema.prisma",
@@ -46,6 +49,7 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.44.0",
+    "@testing-library/jest-dom": "^6.4.8",
     "@testing-library/react": "^14.1.2",
     "@types/bcrypt": "^5.0.0",
     "@types/cookie": "^0.5.1",
@@ -55,6 +59,7 @@
     "autoprefixer": "^10.4.14",
     "concurrently": "^8.1.0",
     "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-import": "^2.29.1",
     "happy-dom": "^14.12.3",
     "postcss": "^8.4.31",

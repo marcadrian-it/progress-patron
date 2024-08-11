@@ -1,0 +1,70 @@
+name: ci
+
+on:
+    pull_request:
+        branches: [main]
+
+jobs:
+    tests:
+        name: Tests
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out code
+              uses: actions/checkout@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20.x
+
+            - name: Cache dependencies
+              uses: actions/cache@v3
+              with:
+                  path: ~/.npm
+                  key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+                  restore-keys: |
+                      ${{ runner.OS }}-node-
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Check for vulnerabilities
+              run: npm audit --audit-level=moderate
+
+            - name: Type check
+              run: npx tsc --noEmit
+
+            - name: Build
+              run: npm run build
+
+            - name: Run tests
+              run: npm test
+
+    style:
+        name: Style
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out code
+              uses: actions/checkout@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20.x
+
+            - name: Cache dependencies
+              uses: actions/cache@v3
+              with:
+                  path: ~/.npm
+                  key: ${{ runner.OS }}-node-${{ hashFiles('**/package-lock.json') }}
+                  restore-keys: |
+                      ${{ runner.OS }}-node-
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Run ESLint
+              run: npm run lint:check .
+
+            - name: Run Prettier
+              run: npx prettier --check .
