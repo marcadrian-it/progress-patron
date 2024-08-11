@@ -9,143 +9,175 @@ import Input from "./Input";
 import { User } from "@prisma/client";
 
 const registerContent = {
-  linkUrl: "/signin",
-  linkText: "Already have an account?",
-  header: "Create a new Account",
-  subheader: "Just a few things to get started",
-  buttonText: "Register",
+    linkUrl: "/signin",
+    linkText: "Already have an account?",
+    header: "Create a new Account",
+    subheader: "Just a few things to get started",
+    buttonText: "Register",
 };
 
 const signinContent = {
-  linkUrl: "/register",
-  linkText: "Don't have an account?",
-  header: "Welcome Back",
-  subheader: "Enter your credentials to access your account",
-  buttonText: "Sign In",
+    linkUrl: "/register",
+    linkText: "Don't have an account?",
+    header: "Welcome Back",
+    subheader: "Enter your credentials to access your account",
+    buttonText: "Sign In",
 };
 
 const initial: Partial<User> = {
-  email: "",
-  password: "",
-  firstName: "",
-  lastName: "",
+    email: "",
+    password: "",
+    firstName: "",
+    lastName: "",
 };
 
 export default function AuthForm({ mode }: { mode: "register" | "signin" }) {
-  const [formState, setFormState] = useState({ ...initial });
-  const [error, setError] = useState("");
+    const [formState, setFormState] = useState({ ...initial });
+    const [error, setError] = useState("");
 
-  const router = useRouter();
-  const handleSubmit = useCallback(
-    async (e: FormEvent) => {
-      e.preventDefault();
+    const router = useRouter();
+    const handleSubmit = useCallback(
+        async (e: FormEvent) => {
+            e.preventDefault();
 
-      try {
-        if (mode === "register") {
-          await register(formState);
-        } else {
-          await signin(formState);
-        }
+            try {
+                if (mode === "register") {
+                    await register(formState);
+                } else {
+                    await signin(formState);
+                }
 
-        router.replace("/home");
-      } catch (e) {
-        setError(`Could not ${mode}`);
-      } finally {
-        setFormState({ ...initial });
-      }
-    },
-    [formState, mode, router]
-  );
+                router.replace("/home");
+            } catch (e) {
+                setError(
+                    `Could not ${mode}. Please check your credentials and try again.`
+                );
+            } finally {
+                setFormState({ ...initial });
+            }
+        },
+        [formState, mode, router]
+    );
 
-  const content = mode === "register" ? registerContent : signinContent;
+    const content = mode === "register" ? registerContent : signinContent;
 
-  return (
-    <Card>
-      <div className="w-full">
-        <div className="text-center">
-          <h2 className="text-3xl mb-2">{content.header}</h2>
-          <p className="tex-lg text-black/60">{content.subheader}</p>
-        </div>
-        <form onSubmit={handleSubmit} className="py-10 w-full">
-          {mode === "register" && (
-            <div className="flex mb-8 justify-between">
-              <div className="pr-2">
-                <div className="text-lg mb-4 ml-2 text-black/50">
-                  First Name
+    return (
+        <Card>
+            <div className="w-full">
+                <div className="text-center">
+                    <h2 className="text-3xl mb-2">{content.header}</h2>
+                    <p className="tex-lg text-black/60">{content.subheader}</p>
                 </div>
-                <Input
-                  required
-                  placeholder="First Name"
-                  value={formState.firstName}
-                  className="border-solid border-black/50 border-2 px-6 py-2 text-lg rounded-3xl w-full"
-                  onChange={(e) =>
-                    setFormState((s) => ({ ...s, firstName: e.target.value }))
-                  }
-                />
-              </div>
-              <div className="pl-2">
-                <div className="text-lg mb-4 ml-2 text-black/50">Last Name</div>
-                <Input
-                  required
-                  placeholder="Last Name"
-                  value={formState.lastName}
-                  className="border-solid border-black/50 border-2 px-6 py-2 text-lg rounded-3xl w-full"
-                  onChange={(e) =>
-                    setFormState((s) => ({ ...s, lastName: e.target.value }))
-                  }
-                />
-              </div>
+                {error && (
+                    <div
+                        className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4"
+                        role="alert"
+                    >
+                        <span className="block sm:inline">{error}</span>
+                    </div>
+                )}
+                <form onSubmit={handleSubmit} className="py-10 w-full">
+                    {mode === "register" && (
+                        <div className="flex mb-8 justify-between">
+                            <div className="pr-2">
+                                <div className="text-lg mb-4 ml-2 text-black/50">
+                                    First Name
+                                </div>
+                                <Input
+                                    required
+                                    placeholder="First Name"
+                                    value={formState.firstName}
+                                    className="border-solid border-black/50 border-2 px-6 py-2 text-lg rounded-3xl w-full"
+                                    onChange={(e) => {
+                                        setError("");
+                                        setFormState((s) => ({
+                                            ...s,
+                                            firstName: e.target.value,
+                                        }));
+                                    }}
+                                />
+                            </div>
+                            <div className="pl-2">
+                                <div className="text-lg mb-4 ml-2 text-black/50">
+                                    Last Name
+                                </div>
+                                <Input
+                                    required
+                                    placeholder="Last Name"
+                                    value={formState.lastName}
+                                    className="border-solid border-black/50 border-2 px-6 py-2 text-lg rounded-3xl w-full"
+                                    onChange={(e) => {
+                                        setError("");
+                                        setFormState((s) => ({
+                                            ...s,
+                                            lastName: e.target.value,
+                                        }));
+                                    }}
+                                />
+                            </div>
+                        </div>
+                    )}
+                    <div className="mb-8">
+                        <div className="text-lg mb-4 ml-2 text-black/50">
+                            E-mail
+                        </div>
+                        <Input
+                            required
+                            type="email"
+                            placeholder="E-mail"
+                            value={formState.email}
+                            className="border-solid border-black/50 border-2 px-6 py-2 text-lg rounded-3xl w-full"
+                            onChange={(e) => {
+                                setError("");
+                                setFormState((s) => ({
+                                    ...s,
+                                    email: e.target.value,
+                                }));
+                            }}
+                        />
+                    </div>
+                    <div className="mb-8">
+                        <div className="text-lg mb-4 ml-2 text-black/50">
+                            Password
+                        </div>
+                        <Input
+                            required
+                            value={formState.password}
+                            type="password"
+                            placeholder="Password"
+                            className="border-solid border-black/50 border-2 px-6 py-2 text-lg rounded-3xl w-full"
+                            onChange={(e) => {
+                                setError("");
+                                setFormState((s) => ({
+                                    ...s,
+                                    password: e.target.value,
+                                }));
+                            }}
+                        />
+                    </div>
+                    <div className="flex items-center justify-between">
+                        <div>
+                            <span>
+                                <Link
+                                    href={content.linkUrl}
+                                    className="text-blue-600 font-bold"
+                                >
+                                    {content.linkText}
+                                </Link>
+                            </span>
+                        </div>
+                        <div>
+                            <Button
+                                type="submit"
+                                intent="secondary"
+                                data-testid="signin-button"
+                            >
+                                {content.buttonText}
+                            </Button>
+                        </div>
+                    </div>
+                </form>
             </div>
-          )}
-          <div className="mb-8">
-            <div className="text-lg mb-4 ml-2 text-black/50">E-mail</div>
-            <Input
-              required
-              type="email"
-              placeholder="E-mail"
-              value={formState.email}
-              className="border-solid border-black/50 border-2 px-6 py-2 text-lg rounded-3xl w-full"
-              onChange={(e) =>
-                setFormState((s) => ({ ...s, email: e.target.value }))
-              }
-            />
-          </div>
-          <div className="mb-8">
-            <div className="text-lg mb-4 ml-2 text-black/50">Password</div>
-            <Input
-              required
-              value={formState.password}
-              type="password"
-              placeholder="Password"
-              className="border-solid border-black/50 border-2 px-6 py-2 text-lg rounded-3xl w-full"
-              onChange={(e) =>
-                setFormState((s) => ({ ...s, password: e.target.value }))
-              }
-            />
-          </div>
-          <div className="flex items-center justify-between">
-            <div>
-              <span>
-                <Link
-                  href={content.linkUrl}
-                  className="text-blue-600 font-bold"
-                >
-                  {content.linkText}
-                </Link>
-              </span>
-            </div>
-            <div>
-              <Button
-                type="submit"
-                intent="secondary"
-                data-testid="signin-button"
-              >
-                {content.buttonText}
-              </Button>
-            </div>
-          </div>
-        </form>
-      </div>
-    </Card>
-  );
+        </Card>
+    );
 }

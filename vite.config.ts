@@ -4,18 +4,18 @@ import { resolve } from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
-  test: {
-    include: [
-      "**/__tests__/vitest/**/*.[jt]s?(x)",
-      "**/?(*.)+(spec|test).[jt]s?(x)",
-    ],
-    globals: true,
-    environment: "happy-dom",
-    mockReset: true,
-    setupFiles: ["setupTests"],
-  },
-  resolve: {
-    alias: [{ find: "@", replacement: resolve(__dirname, "./") }],
-  },
+    plugins: [react()],
+    test: {
+        include: [
+            "**/__tests__/vitest/**/*.[jt]s?(x)",
+            "**/?(*.)+(test).[jt]s?(x)",
+        ],
+        globals: true,
+        environment: "happy-dom",
+        mockReset: true,
+        setupFiles: ["setupTests"],
+    },
+    resolve: {
+        alias: [{ find: "@", replacement: resolve(__dirname, "./") }],
+    },
 });

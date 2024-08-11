@@ -1,7 +1,21 @@
 {
-  "extends": [
-    "next/core-web-vitals",
-    "eslint:recommended",
-    "plugin:import/errors"
-  ]
+    "extends": [
+        "next/core-web-vitals",
+        "eslint:recommended",
+        "plugin:import/errors",
+        "prettier"
+    ],
+    "plugins": [],
+    "parserOptions": {
+        "ecmaVersion": 2022,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "env": {
+        "es6": true,
+        "browser": true,
+        "node": true
+    }
 }
