@@ -28,17 +28,30 @@ To visit the website, click on the logo.
 
 ## Instructions
 
-`npm install` - installs all the packages
+`npm install` - Installs all the packages
 
-`npm run dev` - runs the webapp on localhost
+`npm run dev` - Runs the webapp on localhost
 
-`npm run devnstudio` - runs webapp and prisma studio concurrently
+`npm run devnstudio` - Runs webapp and Prisma Studio concurrently
 
-`npm run build` - generates Prisma client and builds the Next.js application
+`npm run build` - Generates Prisma client and builds the Next.js application
 
-`npm run lint` - runs the next lint command
+`npm run start` - Starts the Next.js production server
 
-`npx prisma migrate reset` - drops, recreates the database, and reseeds it automatically (be careful)
+`npm run test` - Runs Vitest for unit and integration tests
+
+`npm run test:playwright` - Runs Playwright for end-to-end tests
+
+`npm run lint` - Runs ESLint to fix linting issues in all JavaScript and TypeScript files
+
+`npm run lint:check` - Runs ESLint to check for linting issues without fixing them
+
+`npm run format` - Runs Prettier to format all JavaScript and TypeScript files
+
+`npm run prettier:check` - Checks if all JavaScript and TypeScript files are formatted correctly
+
+`npx prisma migrate reset` - Drops, recreates the database, and reseeds it automatically (use with caution)
+
 
 ## Preview
 
