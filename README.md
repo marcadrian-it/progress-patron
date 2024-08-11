@@ -17,14 +17,14 @@ To visit the website, click on the logo.
 
 # Stack
 
-- [TypeScript](https://www.typescriptlang.org/)
-- [NextJS](https://nextjs.org/)
-- [Prisma](https://www.prisma.io/)
-- [PostgreSQL](https://www.postgresql.org/)
-- [Vercel (serverless edge runtime)](https://vercel.com/)
-- [Tailwind](https://tailwindcss.com/)
-- [Bcrypt](https://github.com/kelektiv/node.bcrypt.js) / [Clerk.dev](https://clerk.com/)
-- [ESLint](https://eslint.org/)
+-   [TypeScript](https://www.typescriptlang.org/)
+-   [NextJS](https://nextjs.org/)
+-   [Prisma](https://www.prisma.io/)
+-   [PostgreSQL](https://www.postgresql.org/)
+-   [Vercel (serverless edge runtime)](https://vercel.com/)
+-   [Tailwind](https://tailwindcss.com/)
+-   [Bcrypt](https://github.com/kelektiv/node.bcrypt.js) / [Clerk.dev](https://clerk.com/)
+-   [ESLint](https://eslint.org/)
 
 ## Instructions
 
